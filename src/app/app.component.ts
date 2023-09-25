@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ContentEnum} from "./model/content.enum";
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'intranet-app';
-  contentType = 'home';
+  title = 'intranet-app'
 
-  contentTypeChange(value: string) {
+  ContentEnum = ContentEnum
+  contentType = ContentEnum.HOME
+
+
+  contentTypeChange(value: ContentEnum) {
     this.contentType = value
   }
 }

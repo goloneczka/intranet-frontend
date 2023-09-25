@@ -8,9 +8,9 @@
 
     <mat-sidenav-content>
       <div class="content mat-elevation-z8">
-        <app-content-home *ngIf="contentType === 'home'" />
-        <app-content-employee *ngIf="contentType === 'employee'" />
-        <app-content-document *ngIf="contentType === 'document'" />
+        <app-content-home *ngIf="contentType === ContentEnum.HOME" />
+        <app-content-employee *ngIf="contentType === ContentEnum.EMPLOYEE" />
+        <app-content-document *ngIf="contentType === ContentEnum.DOCUMENT" />
       </div>
     </mat-sidenav-content>
 
