@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'intranet-app';
+  contentType = 'home';
+
+  contentTypeChange(value: string) {
+    this.contentType = value
+  }
 }

@@ -2,13 +2,19 @@
   <mat-toolbar> Intranety </mat-toolbar>
 
   <mat-sidenav-container>
-    <mat-sidenav mode="side" opened="true" class="mat-elevation-z8"> dadada </mat-sidenav>
+    <mat-sidenav mode="side" opened="true" class="mat-elevation-z8">
+      <app-left-nav (contentTypeChangeEvent)="contentTypeChange($event)" />
+    </mat-sidenav>
 
     <mat-sidenav-content>
-      <div class="content mat-elevation-z8">Głowny kontent</div>
+      <div class="content mat-elevation-z8">
+        <app-content-home *ngIf="contentType === 'home'" />
+        <app-content-employee *ngIf="contentType === 'employee'" />
+        <app-content-document *ngIf="contentType === 'document'" />
+      </div>
     </mat-sidenav-content>
 
-    <mat-sidenav mode="side" opened="true" class="right mat-elevation-z8"  position="end"> lalala </mat-sidenav>
+    <mat-sidenav mode="side" opened="true" class="mat-elevation-z8"  position="end"> lalala </mat-sidenav>
   </mat-sidenav-container>
 </div>
 
