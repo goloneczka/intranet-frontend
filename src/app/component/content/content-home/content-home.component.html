@@ -1,11 +1,21 @@
-<div *ngIf="posts$ | async as cars">
-  <p>content-home works!</p>
-  <div *ngIf="cars.length == 0">
+<div *ngIf="posts$ | async as posts">
+  <p>content-employee works!</p>
+
+  <div *ngIf="!posts.length">
      <p> no posts to display !</p>
   </div>
-  <p>{{cars[0].title}}</p>
-  <p>{{cars[0].message}}</p>
-  <p>{{cars[0].creationTime}}</p>
-  <p>{{cars[0].user}}</p>
+
+  <div *ngIf="posts.length" class="card-list" >
+    <mat-card *ngFor="let card of posts" class="card-item">
+      <mat-card-header>
+        <mat-card-title>{{ card.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{ card.message }}
+        {{ card.creationTime }}
+        {{ card.user }}
+      </mat-card-content>
+    </mat-card>
+  </div>
 
 </div>

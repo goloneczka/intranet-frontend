@@ -17,6 +17,9 @@ import {PostService} from "./service/post.service";
 import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./provider/http-interceptor.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
+import {EmployeeService} from "./service/employee.service";
 
 
 @NgModule({
@@ -36,10 +39,13 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [
     PostService,
+    EmployeeService,
     MatSnackBar,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
