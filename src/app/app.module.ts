@@ -20,6 +20,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {EmployeeService} from "./service/employee.service";
+import {DocumentService} from "./service/document.service";
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import {EmployeeService} from "./service/employee.service";
   providers: [
     PostService,
     EmployeeService,
+    DocumentService,
     MatSnackBar,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],

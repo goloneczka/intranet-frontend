@@ -1,1 +1,20 @@
-<p>content-document works!</p>
+<div *ngIf="documents$ | async as documents">
+  <p>content-home works!</p>
+
+  <div *ngIf="!documents.length">
+    <p> no documents to display !</p>
+  </div>
+
+  <div *ngIf="documents.length" class="card-list" >
+    <mat-card *ngFor="let card of documents" class="card-item">
+      <mat-card-header>
+        <mat-card-title>{{ card.fileName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{ card.creator }}
+        {{ card.creationTime }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>
