@@ -14,7 +14,6 @@ export class LeftNavComponent {
 
 
   setContent(contentTypeChange: ContentEnum) {
-    console.log("child hello: " + contentTypeChange)
     this.contentTypeChangeEvent.emit(contentTypeChange)
   }
 }

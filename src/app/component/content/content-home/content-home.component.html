@@ -1,0 +1,11 @@
+<div *ngIf="posts$ | async as cars">
+  <p>content-home works!</p>
+  <div *ngIf="cars.length == 0">
+     <p> no posts to display !</p>
+  </div>
+  <p>{{cars[0].title}}</p>
+  <p>{{cars[0].message}}</p>
+  <p>{{cars[0].creationTime}}</p>
+  <p>{{cars[0].user}}</p>
+
+</div>
