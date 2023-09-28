@@ -21,6 +21,9 @@ import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {EmployeeService} from "./service/employee.service";
 import {DocumentService} from "./service/document.service";
+import { DutyComponent } from './component/right-nav/duty/duty.component';
+import {FilterDutyPipe} from "./service/filterDuty.pipe";
+import {DutyService} from "./service/duty.service";
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import {DocumentService} from "./service/document.service";
     LeftNavComponent,
     ContentHomeComponent,
     ContentEmployeeComponent,
-    ContentDocumentComponent
+    ContentDocumentComponent,
+    DutyComponent,
+    DutyComponent,
+    FilterDutyPipe
   ],
   imports: [
     BrowserModule,
@@ -48,6 +54,7 @@ import {DocumentService} from "./service/document.service";
     PostService,
     EmployeeService,
     DocumentService,
+    DutyService,
     MatSnackBar,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
