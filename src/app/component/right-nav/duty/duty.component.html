@@ -1,0 +1,25 @@
+<div *ngIf="duties$ | async as duties">
+  <p>content-duties works!</p>
+
+  <div *ngIf="!duties.length">
+    <p> no duties to display !</p>
+  </div>
+
+  <div *ngIf="duties.length" class="card-list" >
+    <mat-card *ngFor="let type of dutyTypes" class="card-list">
+      <mat-card-header>
+        <mat-card-title>{{ type }}</mat-card-title>
+      </mat-card-header>
+      <mat-card *ngFor="let card of duties | filterDuty : type" >
+        <mat-card-header>
+          <mat-card-title>{{ card.who }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{ card.startTime }}
+          {{ card.endTime }}
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+  </div>
+
+</div>
