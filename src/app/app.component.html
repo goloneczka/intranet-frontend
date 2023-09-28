@@ -2,19 +2,19 @@
   <mat-toolbar> Intranety </mat-toolbar>
 
   <mat-sidenav-container>
-    <mat-sidenav mode="side" opened="true" class="mat-elevation-z8">
+    <mat-sidenav mode="side" opened="true" >
       <app-left-nav (contentTypeChangeEvent)="contentTypeChange($event)" />
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
+      <div class="content">
         <app-content-home *ngIf="contentType === ContentEnum.HOME" />
         <app-content-employee *ngIf="contentType === ContentEnum.EMPLOYEE" />
         <app-content-document *ngIf="contentType === ContentEnum.DOCUMENT" />
       </div>
     </mat-sidenav-content>
 
-    <mat-sidenav mode="side" opened="true" class="mat-elevation-z8"  position="end">
+    <mat-sidenav mode="side" opened="true"  position="end">
       <app-duty/>
     </mat-sidenav>
   </mat-sidenav-container>

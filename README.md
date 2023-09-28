@@ -3,8 +3,6 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
 #TODO list
-### Wyswietlanie PDF po wcisnieciu nazwy
-### Wyswietlanie dyzurow na dzien dzisiejszy
 ### Prezentacja kalendarza z wydarzeniami
 ### Mozliwosc zalogowania pracownika
 ### create, delete, update pracownikow, postow, dokumentow, dyzurow
