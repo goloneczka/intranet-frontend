@@ -29,7 +29,7 @@ import {DocumentService} from "./service/document.service";
     LeftNavComponent,
     ContentHomeComponent,
     ContentEmployeeComponent,
-    ContentDocumentComponent,
+    ContentDocumentComponent
   ],
   imports: [
     BrowserModule,
