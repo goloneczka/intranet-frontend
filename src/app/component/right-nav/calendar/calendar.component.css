@@ -1,0 +1,7 @@
+.right-calendar {
+  color: black !important;
+}
+
+.mwl-calendar-month-cell {
+  min-height: 50px;
+}

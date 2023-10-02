@@ -24,6 +24,11 @@ import {DocumentService} from "./service/document.service";
 import { DutyComponent } from './component/right-nav/duty/duty.component';
 import {FilterDutyPipe} from "./service/filterDuty.pipe";
 import {DutyService} from "./service/duty.service";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
+import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
+import { HeaderComponent } from './component/header/header.component';
 
 
 @NgModule({
@@ -34,8 +39,10 @@ import {DutyService} from "./service/duty.service";
     ContentEmployeeComponent,
     ContentDocumentComponent,
     DutyComponent,
-    DutyComponent,
-    FilterDutyPipe
+    FilterDutyPipe,
+    CalendarComponent,
+    RightNavParentComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,8 @@ import {DutyService} from "./service/duty.service";
     MatDividerModule,
     HttpClientModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [
     PostService,

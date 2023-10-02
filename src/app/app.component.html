@@ -1,6 +1,5 @@
 <div>
   <mat-toolbar> Intranety </mat-toolbar>
-
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened="true" >
       <app-left-nav (contentTypeChangeEvent)="contentTypeChange($event)" />
@@ -14,8 +13,8 @@
       </div>
     </mat-sidenav-content>
 
-    <mat-sidenav mode="side" opened="true"  position="end">
-      <app-duty/>
+    <mat-sidenav mode="side" opened="true"  position="end" style="width: 400px">
+      <app-right-nav-parent/>
     </mat-sidenav>
   </mat-sidenav-container>
 </div>
