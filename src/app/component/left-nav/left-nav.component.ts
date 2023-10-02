@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {ContentEnum} from "../../model/content.enum";
+import {contentTab} from "../../model/content-tab";
 
 @Component({
   selector: 'app-left-nav',
@@ -8,12 +8,12 @@ import {ContentEnum} from "../../model/content.enum";
 })
 export class LeftNavComponent {
 
-  @Output() contentTypeChangeEvent = new EventEmitter<ContentEnum>();
+  @Output() contentTypeChangeEvent = new EventEmitter<contentTab>();
 
-  ContentEnum = ContentEnum
+  ContentEnum = contentTab
 
 
-  setContent(contentTypeChange: ContentEnum) {
+  setContent(contentTypeChange: contentTab) {
     this.contentTypeChangeEvent.emit(contentTypeChange)
   }
 }

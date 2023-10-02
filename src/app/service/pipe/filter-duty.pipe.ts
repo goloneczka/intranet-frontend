@@ -1,5 +1,5 @@
 import { PipeTransform, Pipe } from '@angular/core';
-import {Duty} from "../model/duty";
+import {Duty} from "../../model/duty";
 
 @Pipe({
   name: 'filterDuty',

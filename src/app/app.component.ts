@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ContentEnum} from "./model/content.enum";
+import {contentTab} from "./model/content-tab";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,11 @@ import {ContentEnum} from "./model/content.enum";
 export class AppComponent {
   title = 'intranet-app'
 
-  ContentEnum = ContentEnum
-  contentType = ContentEnum.HOME
+  ContentEnum = contentTab
+  contentType = contentTab.HOME
 
 
-  contentTypeChange(value: ContentEnum) {
+  contentTypeChange(value: contentTab) {
     this.contentType = value
   }
 }

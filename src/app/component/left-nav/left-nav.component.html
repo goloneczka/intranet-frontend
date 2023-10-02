@@ -1,11 +1,11 @@
 <div>
   <button mat-button class="menu-button" (click)="setContent(ContentEnum.HOME)">
-    <span>Aktualności</span>
+    <span>{{ContentEnum.HOME | ContentTabDisplay}}</span>
   </button>
   <button mat-button class="menu-button" (click)="setContent(ContentEnum.EMPLOYEE)">
-    <span>Współpracownicy</span>
+    <span>{{ContentEnum.EMPLOYEE | ContentTabDisplay}}</span>
   </button>
   <button mat-button class="menu-button" (click)="setContent(ContentEnum.DOCUMENT)">
-    <span>Dokumenty</span>
+    <span>{{ContentEnum.DOCUMENT | ContentTabDisplay}}</span>
   </button>
 </div>

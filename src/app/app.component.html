@@ -1,5 +1,11 @@
 <div>
-  <mat-toolbar> Intranety </mat-toolbar>
+  <mat-toolbar>
+    <app-header>
+      <span tab> {{contentType | ContentTabDisplay}} </span>
+      <span user> </span>
+    </app-header>
+  </mat-toolbar>
+
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened="true" >
       <app-left-nav (contentTypeChangeEvent)="contentTypeChange($event)" />

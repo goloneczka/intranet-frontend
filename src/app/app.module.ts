@@ -22,13 +22,14 @@ import {MatCardModule} from "@angular/material/card";
 import {EmployeeService} from "./service/employee.service";
 import {DocumentService} from "./service/document.service";
 import { DutyComponent } from './component/right-nav/duty/duty.component';
-import {FilterDutyPipe} from "./service/filterDuty.pipe";
+import {FilterDutyPipe} from "./service/pipe/filter-duty.pipe";
 import {DutyService} from "./service/duty.service";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
 import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
 import { HeaderComponent } from './component/header/header.component';
+import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HeaderComponent } from './component/header/header.component';
     FilterDutyPipe,
     CalendarComponent,
     RightNavParentComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContentTabDisplayPipe
   ],
   imports: [
     BrowserModule,
