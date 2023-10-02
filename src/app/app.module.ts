@@ -30,6 +30,7 @@ import {CalendarComponent} from "./component/right-nav/calendar/calendar.compone
 import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
 import { HeaderComponent } from './component/header/header.component';
 import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
+import {CustomDateFormatterImpl} from "./service/calendar-Date-Formatter";
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
     DocumentService,
     DutyService,
     MatSnackBar,
+    CustomDateFormatterImpl,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]

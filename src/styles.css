@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-.my-custom-calendar .mwl-calendar-month-cell {
-  min-height: 50px !important; /* Use !important to ensure your style takes precedence */
+@import "node_modules/angular-calendar/css/angular-calendar.css";
+
+.cal-month-view .cal-day-cell {
+  min-height: auto !important;
 }
