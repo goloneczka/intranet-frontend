@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {contentTab} from "./model/content-tab";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +7,4 @@ import {contentTab} from "./model/content-tab";
 })
 export class AppComponent {
   title = 'intranet-app'
-
-  ContentEnum = contentTab
-  contentType = contentTab.HOME
-
-
-  contentTypeChange(value: contentTab) {
-    this.contentType = value
-  }
 }

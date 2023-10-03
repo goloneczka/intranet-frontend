@@ -3,9 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
 #TODO list
-### Prezentacja kalendarza z wydarzeniami
 ### Mozliwosc zalogowania pracownika
 ### create, delete, update pracownikow, postow, dokumentow, dyzurow
+### wyswietlanie postow w kalendarzu, dostosowanie postow pod kalendarz
 ### wyswietlanie w aktualnosciach wydarzen z dodawania/edycji (pkt wczesniej)
 ### dodawanie wydarzen do kalendarza
 ### parametr na opcjonalne wyswietlanie wydarzen

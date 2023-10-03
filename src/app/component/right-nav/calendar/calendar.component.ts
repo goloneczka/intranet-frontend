@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CustomDateFormatterImpl} from "../../../service/calendar-Date-Formatter";
+import {CustomDateFormatterImpl} from "../../../service/calendar-date-formatter";
 import {CalendarDateFormatter} from "angular-calendar";
 
 @Component({

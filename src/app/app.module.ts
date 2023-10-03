@@ -30,7 +30,9 @@ import {CalendarComponent} from "./component/right-nav/calendar/calendar.compone
 import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
 import { HeaderComponent } from './component/header/header.component';
 import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
-import {CustomDateFormatterImpl} from "./service/calendar-Date-Formatter";
+import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
+import { LoginComponent } from './component/login-component/login.component';
+import { MainPageComponent } from './component/main-page/main-page.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import {CustomDateFormatterImpl} from "./service/calendar-Date-Formatter";
     CalendarComponent,
     RightNavParentComponent,
     HeaderComponent,
-    ContentTabDisplayPipe
+    ContentTabDisplayPipe,
+    LoginComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
