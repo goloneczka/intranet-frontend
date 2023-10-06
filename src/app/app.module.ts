@@ -15,7 +15,7 @@ import {ContentEmployeeComponent} from './component/content/content-employee/con
 import {ContentDocumentComponent} from './component/content/content-document/content-document.component';
 import {PostService} from "./service/post.service";
 import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
-import {HttpInterceptorService} from "./provider/http-interceptor.service";
+import {HttpInterceptorService} from "./service/provider/http-interceptor.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
@@ -33,6 +33,11 @@ import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
 import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
 import { LoginComponent } from './component/login-component/login.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {AuthenticationService} from "./service/authentication.service";
+import {BasicAuthInterceptor} from "./service/provider/auth-interceptor.service";
 
 
 @NgModule({
@@ -54,6 +59,7 @@ import { MainPageComponent } from './component/main-page/main-page.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -63,7 +69,9 @@ import { MainPageComponent } from './component/main-page/main-page.component';
     HttpClientModule,
     MatTableModule,
     MatCardModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     PostService,
@@ -72,7 +80,9 @@ import { MainPageComponent } from './component/main-page/main-page.component';
     DutyService,
     MatSnackBar,
     CustomDateFormatterImpl,
+    AuthenticationService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

@@ -1,1 +1,25 @@
-<p>login-component works!</p>
+<mat-toolbar>
+  <app-header>
+    <span tab> Logowanie </span>
+    <span user> </span>
+  </app-header>
+</mat-toolbar>
+
+<div class="login-container">
+  <h2>Logowanie</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+    <div class="form-group">
+      <label for="username">Użytkownik</label>
+      <input type="text" id="username"
+             formControlName="username" placeholder="username"
+             autocomplete="off" aria-autocomplete="none">
+    </div>
+    <div class="form-group">
+      <label for="password">Hasło</label>
+      <input type="password" id="password"
+             formControlName="password" placeholder="password"
+             autocomplete="new-password" aria-autocomplete="none">
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>

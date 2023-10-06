@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Post} from "../model/post";
+import {HttpClient} from "@angular/common/http";
 import {Employee} from "../model/employee";
 
 @Injectable()

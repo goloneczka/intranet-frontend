@@ -1,4 +1,11 @@
 div {
   font-size: 19px;
-  margin: 4px
+  margin: 4px;
+}
+
+.right-side-header {
+  margin-left: -54px;
+  text-align: right;
+  position: fixed;
+  width: 100%;
 }

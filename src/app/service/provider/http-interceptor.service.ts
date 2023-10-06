@@ -20,7 +20,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           return throwError(response);
         }
 
-        this.snackBar.open(response.error, '', {
+        this.snackBar.open(response.error?.message, '', {
           duration: 5000,
           panelClass: ['error']
         })
