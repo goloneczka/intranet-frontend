@@ -18,9 +18,12 @@ export class AuthenticationService {
     return this.http.post<JwtToken>(this.AUTH_URL, body)
   }
 
-  public getJwtUser() {
+  public getJwtUser() : Jwt | null{
     const storedJwtText = LocalStorageService.getJwt();
     return storedJwtText ? jwt_decode<Jwt>(storedJwtText) : null;
+  }
 
+  logout() : void {
+    LocalStorageService.clearJwt();
   }
 }

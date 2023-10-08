@@ -38,6 +38,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {AuthenticationService} from "./service/authentication.service";
 import {BasicAuthInterceptor} from "./service/provider/auth-interceptor.service";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import {BasicAuthInterceptor} from "./service/provider/auth-interceptor.service"
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   providers: [
     PostService,

@@ -9,3 +9,12 @@ div {
   position: fixed;
   width: 100%;
 }
+
+.inner-right-side-header {
+  display: inline-flex;
+  margin-top: 0;
+}
+
+.icon-center {
+  margin-top: -8px;
+}

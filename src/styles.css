@@ -2,6 +2,18 @@
 
 @import "node_modules/angular-calendar/css/angular-calendar.css";
 
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+
 .cal-month-view .cal-day-cell {
   min-height: auto !important;
+  height: 65px !important;
+}
+
+.error {
+  background: #e8908e;
+
+}
+
+.success {
+  background: #69f0ae;
 }

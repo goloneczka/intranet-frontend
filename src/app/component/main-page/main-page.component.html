@@ -1,8 +1,7 @@
 <div>
   <mat-toolbar>
-    <app-header>
+    <app-header [user]="authenticatedUserName">
       <span tab> {{contentType | ContentTabDisplay}} </span>
-      <span user> {{authenticatedUserName}} </span>
     </app-header>
   </mat-toolbar>
 

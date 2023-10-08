@@ -13,4 +13,8 @@ export class LocalStorageService {
   static isAuthenticated() : boolean{
     return !!this.getJwt();
   }
+
+  static clearJwt() {
+    localStorage.removeItem(this.JWT)
+  }
 }

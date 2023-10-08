@@ -29,7 +29,7 @@ export class LoginComponent {
     this.authService.login(username, password)
       .subscribe(data => {
         LocalStorageService.storeJwt(data.accessJwt);
-        this.router.navigate(['/']);
+        this.router.navigate(['/logged']);
       })
   }
 }

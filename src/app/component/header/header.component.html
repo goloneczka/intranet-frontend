@@ -5,6 +5,13 @@
   </div>
 
   <div class="right-side-header">
-    <ng-content select="[user]"/>
+    <div class="inner-right-side-header">
+      <span> {{userMail}} </span>
+      <div *ngIf="userMail?.trim()?.length" class="icon-center">
+          <button mat-icon-button matTooltip="Wylogowanie" (click)="logoutUser()">
+            <mat-icon>power_settings_new</mat-icon>
+          </button>
+      </div>
+    </div>
   </div>
 </div>

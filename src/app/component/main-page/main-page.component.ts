@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterContentChecked, Component, OnInit} from '@angular/core';
 import {contentTab} from "../../model/content-tab";
 import {AuthenticationService} from "../../service/authentication.service";
 
@@ -7,7 +7,7 @@ import {AuthenticationService} from "../../service/authentication.service";
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
 
   public contentEnum = contentTab
   public contentType : contentTab = contentTab.HOME
@@ -19,7 +19,9 @@ export class MainPageComponent {
   ngOnInit(): void {
     this.authenticatedUserName = this.authService.getJwtUser()?.sub;
   }
+
   contentTypeChange(value: contentTab) {
     this.contentType = value
   }
+
 }
