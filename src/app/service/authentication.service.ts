@@ -6,7 +6,7 @@ import {LocalStorageService} from "./local-storage.service";
 import {Jwt} from "../model/jwt";
 import jwt_decode from "jwt-decode";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
   private AUTH_URL = environment.API_URL + '/login';

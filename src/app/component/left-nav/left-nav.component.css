@@ -9,3 +9,8 @@
 mat-icon {
   margin-right: 3px;
 }
+
+
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: white !important;
+}

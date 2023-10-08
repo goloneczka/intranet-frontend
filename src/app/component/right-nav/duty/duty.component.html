@@ -4,21 +4,21 @@
     <p> no duties to display !</p>
   </div>
 
-  <div *ngIf="duties.length" class="card-list" >
-    <mat-card *ngFor="let type of dutyTypes" class="card-list">
-      <mat-card-header>
-        <mat-card-title>{{ type }}</mat-card-title>
-      </mat-card-header>
-      <mat-card *ngFor="let card of duties | filterDuty : type" class="duty-card" >
-        <mat-card-content>
-          {{ card.who }}
-          <div>
-            {{ card.startTime }} -
-            {{ card.endTime }}
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-card>
+  <div *ngIf="duties.length" class="card-list">
+    <table>
+      <tr *ngFor="let type of dutyTypes" class="card-list">
+        <td>{{ type }}</td>
+        <table>
+          <tr *ngFor="let card of duties | filterDuty : type" class="duty-card">
+            <td>{{ card.who }}</td>
+            <td>
+              {{ card.startTime }} -
+              {{ card.endTime }}
+            </td>
+          </tr>
+        </table>
+      </tr>
+    </table>
   </div>
 
 </div>

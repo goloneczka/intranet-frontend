@@ -2,7 +2,7 @@
 
 @import "node_modules/angular-calendar/css/angular-calendar.css";
 
-/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .cal-month-view .cal-day-cell {
   min-height: auto !important;
@@ -10,10 +10,12 @@
 }
 
 .error {
-  background: #e8908e;
-
+   --mdc-snackbar-container-color: #930703;
+   --mat-mdc-snack-bar-button-color: #fff;
+   --mdc-snackbar-supporting-text-color: #fff;
 }
-
 .success {
-  background: #69f0ae;
+  --mdc-snackbar-container-color: #15ee80;
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
 }
