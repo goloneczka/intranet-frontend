@@ -1,22 +1,7 @@
-<div *ngIf="employees$ | async as employees">
-  <p>content-employee works!</p>
-
-  <div *ngIf="!employees.length">
-    <p> no employees to display !</p>
+<div *ngIf="departmentsWithEmployees">
+  <div *ngFor="let depWithEmployees of departmentsWithEmployees">
+    {{depWithEmployees.team}}
+    <app-content-employee-department [employeeDepartment]="depWithEmployees" />
   </div>
-
-  <div *ngIf="employees.length" class="card-list" >
-    <mat-card *ngFor="let card of employees" class="card-item">
-      <mat-card-header>
-        <mat-card-title>{{ card.email }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        {{ card.firstName }}
-        {{ card.lastName }}
-        {{ card.title }}
-        {{ card.phoneNumber }}
-      </mat-card-content>
-    </mat-card>
-  </div>
-
 </div>
+

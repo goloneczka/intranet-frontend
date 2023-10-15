@@ -40,6 +40,9 @@ import {AuthenticationService} from "./service/authentication.service";
 import {BasicAuthInterceptor} from "./service/provider/auth-interceptor.service";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { ContentEmployeeDepartmentComponent } from './component/content/content-employee/content-employee-department/content-employee-department.component';
 
 
 @NgModule({
@@ -56,27 +59,30 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     HeaderComponent,
     ContentTabDisplayPipe,
     LoginComponent,
-    MainPageComponent
+    MainPageComponent,
+    ContentEmployeeDepartmentComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    HttpClientModule,
-    MatTableModule,
-    MatCardModule,
-    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
-    MatFormFieldModule,
-    MatInputModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        HttpClientModule,
+        MatTableModule,
+        MatCardModule,
+        CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
+        MatFormFieldModule,
+        MatInputModule,
+        MatMenuModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatPaginatorModule,
+    ],
   providers: [
     PostService,
     EmployeeService,
