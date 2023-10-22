@@ -1,22 +1,35 @@
 <div *ngIf="documents$ | async as documents">
-  <p>content-document works!</p>
-
   <div *ngIf="!documents.length">
     <p> no documents to display !</p>
   </div>
 
-  <div *ngIf="documents.length" class="card-list" >
-    <mat-card *ngFor="let card of documents" class="card-item">
-      <mat-card-header>
-        <mat-card-title>
-          <p (click)="getDocumentData(card.fileName)">{{ card.fileName }} </p>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        {{ card.creator }}
-        {{ card.creationTime }}
-      </mat-card-content>
-    </mat-card>
+  <section *ngIf="isUserAuthenticated">
+    <div class="button-row"> 
+      <button mat-raised-button color="primary" [disabled]="isSaveOrderBtnDissabled" (click)="saveOrder()">Zapisz</button>
+      <button mat-raised-button color="primary" style="margin-left: 5px;">Nowa Grupa</button>
+    </div>
+    <mat-divider/>
+  </section>
+
+  <div *ngFor="let docType of docTypes" class="card-list">
+    {{docType.topic}}
+    <span *ngIf="docType.topic" >
+      <button mat-icon-button (click)="setOrder('DOWN', docType.order)">
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button mat-icon-button (click)="setOrder('UP', docType.order)">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </span>
+    
+    <mat-nav-list class="docs-list">
+      <mat-list-item *ngFor="let doc of documents | FilterDocument : docType.topic" (click)="getDocumentData(doc.fileName)">
+        <h3 matListItemTitle style="font-weight: bold">{{ doc.fileName }} </h3>
+        <p matListItemLine class="stylize-center-item"> {{doc.comment}}</p>
+        <p matListItemLine style="text-align: end"> {{doc.creator}}, {{doc.creationTime}} </p>
+      </mat-list-item>
+    </mat-nav-list>
   </div>
 
 </div>
+

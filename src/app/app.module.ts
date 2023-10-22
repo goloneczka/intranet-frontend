@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -9,40 +8,35 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
-import {LeftNavComponent} from './component/left-nav/left-nav.component';
-import {ContentHomeComponent} from './component/content/content-home/content-home.component';
-import {ContentEmployeeComponent} from './component/content/content-employee/content-employee.component';
-import {ContentDocumentComponent} from './component/content/content-document/content-document.component';
-import {PostService} from "./service/post.service";
-import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
-import {HttpInterceptorService} from "./service/provider/http-interceptor.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatTableModule} from "@angular/material/table";
-import {MatCardModule} from "@angular/material/card";
-import {EmployeeService} from "./service/employee.service";
-import {DocumentService} from "./service/document.service";
-import { DutyComponent } from './component/right-nav/duty/duty.component';
-import {FilterDutyPipe} from "./service/pipe/filter-duty.pipe";
-import {DutyService} from "./service/duty.service";
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
-import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
-import { HeaderComponent } from './component/header/header.component';
-import {ContentTabDisplayPipe} from "./service/pipe/content-tab.pipe";
-import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
-import { LoginComponent } from './component/login-component/login.component';
-import { MainPageComponent } from './component/main-page/main-page.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
-import {AuthenticationService} from "./service/authentication.service";
-import {BasicAuthInterceptor} from "./service/provider/auth-interceptor.service";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { ContentEmployeeDepartmentComponent } from './component/content/content-employee/content-employee-department/content-employee-department.component';
+import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+import {LeftNavComponent} from './component/left-nav/left-nav.component';
+import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent,
+        ContentEmployeeDepartmentComponent } from './component/content/index'
+import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
+        FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
+         BasicAuthInterceptor} from './service/index'
+import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
+import { DutyComponent } from './component/right-nav/duty/duty.component';
+import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
+import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
+import { HeaderComponent } from './component/header/header.component';
+import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
+import { LoginComponent } from './component/login-component/login.component';
+import { MainPageComponent } from './component/main-page/main-page.component';
+
 
 
 @NgModule({
@@ -54,6 +48,7 @@ import { ContentEmployeeDepartmentComponent } from './component/content/content-
     ContentDocumentComponent,
     DutyComponent,
     FilterDutyPipe,
+    FilterDocumentPipe,
     CalendarComponent,
     RightNavParentComponent,
     HeaderComponent,
@@ -82,6 +77,7 @@ import { ContentEmployeeDepartmentComponent } from './component/content/content-
         MatTooltipModule,
         MatSortModule,
         MatPaginatorModule,
+        MatListModule,
     ],
   providers: [
     PostService,

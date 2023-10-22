@@ -4,6 +4,7 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
 .cal-month-view .cal-day-cell {
   min-height: auto !important;
   height: 65px !important;
@@ -19,3 +20,4 @@
   --mat-mdc-snack-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
+
