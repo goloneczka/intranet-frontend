@@ -1,0 +1,27 @@
+<section *ngIf="shouldComponentBeRender">
+
+  <form [formGroup]="documentGroupForm" (ngSubmit)="addGroup()">
+
+    <mat-form-field style="max-height: 70px;">
+      <mat-label>Nazwa grupy</mat-label>
+      <input matInput placeholder="Grupa" formControlName="group">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>W kolejności przed</mat-label>
+      <mat-select formControlName="order">
+        <mat-option *ngFor="let group of docTypesShadow" [value]="group.topic" >
+            {{group.topic}}
+        </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button type="submit">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="shouldDisplayForm(false)">
+      <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+  </form>
+</section>
