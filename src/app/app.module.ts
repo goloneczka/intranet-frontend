@@ -36,6 +36,10 @@ import { HeaderComponent } from './component/header/header.component';
 import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
 import { LoginComponent } from './component/login-component/login.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
+import { NewDocumentGroupComponent } from './component/content/content-document/new-document-group/new-document-group.component';
+import { SortingDialogComponent } from './component/content/content-document/sorting-dialog/sorting-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -55,7 +59,9 @@ import { MainPageComponent } from './component/main-page/main-page.component';
     ContentTabDisplayPipe,
     LoginComponent,
     MainPageComponent,
-    ContentEmployeeDepartmentComponent
+    ContentEmployeeDepartmentComponent,
+    NewDocumentGroupComponent,
+    SortingDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -78,6 +84,8 @@ import { MainPageComponent } from './component/main-page/main-page.component';
         MatSortModule,
         MatPaginatorModule,
         MatListModule,
+        MatDialogModule,
+        MatSelectModule
     ],
   providers: [
     PostService,

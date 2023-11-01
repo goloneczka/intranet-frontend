@@ -5,22 +5,30 @@
 
   <section *ngIf="isUserAuthenticated">
     <div class="button-row"> 
-      <button mat-raised-button color="primary" [disabled]="isSaveOrderBtnDissabled" (click)="saveOrder()">Zapisz</button>
-      <button mat-raised-button color="primary" style="margin-left: 5px;">Nowa Grupa</button>
+      <button mat-raised-button color="primary" (click)="addGroup()" style="margin-left: 5px;">Nowa Grupa</button>
+      <button mat-raised-button color="primary" (click)="openDialogBox()" style="margin-left: 5px;">Sortowanie</button>
     </div>
+    <app-new-document-group [docTypes]="docTypes" (newDocumentGroupEvent)="addDocumentGroup($event)" />
     <mat-divider/>
   </section>
 
-  <div *ngFor="let docType of docTypes" class="card-list">
-    {{docType.topic}}
-    <span *ngIf="docType.topic" >
-      <button mat-icon-button (click)="setOrder('DOWN', docType.order)">
-        <mat-icon>arrow_downward</mat-icon>
-      </button>
-      <button mat-icon-button (click)="setOrder('UP', docType.order)">
-        <mat-icon>arrow_upward</mat-icon>
-      </button>
-    </span>
+  <div *ngFor="let docType of docTypes">
+    <div class="center-align">
+      <div>
+        {{docType.topic}}
+        <button mat-icon-button>
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button mat-icon-button >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button >
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </div> 
+    </div>
     
     <mat-nav-list class="docs-list">
       <mat-list-item *ngFor="let doc of documents | FilterDocument : docType.topic" (click)="getDocumentData(doc.fileName)">

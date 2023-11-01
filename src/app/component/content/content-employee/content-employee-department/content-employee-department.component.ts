@@ -50,35 +50,3 @@ export class ContentEmployeeDepartmentComponent implements OnInit {
     return item instanceof String;
   }
 }
-
-
-
-
-// @Input('employees')
-// employees: Employee[] | undefined = [];
-//
-// displayedColumns = employeeKeys;
-// matEmployees!: MatTableDataSource<Employee | EmployeeGroupBy>;
-//
-// ngOnInit(): void {
-//   this.matEmployees = new MatTableDataSource(this.initGroupedEmployees());
-// }
-//
-// isGroup(_: number, item: Employee | EmployeeGroupBy): boolean {
-//   return item instanceof EmployeeGroupBy;
-// }
-//
-// private initGroupedEmployees(): (Employee | EmployeeGroupBy)[] {
-//   const sortEmployees = this.employees?.sort((it, next) =>
-//     it.group?.localeCompare(next.group)
-//   );
-//
-//   const groupedEmployees: (Employee | EmployeeGroupBy)[] = [];
-//   sortEmployees?.forEach((it, ind, _) => {
-//     if (!groupedEmployees.find(nestedIt => nestedIt instanceof EmployeeGroupBy && nestedIt.group === it.group)) {
-//       groupedEmployees.push(new EmployeeGroupBy(it.group));
-//     }
-//     groupedEmployees.push(it);
-//   });
-//   return groupedEmployees;
-// }

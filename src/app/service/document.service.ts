@@ -5,7 +5,7 @@ import {Document, DocumentGroup} from "../model/document";
 
 @Injectable()
 export class DocumentService {
-
+ 
   private DOCUMENT_URL = environment.API_URL + '/document';
   private DOCUMENT_DATA_URL = environment.API_URL + '/document-data';
   private DOCUMENT_GROUP_URL = environment.API_URL + '/document-group';
@@ -25,7 +25,7 @@ export class DocumentService {
     return this.http.get<DocumentGroup[]>(this.DOCUMENT_GROUP_URL);
   }
 
-  public saveDocumentTypes(groups : DocumentGroup[]) {
+  public saveDocumentOrderTypes(groups : DocumentGroup[]) {
     const groupsCopy: DocumentGroup[] = [...groups]
     if(groupsCopy[groupsCopy.length-1].topic == ''){
       groupsCopy.pop();
@@ -33,4 +33,7 @@ export class DocumentService {
     return this.http.post<void>(this.DOCUMENT_GROUP_URL, groupsCopy);
   }
 
+  public saveDocumentType(group: any) {
+    throw new Error('Method not implemented.');
+  }
 }

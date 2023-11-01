@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {DocumentService} from "../../../service/document.service";
 import {Document, DocumentGroup} from "../../../model/document";
 import {LocalStorageService} from "./../../../service/local-storage.service";
+import { NewDocumentGroupComponent } from './new-document-group/new-document-group.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SortingDialogComponent } from './sorting-dialog/sorting-dialog.component';
 
 @Component({
   selector: 'app-content-document',
@@ -11,21 +14,21 @@ import {LocalStorageService} from "./../../../service/local-storage.service";
 })
 export class ContentDocumentComponent {
 
+  @ViewChild(NewDocumentGroupComponent)
+  documentGroupChild!: NewDocumentGroupComponent;
+
   documents$: Observable<Document[]> = of([]);
   docTypes: DocumentGroup[] = [];
 
-  docTypeTopicsInStringFormat: string = '';
-  isSaveOrderBtnDissabled: boolean = true;
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
   
-  constructor(private documentService: DocumentService) {}
+  constructor(private documentService: DocumentService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.documents$ = this.documentService.getDocuments();
     this.documentService.getDocumentTypes().subscribe(docTypes => {
       docTypes.push({'topic': '', 'order': docTypes.length+1 });
       this.docTypes = docTypes;
-      this.docTypeTopicsInStringFormat = JSON.stringify(docTypes.map(it => it.topic));
     });
   }
 
@@ -36,28 +39,29 @@ export class ContentDocumentComponent {
       })
   }
 
-  setOrder(direction : string, order: number) {
-    const temp = this.docTypes[order-1];
-    if(direction === 'DOWN' && this.docTypes.length-1 !== order) {
-      this.docTypes[order-1] = this.docTypes[order];
-      this.docTypes[order-1].order--;
-      this.docTypes[order] = temp;
-      this.docTypes[order].order++;
-    } else if(direction === 'UP' && order !== 1){
-      this.docTypes[order-1] = this.docTypes[order-2];
-      this.docTypes[order-1].order++;
-      this.docTypes[order-2] = temp;
-      this.docTypes[order-2].order--;
-    }
-    this.isSaveOrderBtnDissabled = this.docTypeTopicsInStringFormat == JSON.stringify(this.docTypes.map(it => it.topic));
+  addGroup() {
+    this.documentGroupChild.shouldDisplayForm(true);
   }
 
-  saveOrder(){
-      this.documentService.saveDocumentTypes(this.docTypes).subscribe(_ => {
-        this.docTypeTopicsInStringFormat = JSON.stringify(this.docTypes.map(it => it.topic));
-        this.isSaveOrderBtnDissabled = true;
-      })
+  addDocumentGroup(newGroup: any ){
+    // this.documentService.saveDocumentType(val.group).subscribe(_ => {
+      this.docTypes.forEach(it => it.order >= newGroup.order ? it.order++ : it);
+      this.docTypes.splice(newGroup.order-1, 0, {'topic': newGroup.topic, 'order': newGroup.order });
+      console.log(this.docTypes);
+    // });
   }
 
+  openDialogBox() {
+    const dialogRef = this.dialog.open(SortingDialogComponent,
+       {data: this.docTypes, minWidth: '400px', disableClose: true}
+    );
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(result?.length){
+        this.documentService.saveDocumentOrderTypes(this.docTypes).subscribe(_ => {
+          this.docTypes = result;
+        });
+      }
+    });
+  }
 }
