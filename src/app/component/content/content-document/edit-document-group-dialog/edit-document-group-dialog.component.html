@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Edycja grupy dokumentów</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="documentGroupForm" id="ngForm" #documentEditForm="ngForm">
+        <mat-form-field style="max-height: 70px;">
+          <mat-label>Nazwa grupy</mat-label>
+          <input matInput placeholder="Grupa" formControlName="topic">
+        </mat-form-field>
+    
+        <mat-form-field style="max-height: 70px; margin-left: 5px;">
+          <mat-label>W kolejności za</mat-label>
+          <mat-select formControlName="order" (selectionChange)="update($event.value)">
+            <mat-option *ngFor="let group of docTypesShadow" [value]="group.topic" >
+                {{group.topic}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cofnij</button>
+    <button mat-button form="ngForm" [disabled]="!documentGroupForm.valid" [mat-dialog-close]="result" cdkFocusInitial>Zapisz</button>
+</mat-dialog-actions>
