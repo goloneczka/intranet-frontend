@@ -7,8 +7,8 @@
       <input matInput placeholder="Grupa" formControlName="group">
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>W kolejności przed</mat-label>
+    <mat-form-field style="max-height: 70px; margin-left: 5px;">
+      <mat-label>W kolejności za</mat-label>
       <mat-select formControlName="order">
         <mat-option *ngFor="let group of docTypesShadow" [value]="group.topic" >
             {{group.topic}}

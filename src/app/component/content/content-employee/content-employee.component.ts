@@ -20,16 +20,3 @@ export class ContentEmployeeComponent implements OnInit{
   }
 
 }
-
-//
-// ngOnInit(): void {
-//   this.employeeService.getEmployeesByDepartmentAndTeam().subscribe(data => {
-//
-//     const mapData = new Map(Object.entries(data));
-//     mapData.forEach((val, key, _) => {
-//       this.employeeDepartments.add(key);
-//       this.employees.set(key, val as Employee[]);
-//     })
-//     console.log(this.employees);
-//   });
-// }

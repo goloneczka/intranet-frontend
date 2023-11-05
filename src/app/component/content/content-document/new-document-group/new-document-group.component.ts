@@ -42,6 +42,9 @@ export class NewDocumentGroupComponent implements OnChanges {
   }
 
   shouldDisplayForm(val: boolean) {
+    if(!val){
+      this.documentGroupForm.reset();
+    }
     this.shouldComponentBeRender = val;
   }
 }

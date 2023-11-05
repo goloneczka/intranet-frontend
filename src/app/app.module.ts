@@ -40,6 +40,7 @@ import { NewDocumentGroupComponent } from './component/content/content-document/
 import { SortingDialogComponent } from './component/content/content-document/sorting-dialog/sorting-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { EditDocumentGroupDialogComponent } from './component/content/content-document/edit-document-group-dialog/edit-document-group-dialog.component';
 
 
 
@@ -61,7 +62,8 @@ import { MatSelectModule } from '@angular/material/select';
     MainPageComponent,
     ContentEmployeeDepartmentComponent,
     NewDocumentGroupComponent,
-    SortingDialogComponent
+    SortingDialogComponent,
+    EditDocumentGroupDialogComponent
   ],
     imports: [
         BrowserModule,

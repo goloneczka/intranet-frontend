@@ -5,10 +5,12 @@ import {Document, DocumentGroup} from "../model/document";
 
 @Injectable()
 export class DocumentService {
- 
+  
+
   private DOCUMENT_URL = environment.API_URL + '/document';
   private DOCUMENT_DATA_URL = environment.API_URL + '/document-data';
   private DOCUMENT_GROUP_URL = environment.API_URL + '/document-group';
+  private DOCUMENT_GROUP_ORDER_URL = environment.API_URL + '/document-group-order';
 
   constructor(private http: HttpClient) {}
 
@@ -30,10 +32,18 @@ export class DocumentService {
     if(groupsCopy[groupsCopy.length-1].topic == ''){
       groupsCopy.pop();
     }
-    return this.http.post<void>(this.DOCUMENT_GROUP_URL, groupsCopy);
+    return this.http.post<void>(this.DOCUMENT_GROUP_ORDER_URL, groupsCopy);
   }
 
-  public saveDocumentType(group: any) {
-    throw new Error('Method not implemented.');
+  public saveDocumentType(newGroup: DocumentGroup) {
+    return this.http.post<void>(this.DOCUMENT_GROUP_URL, newGroup);
+  }
+
+  public updateDocumentType(newGroup: DocumentGroup, oldTopic : string) {
+    return this.http.put<void>(`${this.DOCUMENT_GROUP_URL}/${oldTopic}`, newGroup);
+  }
+
+  deleteDocumentType(groupTopic: string) {
+    return this.http.delete<void>(`${this.DOCUMENT_GROUP_URL}/${groupTopic}`);
   }
 }

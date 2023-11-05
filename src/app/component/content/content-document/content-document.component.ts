@@ -6,6 +6,7 @@ import {LocalStorageService} from "./../../../service/local-storage.service";
 import { NewDocumentGroupComponent } from './new-document-group/new-document-group.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SortingDialogComponent } from './sorting-dialog/sorting-dialog.component';
+import { EditDocumentGroupDialogComponent } from './edit-document-group-dialog/edit-document-group-dialog.component';
 
 @Component({
   selector: 'app-content-document',
@@ -26,10 +27,7 @@ export class ContentDocumentComponent {
 
   ngOnInit(): void {
     this.documents$ = this.documentService.getDocuments();
-    this.documentService.getDocumentTypes().subscribe(docTypes => {
-      docTypes.push({'topic': '', 'order': docTypes.length+1 });
-      this.docTypes = docTypes;
-    });
+    this.initDocumentGroups();
   }
 
   getDocumentData(fileName: string) {
@@ -43,23 +41,51 @@ export class ContentDocumentComponent {
     this.documentGroupChild.shouldDisplayForm(true);
   }
 
-  addDocumentGroup(newGroup: any ){
-    // this.documentService.saveDocumentType(val.group).subscribe(_ => {
-      this.docTypes.forEach(it => it.order >= newGroup.order ? it.order++ : it);
-      this.docTypes.splice(newGroup.order-1, 0, {'topic': newGroup.topic, 'order': newGroup.order });
-      console.log(this.docTypes);
-    // });
+  addDocumentGroup(newGroup: DocumentGroup){
+    this.documentService.saveDocumentType(newGroup).subscribe(_ => {
+      this.initDocumentGroups();
+    });
   }
 
-  openDialogBox() {
+  deleteGroup(groupToDelete: DocumentGroup) {
+    console.log(groupToDelete);
+    this.documentService.deleteDocumentType(groupToDelete.topic).subscribe(_ => {
+      this.initDocumentGroups();
+    });
+
+  }
+
+  private initDocumentGroups(){
+    this.documentService.getDocumentTypes().subscribe(docTypes => {
+      docTypes.push({'topic': '', 'order': docTypes.length+1 });
+      this.docTypes = docTypes;
+    });
+  }
+
+  openDialogSorting() {
     const dialogRef = this.dialog.open(SortingDialogComponent,
-       {data: this.docTypes, minWidth: '400px', disableClose: true}
+       {data: this.docTypes, minWidth: '500px', minHeight:'200px', disableClose: true}
     );
 
     dialogRef.afterClosed().subscribe(result => {
       if(result?.length){
-        this.documentService.saveDocumentOrderTypes(this.docTypes).subscribe(_ => {
-          this.docTypes = result;
+        this.documentService.saveDocumentOrderTypes(result).subscribe(_ => {
+          this.initDocumentGroups();
+        });
+      }
+    });
+  }
+
+  openDialogEdit(groupToEdit: DocumentGroup) {
+    const dialogRef = this.dialog.open(EditDocumentGroupDialogComponent,
+       {data: {'groupToEdit': groupToEdit, 'docTypes': this.docTypes}, minWidth: '500px', minHeight:'200px', disableClose: true}
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);
+        this.documentService.updateDocumentType(result, groupToEdit.topic).subscribe(_ => {
+          this.initDocumentGroups();
         });
       }
     });
