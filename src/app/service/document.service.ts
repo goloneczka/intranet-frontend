@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Document, DocumentGroup} from "../model/document";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Document, DocumentGroup, DocumentToSave} from "../model/document";
 
 @Injectable()
 export class DocumentService {
@@ -16,6 +16,16 @@ export class DocumentService {
 
   public getDocuments() {
     return this.http.get<Document[]>(this.DOCUMENT_URL);
+  }
+
+  public saveDocument(newDoc: DocumentToSave) {
+    let queryParams = new FormData();
+    queryParams.append('pdfFile', newDoc.data);
+    queryParams.append('comment',  newDoc.comment);
+    queryParams.append('topic', newDoc.topic);
+    queryParams.append('fileName', newDoc.fileName);
+             
+    return this.http.post<number>(this.DOCUMENT_URL, queryParams);
   }
 
   public getDocumentData(fileName: string) {
@@ -43,7 +53,7 @@ export class DocumentService {
     return this.http.put<void>(`${this.DOCUMENT_GROUP_URL}/${oldTopic}`, newGroup);
   }
 
-  deleteDocumentType(groupTopic: string) {
+  public deleteDocumentType(groupTopic: string) {
     return this.http.delete<void>(`${this.DOCUMENT_GROUP_URL}/${groupTopic}`);
   }
 }

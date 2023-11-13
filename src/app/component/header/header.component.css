@@ -1,20 +1,16 @@
-div {
-  font-size: 19px;
-  margin: 4px;
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%/* Make the parent component take up 100% of available space */
 }
 
-.right-side-header {
-  margin-left: -54px;
-  text-align: right;
-  position: fixed;
-  width: 100%;
+.center-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.inner-right-side-header {
-  display: inline-flex;
-  margin-top: 0;
-}
-
-.icon-center {
-  margin-top: -8px;
+.mat-icon { 
+  /* override angular class */
+  vertical-align: middle;
 }

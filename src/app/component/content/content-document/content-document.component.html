@@ -16,25 +16,27 @@
     <div class="center-align">
       <div>
         {{docType.topic}}
-        <button mat-icon-button>
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
+        <span *ngIf="isUserAuthenticated" >
+          <button mat-icon-button (click)="addDocument(docType.topic)" >
+            <mat-icon>insert_drive_file</mat-icon>
+          </button>
+        </span>
       </div>
-      <div>
+      <div *ngIf="isUserAuthenticated && docType.topic">
         <button mat-icon-button (click)="openDialogEdit(docType)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="deleteGroup(docType)">
           <mat-icon>remove_circle_outline</mat-icon>
         </button>
-      </div> 
-    </div>
+      </div>
+    </div> 
     
     <mat-nav-list class="docs-list">
       <mat-list-item *ngFor="let doc of documents | FilterDocument : docType.topic" (click)="getDocumentData(doc.fileName)">
         <h3 matListItemTitle style="font-weight: bold">{{ doc.fileName }} </h3>
         <p matListItemLine class="stylize-center-item"> {{doc.comment}}</p>
-        <p matListItemLine style="text-align: end"> {{doc.creator}}, {{doc.creationTime}} </p>
+        <p matListItemLine style="text-align: end"> {{(doc.creator?.length) ? (doc.creator + ',') : ('')}} {{doc.creationTime | date: 'yyyy-MM-dd'}} </p>
       </mat-list-item>
     </mat-nav-list>
   </div>

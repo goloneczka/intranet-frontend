@@ -7,6 +7,7 @@ import { NewDocumentGroupComponent } from './new-document-group/new-document-gro
 import { MatDialog } from '@angular/material/dialog';
 import { SortingDialogComponent } from './sorting-dialog/sorting-dialog.component';
 import { EditDocumentGroupDialogComponent } from './edit-document-group-dialog/edit-document-group-dialog.component';
+import { NewDocumentDialogComponent } from './new-document-dialog/new-document-dialog.component';
 
 @Component({
   selector: 'app-content-document',
@@ -52,7 +53,6 @@ export class ContentDocumentComponent {
     this.documentService.deleteDocumentType(groupToDelete.topic).subscribe(_ => {
       this.initDocumentGroups();
     });
-
   }
 
   private initDocumentGroups(){
@@ -89,5 +89,24 @@ export class ContentDocumentComponent {
         });
       }
     });
+  }
+
+  addDocument(docGrupe : string) {
+    const dialogRef = this.dialog.open(NewDocumentDialogComponent,
+      {data: docGrupe, minWidth: '500px', minHeight:'200px', disableClose: true}
+   );
+
+   dialogRef.afterClosed().subscribe(result => {
+    if(result){
+      const documentName = result.controls['document'].value;
+      const file = result.controls['file'].value;
+      const comment = result.controls['comment'].value;
+      this.documentService.saveDocument({
+        'topic': docGrupe, 'data': file, 'comment': comment, 'fileName': documentName
+      }).subscribe(_ => {
+        this.documents$ = this.documentService.getDocuments();
+      })
+    }
+  });
   }
 }

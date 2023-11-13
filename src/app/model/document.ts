@@ -8,6 +8,13 @@ export interface Document {
 
 }
 
+export interface DocumentToSave {
+  fileName: string
+  comment: string
+  topic: string
+  data: any
+}
+
 export interface DocumentGroup {
   order: number
   topic: string

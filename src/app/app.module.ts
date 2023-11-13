@@ -21,7 +21,7 @@ import {MatCardModule} from "@angular/material/card";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {MatSnackBar} from "@angular/material/snack-bar";
-
+import {TextFieldModule} from '@angular/cdk/text-field';
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
 import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent,
         ContentEmployeeDepartmentComponent } from './component/content/index'
@@ -41,6 +41,7 @@ import { SortingDialogComponent } from './component/content/content-document/sor
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { EditDocumentGroupDialogComponent } from './component/content/content-document/edit-document-group-dialog/edit-document-group-dialog.component';
+import { NewDocumentDialogComponent } from './component/content/content-document/new-document-dialog/new-document-dialog.component';
 
 
 
@@ -63,7 +64,8 @@ import { EditDocumentGroupDialogComponent } from './component/content/content-do
     ContentEmployeeDepartmentComponent,
     NewDocumentGroupComponent,
     SortingDialogComponent,
-    EditDocumentGroupDialogComponent
+    EditDocumentGroupDialogComponent,
+    NewDocumentDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -87,7 +89,8 @@ import { EditDocumentGroupDialogComponent } from './component/content/content-do
         MatPaginatorModule,
         MatListModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        TextFieldModule
     ],
   providers: [
     PostService,

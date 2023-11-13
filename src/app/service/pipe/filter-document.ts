@@ -9,6 +9,8 @@ export class FilterDocumentPipe implements PipeTransform {
     if (!items) {
       return items;
     }
-    return items.filter(item => item.topic === type);
+    return items.filter(item => item.topic === type).sort((a,b) => 
+        new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime()
+      );
   }
 }

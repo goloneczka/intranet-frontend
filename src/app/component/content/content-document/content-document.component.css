@@ -24,3 +24,9 @@ mat-list-item:nth-child(odd) {
   justify-content: space-between;
   align-items: center;
 }
+
+.mat-icon { 
+  /* override angular class */
+  vertical-align: middle;
+}
+

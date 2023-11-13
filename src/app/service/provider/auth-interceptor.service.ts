@@ -10,9 +10,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
     if (LocalStorageService.isAuthenticated()) {
       req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${LocalStorageService.getJwt()}`
-        }
+        headers: req.headers.append('Authorization', `Bearer ${LocalStorageService.getJwt()}`)
       });
     }
     return next.handle(req);

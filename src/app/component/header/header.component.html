@@ -1,17 +1,15 @@
-<div style="display: inline-flex">
-  <div class="left-side-header">
+<div class="center-align">
+  <div>
     <span>Intranety, </span>
     <ng-content select="[tab]"/>
   </div>
 
-  <div class="right-side-header">
-    <div class="inner-right-side-header">
-      <span> {{userMail}} </span>
-      <div *ngIf="userMail?.trim()?.length" class="icon-center">
-          <button mat-icon-button matTooltip="Wylogowanie" (click)="logoutUser()">
-            <mat-icon>power_settings_new</mat-icon>
-          </button>
-      </div>
-    </div>
+  <div style="margin-bottom: 5px;">
+    <span> {{userMail}} </span>
+    <span *ngIf="userMail?.trim()?.length" class="icon-center">
+        <button mat-icon-button matTooltip="Wylogowanie" (click)="logoutUser()">
+          <mat-icon>power_settings_new</mat-icon>
+        </button>
+    </span>
   </div>
 </div>
