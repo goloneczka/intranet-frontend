@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{groupName}}, Dodawanie Dokumentów</h2>
+<mat-dialog-content class="mat-typography">
+
+<form [formGroup]="documentForm" (ngSubmit)="addGroup()">
+
+    <mat-form-field style="min-width: 260px;">
+        <mat-label>Nazwa dokumentu</mat-label>
+        <input matInput placeholder="Dokument" formControlName="document">
+    </mat-form-field>
+
+    <span class="file-form">
+        <button type="button" mat-raised-button (click)="fileInput.click()" style="width: 130px;">Choose File</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+        <p>{{(inputFileName.length>30)? (inputFileName | slice:0:30)+'...':(inputFileName)}}</p>
+    </span>
+
+    <mat-form-field style="min-width: 350px; display: block;">
+        <mat-label>Komentarz</mat-label>
+        <textarea matInput placeholder="Krótka Notka" formControlName="comment"> </textarea>
+    </mat-form-field>
+</form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cofnij</button>
+    <button mat-button form="ngForm" [disabled]="!documentForm.valid" [mat-dialog-close]="documentForm" cdkFocusInitial>Zapisz</button>
+</mat-dialog-actions>
