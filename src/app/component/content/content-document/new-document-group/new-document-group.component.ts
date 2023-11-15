@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DocumentGroup } from 'src/app/model/document';
 import {cloneDeep} from 'lodash';
 

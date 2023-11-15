@@ -24,10 +24,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
 import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent,
-        ContentEmployeeDepartmentComponent } from './component/content/index'
+        ContentEmployeeDepartmentComponent, NewDocumentDialogComponent, NewPostComponent, EditDocumentGroupDialogComponent,
+        NewDocumentGroupComponent, SortingDialogComponent } from './component/content/index';
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
-         BasicAuthInterceptor} from './service/index'
+         BasicAuthInterceptor, PostOrderPipe, SafeHtmlPipe } from './service/index';
 import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
 import { DutyComponent } from './component/right-nav/duty/duty.component';
 import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
@@ -36,12 +37,10 @@ import { HeaderComponent } from './component/header/header.component';
 import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
 import { LoginComponent } from './component/login-component/login.component';
 import { MainPageComponent } from './component/main-page/main-page.component';
-import { NewDocumentGroupComponent } from './component/content/content-document/new-document-group/new-document-group.component';
-import { SortingDialogComponent } from './component/content/content-document/sorting-dialog/sorting-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { EditDocumentGroupDialogComponent } from './component/content/content-document/edit-document-group-dialog/edit-document-group-dialog.component';
-import { NewDocumentDialogComponent } from './component/content/content-document/new-document-dialog/new-document-dialog.component';
+import { QuillModule } from 'ngx-quill';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -59,15 +58,19 @@ import { NewDocumentDialogComponent } from './component/content/content-document
     RightNavParentComponent,
     HeaderComponent,
     ContentTabDisplayPipe,
+    PostOrderPipe,
     LoginComponent,
     MainPageComponent,
     ContentEmployeeDepartmentComponent,
     NewDocumentGroupComponent,
     SortingDialogComponent,
     EditDocumentGroupDialogComponent,
-    NewDocumentDialogComponent
+    NewDocumentDialogComponent,
+    NewPostComponent,
+    SafeHtmlPipe,
   ],
     imports: [
+        CommonModule,
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
@@ -90,7 +93,8 @@ import { NewDocumentDialogComponent } from './component/content/content-document
         MatListModule,
         MatDialogModule,
         MatSelectModule,
-        TextFieldModule
+        TextFieldModule,
+        QuillModule.forRoot(),
     ],
   providers: [
     PostService,

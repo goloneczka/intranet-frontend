@@ -5,3 +5,10 @@ export interface Post {
   user: string
   creationTime: Date
 }
+
+export interface PostToSave {
+
+  message: string
+  title: string
+}
+

@@ -49,7 +49,6 @@ export class ContentDocumentComponent {
   }
 
   deleteGroup(groupToDelete: DocumentGroup) {
-    console.log(groupToDelete);
     this.documentService.deleteDocumentType(groupToDelete.topic).subscribe(_ => {
       this.initDocumentGroups();
     });

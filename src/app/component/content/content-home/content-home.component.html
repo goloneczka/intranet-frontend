@@ -1,21 +1,32 @@
-<div *ngIf="posts$ | async as posts">
-  <p>content-home works!</p>
+<section *ngIf="isUserAuthenticated">
+  <div class="button-row"> 
+    <button mat-raised-button color="primary" (click)="addPost()" style="margin-left: 5px;">Nowy Post</button>
+  </div>
+  <app-new-post (newPostEvent)="savePost($event)" />
+  <mat-divider/>
+</section>
 
+<section *ngIf="posts$ | async as posts">
   <div *ngIf="!posts.length">
      <p> no posts to display !</p>
   </div>
 
-  <div *ngIf="posts.length" class="card-list" >
-    <mat-card *ngFor="let card of posts" class="card-item">
-      <mat-card-header>
-        <mat-card-title>{{ card.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        {{ card.message }}
-        {{ card.creationTime }}
-        {{ card.user }}
-      </mat-card-content>
-    </mat-card>
+  <div *ngIf="posts.length" style="margin-top: 5px;">
+    <div *ngFor="let card of posts | PostOrder" class="post-container">
+      <div class="center-align">
+        <div class="post-header"> {{ card.title }}</div>
+        <div *ngIf="isUserAuthenticated">
+          <button mat-icon-button (click)="openDialogEdit(card)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deletePost(card)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="post-content" [innerHTML]="card.message | SafeHtml"></div>
+      <div class="post-footer"> {{ card.user }}, {{ card.creationTime | date: 'd/M/yyyy, H:mm'}} </div>
+    </div>
   </div>
 
-</div>
+</section>

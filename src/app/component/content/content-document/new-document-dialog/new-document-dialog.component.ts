@@ -35,8 +35,5 @@ export class NewDocumentDialogComponent {
     }
   }
 
-  addGroup() {
-
-  }
 
 }

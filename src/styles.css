@@ -3,6 +3,9 @@
 @import "node_modules/angular-calendar/css/angular-calendar.css";
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~quill/dist/quill.snow.css';
+
+
 
 
 .cal-month-view .cal-day-cell {

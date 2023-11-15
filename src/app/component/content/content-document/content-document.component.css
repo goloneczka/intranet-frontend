@@ -30,3 +30,9 @@ mat-list-item:nth-child(odd) {
   vertical-align: middle;
 }
 
+.post-footer {
+  font-size: 0.8em;
+  color: #888;
+  text-align: end;
+}
+
