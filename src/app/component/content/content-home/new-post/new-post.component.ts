@@ -11,7 +11,7 @@ import { PostToSave } from 'src/app/model/post';
 export class NewPostComponent {
   
   @Output() newPostEvent = new EventEmitter<PostToSave>();
-  @Input() shouldComponentBeRender = false;
+  shouldComponentBeRender = false;
   postForm: FormGroup;
 
   quillConfiguration: any;

@@ -26,7 +26,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #A89985;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -35,10 +35,10 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #483C32;
 }
 
 mat-toolbar {
-  background: #006a9f;
+  background: #A89985;
   color: white;
 }

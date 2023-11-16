@@ -1,0 +1,21 @@
+
+  .post-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .post-content {
+    margin-bottom: 10px;
+  }
+  
+  .post-footer {
+    font-size: 0.8em;
+    color: #888;
+  }
+  
+  .center-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

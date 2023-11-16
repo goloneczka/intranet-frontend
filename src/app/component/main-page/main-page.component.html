@@ -6,7 +6,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container>
-    <mat-sidenav mode="side" opened="true" >
+    <mat-sidenav mode="side" opened="true" class="sidenav left-sidenav" >
       <app-left-nav (contentTypeChangeEvent)="contentTypeChange($event)" />
     </mat-sidenav>
 
@@ -18,10 +18,8 @@
       </div>
     </mat-sidenav-content>
 
-    <mat-sidenav mode="side" opened="true"  position="end" style="width: 400px">
+    <mat-sidenav mode="side" opened="true"  position="end" class="sidenav right-sidenav">
       <app-right-nav-parent/>
     </mat-sidenav>
   </mat-sidenav-container>
 </div>
-
-<router-outlet></router-outlet>

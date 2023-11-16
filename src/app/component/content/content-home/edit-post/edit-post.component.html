@@ -1,0 +1,21 @@
+<form [formGroup]="postForm" (ngSubmit)="editPost()">
+    <div class="post-container">
+        <mat-form-field  style="min-width: 350px;">
+            <mat-label>Nazwa Posta</mat-label>
+            <input matInput placeholder="Grupa" formControlName="title">
+        </mat-form-field>
+
+        <button mat-icon-button type="submit">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+        
+        <button mat-icon-button (click)="undoEdit()">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+            
+        <quill-editor [modules]="quillConfiguration" [placeholder]="'Wiadomość posta ...'"
+            [styles]="{'min-height': '120px'}"  class="quill-display" formControlName="message">
+        </quill-editor>
+
+    </div>
+</form>

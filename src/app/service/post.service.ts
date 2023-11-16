@@ -5,7 +5,7 @@ import {Post, PostToSave} from "../model/post";
 
 @Injectable()
 export class PostService {
- 
+  
   private POST_URL = environment.API_URL + '/post';
 
   constructor(private http: HttpClient) {}
@@ -18,5 +18,16 @@ export class PostService {
   savePost(post: PostToSave) {
     return this.http.post<number>(this.POST_URL, post);
   }
+
+  deletePost(title: string) {
+    const queryParams = new HttpParams().append('title', title);
+    return this.http.delete<number>(this.POST_URL, {params: queryParams});
+  }
+
+  editPost(title: string, post: PostToSave) {
+    const queryParams = new HttpParams().append('title', title);
+    return this.http.put<number>(this.POST_URL, post, {params: queryParams});
+  }
+ 
 
 }

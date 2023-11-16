@@ -15,6 +15,7 @@ export class ContentHomeComponent {
   @ViewChild(NewPostComponent)
   documentGroupChild!: NewPostComponent;
 
+  idOfPostsToEdit : number[] = [];
   posts$: Observable<Post[]> = of([]);
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
 
@@ -30,15 +31,30 @@ export class ContentHomeComponent {
 
   savePost(post : PostToSave) {
     this.postService.savePost(post).subscribe(_ => {
+      this.idOfPostsToEdit = [];
       this.posts$ = this.postService.getPosts();
     });
   }
 
-  openDialogEdit(post : Post) {
-
+  displayOrEditView(isAdd: boolean, ind: number) {
+    if(isAdd){
+      this.idOfPostsToEdit.push(ind);
+    } else {
+      this.idOfPostsToEdit = this.idOfPostsToEdit.filter(v => v != ind);
+    }
   }
 
   deletePost(post : Post) {
-    
+    this.postService.deletePost(post.title).subscribe(_ => {
+      this.idOfPostsToEdit = [];
+      this.posts$ = this.postService.getPosts();
+    });
+  }
+
+  editPost(post : PostToSave, title : string) {
+    this.postService.editPost(title, post).subscribe(_ => {
+      this.idOfPostsToEdit = [];
+      this.posts$ = this.postService.getPosts();
+    });
   }
 }

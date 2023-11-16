@@ -5,8 +5,8 @@
 
   <section *ngIf="isUserAuthenticated">
     <div class="button-row"> 
-      <button mat-raised-button color="primary" (click)="addGroup()" style="margin-left: 5px;">Nowa Grupa</button>
-      <button mat-raised-button color="primary" (click)="openDialogSorting()" style="margin-left: 5px;">Sortowanie</button>
+      <button mat-raised-button (click)="addGroup()" style="margin-left: 5px; background-color: #A89985;">Nowa Grupa</button>
+      <button mat-raised-button (click)="openDialogSorting()" style="margin-left: 5px; background-color: #A89985;">Sortowanie</button>
     </div>
     <app-new-document-group [docTypes]="docTypes" (newDocumentGroupEvent)="addDocumentGroup($event)" />
     <mat-divider/>

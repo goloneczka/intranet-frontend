@@ -6,7 +6,10 @@
 @import '~quill/dist/quill.snow.css';
 
 
-
+body {
+  margin: 0%;
+  margin-right: 1px;
+}
 
 .cal-month-view .cal-day-cell {
   min-height: auto !important;
@@ -23,4 +26,14 @@
   --mat-mdc-snack-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D2C4B6;
+}
+
+
 

@@ -1,6 +1,6 @@
 <section *ngIf="isUserAuthenticated">
   <div class="button-row"> 
-    <button mat-raised-button color="primary" (click)="addPost()" style="margin-left: 5px;">Nowy Post</button>
+    <button mat-raised-button (click)="addPost()" style="margin-left: 5px; background-color: #A89985;">Nowy Post</button>
   </div>
   <app-new-post (newPostEvent)="savePost($event)" />
   <mat-divider/>
@@ -12,20 +12,17 @@
   </div>
 
   <div *ngIf="posts.length" style="margin-top: 5px;">
-    <div *ngFor="let card of posts | PostOrder" class="post-container">
-      <div class="center-align">
-        <div class="post-header"> {{ card.title }}</div>
-        <div *ngIf="isUserAuthenticated">
-          <button mat-icon-button (click)="openDialogEdit(card)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button (click)="deletePost(card)">
-            <mat-icon>remove_circle_outline</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div class="post-content" [innerHTML]="card.message | SafeHtml"></div>
-      <div class="post-footer"> {{ card.user }}, {{ card.creationTime | date: 'd/M/yyyy, H:mm'}} </div>
+    <div *ngFor="let card of posts | PostOrder; index as ind" class="post-container">
+
+      <div *ngIf="idOfPostsToEdit.includes(ind); then edit else display"></div>
+      <ng-template #edit>
+        <app-edit-post [card]="card" 
+        (editEvent)="displayOrEditView($event, ind)" (editPostEvent)="editPost($event, card.title)"/>
+      </ng-template>
+      <ng-template #display>
+        <app-display-post [card]="card" [isUserAuthenticated]="isUserAuthenticated"
+            (deleteEvent)="deletePost($event)" (editEvent)="displayOrEditView($event, ind)"/>
+      </ng-template>
     </div>
   </div>
 

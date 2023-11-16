@@ -41,6 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { QuillModule } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
+import { DisplayPostComponent } from './component/content/content-home/display-post/display-post.component';
+import { EditPostComponent } from './component/content/content-home/edit-post/edit-post.component';
 
 
 
@@ -68,6 +70,8 @@ import { CommonModule } from '@angular/common';
     NewDocumentDialogComponent,
     NewPostComponent,
     SafeHtmlPipe,
+    DisplayPostComponent,
+    EditPostComponent,
   ],
     imports: [
         CommonModule,
