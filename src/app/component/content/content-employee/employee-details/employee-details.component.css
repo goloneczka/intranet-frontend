@@ -1,0 +1,36 @@
+.center-dialog {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.circle-with-text-gpt {
+    min-width: 115px;
+    min-height: 115px;
+    border-radius: 50%;
+    background-color: #576E5E; /* Change this color as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+
+  .card-display {
+    background-color: #D2C4B6;
+    display: inline-block;
+    margin: 10px;
+    width: 240px;
+    height: 80px;
+  }
+
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+  }

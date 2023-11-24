@@ -13,8 +13,13 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   public getEmployees() {
-    return this.http.get<Employee[]>(this.EMPLOYEE_URL)
+    return this.http.get<Employee[]>(this.EMPLOYEE_URL);
   }
+
+  public getEmployee(email : string) {
+    return this.http.get<Employee>(`${this.EMPLOYEE_URL}/${email}`);
+  }
+
 
   public getEmployeesWithTeams(teamUuid :string | null){
     const queryParams = teamUuid ? new HttpParams().append('teamParentUuid', teamUuid) : new HttpParams();

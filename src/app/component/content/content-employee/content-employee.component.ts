@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../../../service/employee.service";
-import {Employee, EmployeeDepartment, employeeKeys} from "../../../model/employee";
-import {MatTableDataSource} from "@angular/material/table";
+import {Employee} from "../../../model/employee";
+import { Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @Component({
   selector: 'app-content-employee',
@@ -10,13 +12,20 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class ContentEmployeeComponent implements OnInit{
 
-  departmentsWithEmployees : EmployeeDepartment[] = [];
+  employees$ : Observable<Employee[]> = of([]);
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.employeeService.getEmployeesWithTeams(null)
-      .subscribe(data => { this.departmentsWithEmployees = data});
+    this.employees$ = this.employeeService.getEmployees();
+  }
+
+  openDialogDetails(emp: Employee) {
+    this.employeeService.getEmployee(emp.email).subscribe(emp => {
+      const dialogRef = this.dialog.open(EmployeeDetailsComponent,
+        {data: emp, minWidth: '500px', minHeight:'200px'}
+     );
+    })
   }
 
 }

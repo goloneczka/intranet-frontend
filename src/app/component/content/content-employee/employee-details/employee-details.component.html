@@ -1,0 +1,51 @@
+<div *ngIf="fullDataEmployee">
+    <div class="center-dialog">
+        <div class="circle-with-text-gpt">
+            {{ (fullDataEmployee.firstName | slice:0:1) }}{{ (fullDataEmployee.lastName | slice:0:1) }}
+         </div>
+    </div>
+    <div>
+         <div class="card-row">
+            <mat-card class="card-display">
+                <mat-card-header>
+                  <mat-card-title>Imię i Nazwisko</mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.firstName }} {{ fullDataEmployee.lastName }}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card class="card-display">
+                <mat-card-header>
+                  <mat-card-title>Email</mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.email }}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+         </div>
+         <div class="card-row">
+            <mat-card class="card-display">
+                <mat-card-header>
+                  <mat-card-title>Stanowisko</mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.title}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card class="card-display">
+                <mat-card-header>
+                  <mat-card-title>Telefon </mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.phoneNumber}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+         </div>
+         <div class="card-row" style="margin-bottom: 15px;">
+            <mat-card class="card-display" >
+                <mat-card-header>
+                  <mat-card-title>Data zatrudnienia</mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.hireDate}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card class="card-display">
+                <mat-card-header>
+                  <mat-card-title>Data urodzenia </mat-card-title>
+                  <mat-card-subtitle>{{ fullDataEmployee.birthDate}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+         </div>
+    </div>
+</div>

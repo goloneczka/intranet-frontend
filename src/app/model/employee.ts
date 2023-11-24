@@ -5,8 +5,11 @@ export interface Employee {
   email: string
   title: string
   phoneNumber: string
-  isManager: boolean
+  major: boolean
+  hireDate: Date
+  birthDate: Date
 }
+
 
 export interface EmployeeDepartment {
 
@@ -14,5 +17,3 @@ export interface EmployeeDepartment {
   uuid: string
   employeeList: Employee[]
 }
-
-export const employeeKeys = ['firstName', 'lastName', 'email', 'title', 'phoneNumber'];

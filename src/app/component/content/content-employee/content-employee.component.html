@@ -1,7 +1,19 @@
-<div *ngIf="departmentsWithEmployees">
-  <div *ngFor="let depWithEmployees of departmentsWithEmployees">
-    {{depWithEmployees.team}}
-    <app-content-employee-department [employeeDepartment]="depWithEmployees" />
+<div *ngIf="employees$ | async as employees">
+  <div *ngIf="!employees.length">
+    <p> no employees to display !</p>
   </div>
+
+  <table>
+    <tr *ngFor="let emp of employees" >
+      <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
+        <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
+           {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}
+        </div>
+        <div class="text-emp">
+           {{ emp.firstName }} {{ emp.lastName }}, {{ emp.title }}
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
 

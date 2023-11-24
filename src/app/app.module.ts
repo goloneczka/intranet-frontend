@@ -24,7 +24,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
 import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent,
-        ContentEmployeeDepartmentComponent, NewDocumentDialogComponent, NewPostComponent, EditDocumentGroupDialogComponent,
+        NewDocumentDialogComponent, NewPostComponent, EditDocumentGroupDialogComponent,
         NewDocumentGroupComponent, SortingDialogComponent } from './component/content/index';
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
@@ -43,6 +43,7 @@ import { QuillModule } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
 import { DisplayPostComponent } from './component/content/content-home/display-post/display-post.component';
 import { EditPostComponent } from './component/content/content-home/edit-post/edit-post.component';
+import { EmployeeDetailsComponent } from './component/content/content-employee/employee-details/employee-details.component';
 
 
 
@@ -63,7 +64,6 @@ import { EditPostComponent } from './component/content/content-home/edit-post/ed
     PostOrderPipe,
     LoginComponent,
     MainPageComponent,
-    ContentEmployeeDepartmentComponent,
     NewDocumentGroupComponent,
     SortingDialogComponent,
     EditDocumentGroupDialogComponent,
@@ -72,6 +72,7 @@ import { EditPostComponent } from './component/content/content-home/edit-post/ed
     SafeHtmlPipe,
     DisplayPostComponent,
     EditPostComponent,
+    EmployeeDetailsComponent,
   ],
     imports: [
         CommonModule,

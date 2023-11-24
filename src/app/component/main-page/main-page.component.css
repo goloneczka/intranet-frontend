@@ -27,6 +27,9 @@ mat-toolbar {
   align-items: center;
 }
 
+mat-sidenav-container {
+    min-height: calc(100vh - 65px);
+}
 
 .mat-drawer-content {
   overflow: hidden !important;
