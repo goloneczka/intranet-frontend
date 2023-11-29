@@ -1,10 +1,44 @@
-<div *ngIf="employees$ | async as employees">
-  <div *ngIf="!employees.length">
+<div>
+  <div *ngIf="!filteredEmployees.length">
     <p> no employees to display !</p>
   </div>
 
+  <section *ngIf="isUserAuthenticated">
+    <div class="button-row"> 
+      <button mat-raised-button (click)="addEmployee()" style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
+      <button mat-raised-button (click)="addTeam()" style="margin-left: 5px; background-color: #A89985;">Nowy Zespół</button>
+    </div>
+    <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" />
+    <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)"></app-new-employee-team>
+    <mat-divider style="margin-bottom: 5px;"/>
+  </section>
+
+
+  <section class="flex-container">
+    <div>
+      Wyszukaj Współpracowników
+    </div>
+    <div>
+      <form [formGroup]="filterForm" class="filter-form">
+        <mat-form-field class="filter-form-item">
+          <mat-label>Godność</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+    
+        <mat-form-field class="filter-form-item">
+          <mat-label>Zespół</mat-label>
+          <mat-select formControlName="teamName">
+            <mat-option *ngFor="let team of teamNames" [value]="team" >
+                {{team}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </section>
+
   <table>
-    <tr *ngFor="let emp of employees" >
+    <tr *ngFor="let emp of filteredEmployees" >
       <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
         <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
            {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}

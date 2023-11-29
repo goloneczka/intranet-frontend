@@ -1,0 +1,28 @@
+<section *ngIf="shouldComponentBeRender">
+    <form [formGroup]="teamGroupForm" (ngSubmit)="addTeam()">
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Zespół</mat-label>
+            <input matInput placeholder="nazwa ..." formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px; width: 200px;">
+                <mat-label>Zespół Nadrzędny</mat-label>
+                <mat-select formControlName="parentTeam">
+                    <mat-option *ngFor="let team of teamArrayInput" [value]="team" >
+                        {{team}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-icon-button type="submit" [disabled]="!teamGroupForm.valid">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+          
+              <button mat-icon-button (click)="shouldDisplayForm(false)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+        </div>
+    </form>
+</section>

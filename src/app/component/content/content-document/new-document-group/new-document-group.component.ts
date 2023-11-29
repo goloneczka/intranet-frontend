@@ -12,7 +12,7 @@ export class NewDocumentGroupComponent implements OnChanges {
   
   @Output() newDocumentGroupEvent = new EventEmitter<DocumentGroup>();
   documentGroupForm: FormGroup;
-  @Input() shouldComponentBeRender = false;
+  shouldComponentBeRender = false;
   @Input() docTypes: DocumentGroup[] = [];
   docTypesShadow: DocumentGroup[] = [];
 

@@ -1,0 +1,75 @@
+<section *ngIf="shouldComponentBeRender">
+    <form [formGroup]="employeeGroupForm" (ngSubmit)="addEmployee()">
+
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput placeholder="nazwisko ..." formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px; width: 250px;">
+                <mat-label>Imię</mat-label>
+                <input matInput placeholder="imię ..." formControlName="firstName">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email ..." formControlName="email">
+              </mat-form-field>
+    
+              <mat-form-field style="max-height: 70px; width: 200px;">
+                <mat-label>Numer Telefonu</mat-label>
+                <input matInput placeholder="telefon ..." formControlName="phoneNumber">
+              </mat-form-field>
+        </div>
+
+        <div class="row" style="align-items: stretch;">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Stanowisko</mat-label>
+                <input matInput placeholder="stanowisko ..." formControlName="title">
+              </mat-form-field>
+            
+              <div class="toogle-flex">
+                Stanowisko Kierownicze
+                <mat-slide-toggle formControlName="major"><span style="opacity: 0;">S.K</span></mat-slide-toggle>
+              </div>
+        </div>
+
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 200px;">
+                <mat-label>Urodzony</mat-label>
+                <input matInput [matDatepicker]="datepicker" formControlName="birthDate">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker></mat-datepicker>
+              </mat-form-field>
+    
+              <mat-form-field style="max-height: 70px;  width: 200px;">
+                <mat-label>Data Zatrudnienia</mat-label>
+                <input matInput [matDatepicker]="datepicker1" formControlName="hireDate">
+                <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker1></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field style="max-height: 70px; width: 200px;">
+                <mat-label>Nazwa Zespołu</mat-label>
+                <mat-select formControlName="teamName">
+                    <mat-option *ngFor="let team of teamArrayShadow" [value]="team" >
+                        {{team}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+
+        <div>
+            <button mat-icon-button type="submit" [disabled] = "!employeeGroupForm.valid">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+          
+              <button mat-icon-button (click)="shouldDisplayForm(false)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+        </div>
+      </form>
+</section>

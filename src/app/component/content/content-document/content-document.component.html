@@ -32,7 +32,7 @@
       </div>
     </div> 
     
-    <mat-nav-list class="docs-list">
+    <mat-nav-list>
       <mat-list-item *ngFor="let doc of documents | FilterDocument : docType.topic" (click)="getDocumentData(doc.fileName)">
         <h3 matListItemTitle style="font-weight: bold">{{ doc.fileName }} </h3>
         <p matListItemLine class="stylize-center-item"> {{doc.comment}}</p>

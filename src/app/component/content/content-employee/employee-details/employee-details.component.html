@@ -8,44 +8,52 @@
          <div class="card-row">
             <mat-card class="card-display">
                 <mat-card-header>
-                  <mat-card-title>Imię i Nazwisko</mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.firstName }} {{ fullDataEmployee.lastName }}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.firstName }} {{ fullDataEmployee.lastName }}</mat-card-title>
+                  <mat-card-subtitle>Imię i Naziwsko</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
             <mat-card class="card-display">
                 <mat-card-header>
-                  <mat-card-title>Email</mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.email }}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.email }}</mat-card-title>
+                  <mat-card-subtitle>Email</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
          </div>
          <div class="card-row">
             <mat-card class="card-display">
                 <mat-card-header>
-                  <mat-card-title>Stanowisko</mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.title}}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.title}}</mat-card-title>
+                  <mat-card-subtitle>Stanowisko</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
             <mat-card class="card-display">
                 <mat-card-header>
-                  <mat-card-title>Telefon </mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.phoneNumber}}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.phoneNumber}} </mat-card-title>
+                  <mat-card-subtitle>Telefon</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
          </div>
-         <div class="card-row" style="margin-bottom: 15px;">
+         <div class="card-row">
             <mat-card class="card-display" >
                 <mat-card-header>
-                  <mat-card-title>Data zatrudnienia</mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.hireDate}}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.hireDate}}</mat-card-title>
+                  <mat-card-subtitle>Data Zatrudnienia</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
             <mat-card class="card-display">
                 <mat-card-header>
-                  <mat-card-title>Data urodzenia </mat-card-title>
-                  <mat-card-subtitle>{{ fullDataEmployee.birthDate}}</mat-card-subtitle>
+                  <mat-card-title>{{ fullDataEmployee.birthDate}} </mat-card-title>
+                  <mat-card-subtitle>Data Urodzenia</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
+         </div>
+         <div class="card-row" style="margin-bottom: 15px; justify-content: center;">
+          <mat-card class="card-display" >
+              <mat-card-header>
+                <mat-card-title>{{ fullDataEmployee.teamName}}</mat-card-title>
+                <mat-card-subtitle>Zespół</mat-card-subtitle>
+              </mat-card-header>
+          </mat-card>
          </div>
     </div>
 </div>

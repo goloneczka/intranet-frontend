@@ -21,6 +21,9 @@ import {MatCardModule} from "@angular/material/card";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
 import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent,
@@ -44,6 +47,8 @@ import { CommonModule } from '@angular/common';
 import { DisplayPostComponent } from './component/content/content-home/display-post/display-post.component';
 import { EditPostComponent } from './component/content/content-home/edit-post/edit-post.component';
 import { EmployeeDetailsComponent } from './component/content/content-employee/employee-details/employee-details.component';
+import { NewEmployeeComponent } from './component/content/content-employee/new-employee/new-employee.component';
+import { NewEmployeeTeamComponent } from './component/content/content-employee/new-employee-team/new-employee-team.component';
 
 
 
@@ -73,6 +78,8 @@ import { EmployeeDetailsComponent } from './component/content/content-employee/e
     DisplayPostComponent,
     EditPostComponent,
     EmployeeDetailsComponent,
+    NewEmployeeComponent,
+    NewEmployeeTeamComponent,
   ],
     imports: [
         CommonModule,
@@ -100,6 +107,9 @@ import { EmployeeDetailsComponent } from './component/content/content-employee/e
         MatSelectModule,
         TextFieldModule,
         QuillModule.forRoot(),
+        MatSlideToggleModule,
+        MatDatepickerModule,
+        MatNativeDateModule 
     ],
   providers: [
     PostService,

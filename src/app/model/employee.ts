@@ -8,6 +8,7 @@ export interface Employee {
   major: boolean
   hireDate: Date
   birthDate: Date
+  teamName: string
 }
 
 
@@ -17,3 +18,15 @@ export interface EmployeeDepartment {
   uuid: string
   employeeList: Employee[]
 }
+
+export interface Team {
+  teamName: string
+  uuid: string
+  parentTeamUuid: string
+}
+
+export interface TeamTree {
+  team: Team
+  children: TeamTree[]
+}
+
