@@ -8,8 +8,12 @@
       <button mat-raised-button (click)="addEmployee()" style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
       <button mat-raised-button (click)="addTeam()" style="margin-left: 5px; background-color: #A89985;">Nowy Zespół</button>
     </div>
-    <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" />
-    <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)"></app-new-employee-team>
+    <div style="margin-bottom: 5px;">
+      <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" style="margin-bottom: 5px;"/>
+    </div>
+    <div style="margin-bottom: 5px;">
+      <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)" style="margin-bottom: 5px;"/>
+    </div>
     <mat-divider style="margin-bottom: 5px;"/>
   </section>
 

@@ -12,17 +12,9 @@ export interface Employee {
 }
 
 
-export interface EmployeeDepartment {
-
-  team: string
-  uuid: string
-  employeeList: Employee[]
-}
-
 export interface Team {
   teamName: string
-  uuid: string
-  parentTeamUuid: string
+  parentTeamName: string
 }
 
 export interface TeamTree {

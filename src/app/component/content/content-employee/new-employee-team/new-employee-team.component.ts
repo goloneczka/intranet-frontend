@@ -28,13 +28,12 @@ export class NewEmployeeTeamComponent {
   }
 
   addTeam() {
-      const controlsForm = this.teamGroupForm.controls;
-      this.newTeamEvent.emit({'teamName': controlsForm['name'].value,
-                              'parentTeamUuid': controlsForm['parentTeam'].value,
-                              'uuid': ''
-      });
-      this.shouldComponentBeRender = false;
-      this.teamGroupForm.reset();
+    const controlsForm = this.teamGroupForm.controls;
+    this.newTeamEvent.emit({'teamName': controlsForm['name'].value,
+                            'parentTeamName': controlsForm['parentTeam'].value
+    });
+    this.shouldComponentBeRender = false;
+    this.teamGroupForm.reset();
   }
 
 }

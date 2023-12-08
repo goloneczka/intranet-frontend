@@ -60,12 +60,9 @@ export class ContentEmployeeComponent implements OnInit{
     this.employeeService.getEmployees().subscribe(data => {
       this.employees = this.filteredEmployees = data;
       
-      const teamNamesArray = this.employees.map(it => it.teamName).sort();
-      teamNamesArray.unshift('');
-      this.teamNames = new Set(teamNamesArray);
-
       this.employeeService.getTeamsTree().subscribe(data => {
         this.teamTree = data;
+        this.teamNames = new Set(this.employeeService.gesNestedTeamsInTree('', this.teamTree).sort());
       })
     });
   }
@@ -103,7 +100,9 @@ export class ContentEmployeeComponent implements OnInit{
   }
 
   saveTeam(team : Team) { 
-    
+    this.employeeService.saveTeam(team).subscribe(_ => {
+      this.initEmployees();
+    });
   }
 
 }
