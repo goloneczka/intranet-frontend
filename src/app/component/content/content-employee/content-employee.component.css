@@ -68,3 +68,9 @@ table {
   margin-left: 15px;
   flex: 1 0 90%;
 }
+
+.center-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

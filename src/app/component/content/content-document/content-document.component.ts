@@ -82,9 +82,9 @@ export class ContentDocumentComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log(result);
         this.documentService.updateDocumentType(result, groupToEdit.topic).subscribe(_ => {
           this.initDocumentGroups();
+          this.documents$ = this.documentService.getDocuments();
         });
       }
     });

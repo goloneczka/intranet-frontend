@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, pairwise, startWith } from 'rxjs';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewEmployeeTeamComponent } from './new-employee-team/new-employee-team.component';
+import { EditEmployeeTeamDialogComponent } from './edit-employee-team-dialog/edit-employee-team-dialog.component';
+
 
 @Component({
   selector: 'app-content-employee',
@@ -82,6 +84,32 @@ export class ContentEmployeeComponent implements OnInit{
       this.dialog.open(EmployeeDetailsComponent,
         {data: emp, minWidth: '500px', minHeight:'200px'}
      );
+    })
+  }
+
+  openDialogEdit(empToEdit: Employee) {
+    this.employeeService.getEmployee(empToEdit.email).subscribe(emp => {
+    
+    const dialogRef = this.dialog.open(EditEmployeeTeamDialogComponent, {
+        data: {'emp': emp, 'teamNames': this.teamNames},
+        minWidth: '800px',
+        minHeight:'500px',
+        disableClose: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.employeeService.updateEmployee(result).subscribe(_ => {
+            this.initEmployees();
+          });
+        }
+      });
+    });
+  }
+
+  deleteEmployee(empToDelete: Employee) {
+    this.employeeService.deleteEmployee(empToDelete.email).subscribe(_ => {
+      this.initEmployees();
     })
   }
 

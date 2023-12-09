@@ -9,7 +9,6 @@ export class EmployeeService {
   private EMPLOYEE_URL = environment.API_URL + '/employee';
   private TEAM = environment.API_URL + '/team';
 
-
   constructor(private http: HttpClient) {}
 
   public getEmployees() {
@@ -23,6 +22,15 @@ export class EmployeeService {
   public saveEmployee(employee: Employee) {
     return this.http.post<void>(this.EMPLOYEE_URL, employee);
   }
+
+  public updateEmployee(emp: Employee) {
+    return this.http.put<void>(`${this.EMPLOYEE_URL}/${emp.email}`, emp);
+  }
+
+  public deleteEmployee(email: string) {
+    return this.http.delete<void>(`${this.EMPLOYEE_URL}/${email}`);
+  }
+  
 
   public saveTeam(team: Team) {
     return this.http.post<void>(this.TEAM, team);

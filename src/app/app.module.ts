@@ -49,6 +49,7 @@ import { EditPostComponent } from './component/content/content-home/edit-post/ed
 import { EmployeeDetailsComponent } from './component/content/content-employee/employee-details/employee-details.component';
 import { NewEmployeeComponent } from './component/content/content-employee/new-employee/new-employee.component';
 import { NewEmployeeTeamComponent } from './component/content/content-employee/new-employee-team/new-employee-team.component';
+import { EditEmployeeTeamDialogComponent } from './component/content/content-employee/edit-employee-team-dialog/edit-employee-team-dialog.component';
 
 
 
@@ -80,6 +81,7 @@ import { NewEmployeeTeamComponent } from './component/content/content-employee/n
     EmployeeDetailsComponent,
     NewEmployeeComponent,
     NewEmployeeTeamComponent,
+    EditEmployeeTeamDialogComponent,
   ],
     imports: [
         CommonModule,

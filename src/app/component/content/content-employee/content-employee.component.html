@@ -43,14 +43,26 @@
 
   <table>
     <tr *ngFor="let emp of filteredEmployees" >
-      <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
-        <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
-           {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}
+      <div class="center-align">
+        <div>
+          <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
+            <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
+               {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}
+            </div>
+            <div class="text-emp">
+               {{ emp.firstName }} {{ emp.lastName }}, {{ emp.title }}
+            </div>
+          </td>
         </div>
-        <div class="text-emp">
-           {{ emp.firstName }} {{ emp.lastName }}, {{ emp.title }}
+        <div *ngIf="isUserAuthenticated">
+          <button mat-icon-button (click)=openDialogEdit(emp)>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)=deleteEmployee(emp)>
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
         </div>
-      </td>
+      </div>
     </tr>
   </table>
 </div>
