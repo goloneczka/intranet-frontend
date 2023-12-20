@@ -1,0 +1,21 @@
+Dyżury:
+<div *ngIf="!duties.length">
+  <p> no duties to display !</p>
+</div>
+
+<div *ngIf="duties.length" class="card-list">
+  <table>
+    <tr *ngFor="let dutyType of dutyTypes" class="card-list">
+      <td>{{ dutyType.shortcut ? dutyType.shortcut : dutyType.type}}</td>
+      <table>
+        <tr *ngFor="let card of duties | filterDuty : dutyType.type" class="duty-card">
+          <td>{{ card.employeeFirstName }} {{ card.employeeLastName }}</td>
+          <td>
+            {{ card.startTime }} -
+            {{ card.endTime }}
+          </td>
+        </tr>
+      </table>
+    </tr>
+  </table>
+</div>

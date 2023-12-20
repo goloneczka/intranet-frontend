@@ -1,0 +1,70 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 95%; /* Make the parent component take up 100% of available space */
+  }
+  
+  .flex-container{
+    width: 100%;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button-row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-form {
+    display: inline-flex;
+    gap: 10px;
+  }
+  
+  .filter-form-item {
+    height: 70px;
+  }
+  
+  .major-emp {
+    border-left: 5px solid #D2C4B6;
+  }
+  
+  .empty-space{
+    margin-left: 5px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .row-emp-item {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    position: relative;
+  }
+  
+  mat-icon {
+    position: relative;
+    float: right;
+    top: -15px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .circle-with-text-gpt:hover {
+    background-color: #3D4D40; /* Change the hover color as needed */
+    cursor: pointer; /* Optional: Change cursor on hover */
+  }
+  
+  .text-emp{
+    margin-left: 15px;
+    flex: 1 0 90%;
+  }
+  
+  .center-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

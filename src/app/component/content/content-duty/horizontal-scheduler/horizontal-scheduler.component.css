@@ -1,0 +1,114 @@
+::-webkit-scrollbar {
+    height: 5px;
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+.scheduler-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow-x: auto;
+
+  }
+  
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 5px; /* Add padding for spacing */
+    align-items: self-end;
+}
+
+.date-info {
+    display: flex;
+    align-items: center;
+}
+
+.navigation button {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.current-month {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.event {
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #A89985;
+    border: 2px solid #ccc !important; 
+}
+
+.res-column {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* To ensure text is centered vertically */
+    text-align: center;
+}
+
+.header, .row {
+    display: flex;
+    align-items: center;
+}
+  
+.cell, .res-column {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 1px;
+    min-width: 55px; /* Reduce min-width */
+    min-height: 45px;
+}
+
+.row {
+    margin-top: 1px;
+}
+
+.row:first-child {
+    margin-top: 4px; /* Add margin-top only to the first row */
+}
+
+.cell {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.cell.pointer {
+    cursor: pointer;
+}
+
+button {
+    padding: 8px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.progres-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.progres-bar {
+    width: -webkit-fill-available;
+    margin-top: 10px;
+}
+
+.progres-bar.progres-with-margin {
+    margin-top: 38px;
+}
+
+.mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: #576E5E;
+    --mdc-linear-progress-track-color: #ccc;
+}

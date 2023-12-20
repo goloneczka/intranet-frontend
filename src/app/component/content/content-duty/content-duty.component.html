@@ -1,0 +1,17 @@
+<section >
+  <div class="button-row"> 
+    <button mat-raised-button style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
+  </div>
+  <div style="margin-bottom: 5px;">
+    <!-- <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" style="margin-bottom: 5px;"/> -->
+  </div>
+  <mat-divider style="margin-bottom: 5px;"/>
+</section>
+
+
+<div style="margin-top: 10px;">
+  <app-horizontal-scheduler [resources]="dutyTypes" [duties]="duties"
+      (currentDateEvent)="prepareDutiesForMonth($event)" (currentDayEvent)="prepareDutyForDay($event)"/>
+
+  <app-dail-duty-list [duties]="dailyDuties" [dutyTypes]="dutyTypes"/>
+</div>

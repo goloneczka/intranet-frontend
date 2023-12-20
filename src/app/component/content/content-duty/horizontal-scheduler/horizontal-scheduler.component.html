@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="navigation">
+        <div class="date-info">
+            <button mat-raised-button (click)="showPreviousMonth()">Previous Month</button>
+            <button mat-raised-button (click)="currentMonth()">Current</button>
+            <button mat-raised-button (click)="showNextMonth()">Next Month</button>
+        </div>
+        <div class="current-month">{{ currentDate | date: 'MMMM yyyy' }}</div>
+    </div>
+    
+    <div class="scheduler-container">
+        <div class="header">
+          <div class="cell"> Dzień / &nbsp;Dyżur </div>
+          <div class="cell pointer" *ngFor="let day of days; let i = index" (click)="toggleDay(day)" [ngClass]="i+1===currentDayNumber ? 'event' : ''">
+            <div class="day-number">{{ day.dayOfMonth }}</div>
+            <div class="day-name">{{ day.name }}</div>
+          </div>
+        </div>
+      
+        <div class="body">
+          <div class="row" *ngFor="let res of resources">
+            <div class="res-column" >{{ res.shortcut.length ? res.shortcut : res.type.length < 5 ? res.type : res.type.substring(0,4).concat('.') }}</div>
+            <div class="cell pointer" *ngFor="let day of days; let i = index" (click)="toggleEvent(day.name, res)"  [ngClass]="i+1===currentDayNumber ? 'event' : ''">
+                <div >
+                    <div *ngIf="hasDuty(day, res)">
+                      <div *ngIf="isTotalDutyAssigned(day, res); else notTotalDuty" class="progres-flex">
+                        <div><mat-icon class="custom-icon">done_outline</mat-icon></div>
+                        <div class="progres-bar"><mat-progress-bar mode="determinate" value="100" ></mat-progress-bar></div> 
+                      </div>
+                      <ng-template #notTotalDuty>
+                        <div class="progres-bar progres-with-margin"><mat-progress-bar mode="determinate" value="50" ></mat-progress-bar></div> 
+                      </ng-template >
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
