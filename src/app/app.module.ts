@@ -50,6 +50,10 @@ import { EmployeeDetailsComponent } from './component/content/content-employee/e
 import { NewEmployeeComponent } from './component/content/content-employee/new-employee/new-employee.component';
 import { NewEmployeeTeamComponent } from './component/content/content-employee/new-employee-team/new-employee-team.component';
 import { EditEmployeeTeamDialogComponent } from './component/content/content-employee/edit-employee-team-dialog/edit-employee-team-dialog.component';
+import { ContentDutyComponent } from './component/content/content-duty/content-duty.component';
+import { HorizontalSchedulerComponent } from './component/content/content-duty/horizontal-scheduler/horizontal-scheduler.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { DailDutyListComponent } from './component/content/content-duty/dail-duty-list/dail-duty-list.component';
 
 
 
@@ -82,6 +86,9 @@ import { EditEmployeeTeamDialogComponent } from './component/content/content-emp
     NewEmployeeComponent,
     NewEmployeeTeamComponent,
     EditEmployeeTeamDialogComponent,
+    ContentDutyComponent,
+    HorizontalSchedulerComponent,
+    DailDutyListComponent,
   ],
     imports: [
         CommonModule,
@@ -111,7 +118,8 @@ import { EditEmployeeTeamDialogComponent } from './component/content/content-emp
         QuillModule.forRoot(),
         MatSlideToggleModule,
         MatDatepickerModule,
-        MatNativeDateModule 
+        MatNativeDateModule,
+        MatProgressBarModule
     ],
   providers: [
     PostService,

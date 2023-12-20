@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {map, Observable, of} from "rxjs";
-import {Duty} from "../../../model/duty";
+import {Duty, DutyType} from "../../../model/duty";
 import {DutyService} from "../../../service/duty.service";
 
 @Component({
@@ -10,16 +10,18 @@ import {DutyService} from "../../../service/duty.service";
 })
 export class DutyComponent {
 
-  duties$: Observable<Duty[]> = of([]);
-  dutyTypes: Set<string> = new Set<string>();
+  duties: Duty[] = [];
+  dutyTypes: DutyType[] = [];
 
   constructor(private dutyService: DutyService) { }
 
   ngOnInit(): void {
-    this.duties$ = this.dutyService.getDuties();
-    this.duties$.subscribe(duties => {
-      duties.forEach(it => this.dutyTypes.add(it.dutyType))
-    })
+    this.dutyService.getDutyTypes().subscribe(typesData => {
+      this.dutyTypes = typesData;
+      this.dutyService.getDuties(new Date()).subscribe(dutyData => {
+        this.duties = dutyData;
+      });
+    });
   }
 
 }

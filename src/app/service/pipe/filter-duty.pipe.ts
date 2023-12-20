@@ -9,6 +9,6 @@ export class FilterDutyPipe implements PipeTransform {
     if (!items || !type) {
       return items;
     }
-    return items.filter(item => item.dutyType === type);
+    return items.filter(item => item.dutyType.type === type);
   }
 }
