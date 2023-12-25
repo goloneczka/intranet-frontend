@@ -1,12 +1,11 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Duty, DutyType} from "../model/duty";
+import {Duty, DutyToSave, DutyType} from "../model/duty";
 
 @Injectable()
 export class DutyService {
   
-
   private DUTY_URL = environment.API_URL + '/duty';
   private DUTY_DATE_URL = environment.API_URL + '/duty-date';
 
@@ -29,4 +28,9 @@ export class DutyService {
   public getDutyTypes() {
     return this.http.get<DutyType[]>(this.DUTY_TYPE_URL);
   }
+
+  createNewDuty(result: DutyToSave) {
+    return this.http.post<void>(this.DUTY_URL, result);
+  }
+  
 }

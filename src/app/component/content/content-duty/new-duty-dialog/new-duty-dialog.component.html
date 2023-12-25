@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>Zapisz Się na Dyżur</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="dutyGroupForm">
+
+    <div class="row">
+        <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="mail ..." formControlName="employeeMail" >
+          </mat-form-field>
+
+          <mat-form-field style="max-height: 70px; width: 200px;">
+            <mat-label>Dyżur</mat-label>
+            <input matInput placeholder="typ ..." formControlName="dutyType" [readonly]=true>
+          </mat-form-field>
+    </div>
+
+    <div class="row" >
+      <div>
+        <mat-form-field>
+          <mat-label>Czas Start</mat-label>
+          <input matInput [format]="24" formControlName="startTime" [ngxMatTimepicker]="pickerB" placeholder="12:00" required/>
+          <mat-icon matSuffix (click)="pickerB.open()"> watch_later </mat-icon>
+        </mat-form-field>
+        <ngx-mat-timepicker color="primary" [minutesGap]="5" #pickerB ></ngx-mat-timepicker>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Czas Koniec</mat-label>
+          <input matInput [format]="24" formControlName="endTime" [ngxMatTimepicker]="pickerA" placeholder="12:00"  required/>
+          <mat-icon matSuffix (click)="pickerA.open()"> watch_later </mat-icon>
+        </mat-form-field>
+        <ngx-mat-timepicker color="primary"  #pickerA></ngx-mat-timepicker>
+      </div>
+    </div>
+
+    <div class="row">
+        <mat-form-field style="max-height: 70px; width: 200px;">
+            <mat-label>dutyDay</mat-label>
+            <input matInput [matDatepicker]="datepicker" formControlName="dutyDay" [readonly]=true>
+            <mat-datepicker-toggle matSuffix [for]="datepicker" [disabled]="true"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker ></mat-datepicker>
+          </mat-form-field>
+    </div>
+  </form>
+
+  <div class="note">
+    <p > Twój nowy dyżur może wymagać zaakceptowania przez administratora !</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cofnij</button>
+    <button mat-button form="ngForm" [disabled]="!dutyGroupForm.valid" [mat-dialog-close]="result" cdkFocusInitial>Zapisz</button>
+</mat-dialog-actions>

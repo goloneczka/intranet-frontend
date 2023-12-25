@@ -24,6 +24,9 @@ export class HorizontalSchedulerComponent {
   @Output() 
   currentDayEvent = new EventEmitter<Date>();
 
+  @Output() 
+  newDutyEvent = new EventEmitter();
+
   ngOnInit() {
     this.generateCalendar();
   }
@@ -76,8 +79,18 @@ export class HorizontalSchedulerComponent {
     this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day.dayOfMonth));
   }
 
-  toggleEvent(day: string, resource: DutyType) {
-    console.log(`Toggle event for ${day} at ${resource}`);
+  shouldDisableCursor(index : number, resource: DutyType) {
+      const indexedDate = new Date(this.currentDate);
+      indexedDate.setDate(index+1);
+      return indexedDate < new Date() || this.isTotalDutyAssigned({dayOfMonth: index+1, name: ''}, resource);
+  }
+
+  toggleEvent(day: CalendarDay, resource: DutyType) {
+    const date = this.currentDate;
+    date.setDate(day.dayOfMonth);
+    if(date >= new Date() && !this.isTotalDutyAssigned(day, resource)){
+      this.newDutyEvent.emit({ resource: resource.type, date: date});
+    }
   }
 
   showPreviousMonth() {
@@ -98,6 +111,7 @@ export class HorizontalSchedulerComponent {
 
   currentMonth() {
     this.currentDate = new Date();
+    this.currentDayNumber = this.currentDate.getDate();
     this.currentDateEvent.emit(this.currentDate);
     this.currentDayEvent.emit(this.currentDate);
     this.generateCalendar();

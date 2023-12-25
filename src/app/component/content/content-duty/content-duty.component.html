@@ -11,7 +11,8 @@
 
 <div style="margin-top: 10px;">
   <app-horizontal-scheduler [resources]="dutyTypes" [duties]="duties"
-      (currentDateEvent)="prepareDutiesForMonth($event)" (currentDayEvent)="prepareDutyForDay($event)"/>
+      (currentDateEvent)="prepareDutiesForMonth($event)" (currentDayEvent)="prepareDutyForDay($event)"
+      (newDutyEvent)="prepareNewDutyDialog($event)"/>
 
   <app-dail-duty-list [duties]="dailyDuties" [dutyTypes]="dutyTypes"/>
 </div>

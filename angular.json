@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "intranet-app:build:production"
+              "buildTarget": "intranet-app:build:production"
             },
             "development": {
-              "browserTarget": "intranet-app:build:development"
+              "buildTarget": "intranet-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "intranet-app:build"
+            "buildTarget": "intranet-app:build"
           }
         },
         "test": {

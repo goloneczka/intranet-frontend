@@ -40,7 +40,7 @@
   margin-bottom: 10px;
 }
 
-.event {
+.selected-day-event {
     margin-left: 2px;
     margin-right: 2px;
     background-color: #A89985;
@@ -84,6 +84,10 @@
 
 .cell.pointer {
     cursor: pointer;
+}
+
+.disable-cursor {
+    cursor: default !important;
 }
 
 button {

@@ -10,6 +10,15 @@ export interface Duty {
   endTime: Date
 }
 
+export interface DutyToSave {
+
+  dutyType: string
+  employeeMail: string
+  dutyDay: Date
+  startTime: string
+  endTime: string
+}
+
 export interface DutyType {
 
   type: string
