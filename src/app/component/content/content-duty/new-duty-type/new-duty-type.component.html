@@ -1,0 +1,29 @@
+<section *ngIf="shouldComponentBeRender">
+    <form [formGroup]="dutyTypeForm" (ngSubmit)="addDutyType()">
+        <div class="header">
+            Nowy Rodzaj Dyżuru
+        </div>
+
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Dyżur</mat-label>
+                <input matInput placeholder="nazwa ..." formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Skrót</mat-label>
+                <input matInput placeholder="max 4 litery ..." formControlName="shortcut">
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-icon-button type="submit" [disabled]="!dutyTypeForm.valid">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+          
+              <button mat-icon-button (click)="shouldDisplayForm(false)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+        </div>
+    </form>
+
+</section>

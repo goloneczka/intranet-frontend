@@ -1,0 +1,45 @@
+<section *ngIf="shouldComponentBeRender">
+
+    <div *ngIf="!duties.length">
+        <p> Wszystkie wnioski są obecnie rozpatrzone !</p>
+    </div>
+
+    <div *ngIf="duties.length">
+        <table style="width: 100%;">
+            <tr *ngFor="let duty of dutiesAcceptance" >
+                <td>
+                    <div class="row-with-margin">
+                        <div class="row-circle">
+                            <div class="circle-with-text-gpt">{{ (duty.employeeFirstName | slice:0:1) }}{{ (duty.employeeLastName | slice:0:1) }}</div>
+                            <div style="margin-left: 15px;">{{ duty.employeeFirstName }} {{ duty.employeeLastName }}</div >
+                        </div>
+                        <mat-divider/>
+                        <div class="row-emp">
+                            <div class="row-emp-item">
+                                <div class="text-emp">Typ: <b>{{ duty.dutyType.type }} </b></div >
+                                <div class="text-emp">Dzień: <b>{{ duty.dutyDay }} </b></div>
+                                <div class="text-emp">Czas: <b>{{ duty.startTime | slice:0:5 }} - {{ duty.endTime | slice:0:5 }} </b></div>
+                                <div class="text-emp">Złożono: <b>{{ duty.creationTime | creationTimeRepresentation }} </b></div>
+                            </div>
+                            <div class="acceptance">
+                                <div class="acceptance-column">
+                                    <small> Czy Akceptacja</small>  
+                                    <mat-slide-toggle (change)="updateAcceptanceDuty($event.checked, duty)"><span style="opacity: 0;">A</span></mat-slide-toggle>
+                                </div>
+                                <div style="margin-left: 15px;">
+                                    <button mat-raised-button (click)="saveAcceptanceDuty(duty)">Zapisz</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    Zakończ rozpatrywanie wniosków
+    <button mat-icon-button (click)="shouldDisplayForm(false)">
+        <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+    
+</section>
