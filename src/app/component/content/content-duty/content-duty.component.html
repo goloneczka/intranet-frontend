@@ -1,18 +1,23 @@
 <section >
   <div class="button-row"> 
-    <button mat-raised-button style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
+    <button mat-raised-button (click)="addDutyType()" style="margin-left: 5px; background-color: #A89985;" >Zdefinij Rodzaj</button>
+    <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
+      <span class="badge">{{ dutiesToAccept.length }}</span>
+      Oczekujące Dyżury
+    </button>
   </div>
   <div style="margin-bottom: 5px;">
     <!-- <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" style="margin-bottom: 5px;"/> -->
+    <app-new-duty-type (newDutyTypeEvent)="saveNewDutyType($event)"/>
+    <app-duty-acceptance [duties]="dutiesToAccept" (newDutyAcceptanceEvent)="saveNewDutyAcceptance($event)"/>
   </div>
   <mat-divider style="margin-bottom: 5px;"/>
 </section>
 
 
 <div style="margin-top: 10px;">
-  <app-horizontal-scheduler [resources]="dutyTypes" [duties]="duties"
-      (currentDateEvent)="prepareDutiesForMonth($event)" (currentDayEvent)="prepareDutyForDay($event)"
+  <app-horizontal-scheduler [resources]="dutyTypes" (currentDayEvent)="prepareDutyForDay($event)"
       (newDutyEvent)="prepareNewDutyDialog($event)"/>
 
-  <app-dail-duty-list [duties]="dailyDuties" [dutyTypes]="dutyTypes"/>
+  <app-dail-duty-list [dutyTypes]="dutyTypes" [day]="pickedDay"/>
 </div>

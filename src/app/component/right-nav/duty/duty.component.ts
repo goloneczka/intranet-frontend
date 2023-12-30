@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {map, Observable, of} from "rxjs";
-import {Duty, DutyType} from "../../../model/duty";
+import {Duty, DutyToAccept, DutyType} from "../../../model/duty";
 import {DutyService} from "../../../service/duty.service";
+import { DutyEventService } from 'src/app/service/duty-event.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-duty',
@@ -12,16 +13,33 @@ export class DutyComponent {
 
   duties: Duty[] = [];
   dutyTypes: DutyType[] = [];
+  subscription!: Subscription;
 
-  constructor(private dutyService: DutyService) { }
+
+  constructor(private dutyService: DutyService, private dutyEventService: DutyEventService) { }
 
   ngOnInit(): void {
     this.dutyService.getDutyTypes().subscribe(typesData => {
       this.dutyTypes = typesData;
-      this.dutyService.getDuties(new Date()).subscribe(dutyData => {
-        this.duties = dutyData;
-      });
+      this.prepareDutyForDay();
     });
+    this.subscription = this.dutyEventService.getMessage().subscribe((message : DutyToAccept | null) => {
+      if(message && this.dutyEventService.shouldForceRenderDuties(message, new Date())){
+        this.prepareDutyForDay();
+      }
+    });
+  }
+
+  prepareDutyForDay() { 
+    this.dutyService.getDuties(new Date()).subscribe(dutyData => {
+      this.duties = dutyData;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

@@ -56,6 +56,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { DailDutyListComponent } from './component/content/content-duty/dail-duty-list/dail-duty-list.component';
 import { NewDutyDialogComponent } from './component/content/content-duty/new-duty-dialog/new-duty-dialog.component';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { DutyAcceptanceComponent } from './component/content/content-duty/duty-acceptance/duty-acceptance.component';
+import { NewDutyTypeComponent } from './component/content/content-duty/new-duty-type/new-duty-type.component';
+import { CreationTimeRepresentationPipe } from './service/pipe/creation-time-representation.pipe';
 
 
 
@@ -92,6 +95,9 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
     HorizontalSchedulerComponent,
     DailDutyListComponent,
     NewDutyDialogComponent,
+    DutyAcceptanceComponent,
+    NewDutyTypeComponent,
+    CreationTimeRepresentationPipe
   ],
     imports: [
         CommonModule,

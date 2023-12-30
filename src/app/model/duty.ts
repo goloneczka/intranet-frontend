@@ -6,8 +6,23 @@ export interface Duty {
   uuid: string
   dutyType: DutyType
   dutyDay: Date
-  startTime: Date
-  endTime: Date
+  startTime: string
+  endTime: string
+  creationTime: Date
+}
+
+export interface DutyToAccept {
+
+  employeeFirstName: string
+  employeeLastName: string
+  employeeMail: string
+  uuid: string
+  dutyType: DutyType
+  dutyDay: Date
+  startTime: string
+  endTime: string
+  creationTime: Date
+  acceptance: boolean
 }
 
 export interface DutyToSave {

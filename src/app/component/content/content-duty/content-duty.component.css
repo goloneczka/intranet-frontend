@@ -68,3 +68,24 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .button-with-badge {
+    position: relative;
+    padding: 10px 20px;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -19px;
+    right: -30px;
+    background-color: #576E5E; /* Badge background color */
+    border: 2px solid #3D4D40; /* Border color (green) and solid */
+    border-radius: 50%; /* Make it a circle */
+    width: 20px; /* Set width to make it a circle */
+    height: 20px; /* Set height to make it a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: white;
+  }

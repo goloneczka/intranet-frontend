@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Duty, DutyType } from 'src/app/model/duty';
+import { Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
-import { EditEmployeeTeamDialogComponent } from '../content-employee/edit-employee-team-dialog/edit-employee-team-dialog.component';
 import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.component';
+import { DutyAcceptanceComponent } from './duty-acceptance/duty-acceptance.component';
+import { NewDutyTypeComponent } from './new-duty-type/new-duty-type.component';
+import { DutyEventService } from 'src/app/service/duty-event.service';
 
 @Component({
   selector: 'app-content-duty',
@@ -14,58 +16,81 @@ import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.compon
 })
 export class ContentDutyComponent {
 
+  @ViewChild(DutyAcceptanceComponent)
+  dutyAcceptanceComponent!: DutyAcceptanceComponent;
+
+  @ViewChild(NewDutyTypeComponent)
+  newDutyTypeComponent!: NewDutyTypeComponent;
+
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
 
-  duties: Duty[] = [];
-  dailyDuties: Duty[] = [];
+  pickedDay: Date = new Date();
+  dutiesToAccept: Duty[] = [];
 
   dutyTypes: DutyType[] = [];
 
-  filterForm: FormGroup;
 
-  constructor(private dutyService: DutyService, private fb: FormBuilder, public dialog: MatDialog) {
-    this.filterForm = this.fb.group({
-      date: [''],
-      dutyType: ['']
-    });
-  }
+  constructor(private dutyService: DutyService, private fb: FormBuilder, public dialog: MatDialog, private dutyEventService: DutyEventService) {}
 
   ngOnInit(): void {
     this.dutyService.getDutyTypes().subscribe(typesData => {
       this.dutyTypes = typesData;
-      this.prepareDutiesForMonth(new Date());
       this.prepareDutyForDay(new Date());
+      this.prepareDutiesToAccept();
     });
   }
 
-  prepareDutiesForMonth(date : Date) {
-    this.dutyService.getDutiesForMonth(date).subscribe(dutyData => {
-      this.duties = dutyData;
+
+  prepareDutiesToAccept() {
+    this.dutyService.getDutiesToAccept().subscribe(dutyData => {
+      this.dutiesToAccept = dutyData;
     });
   }
 
   prepareDutyForDay(date : Date) { 
-    this.dutyService.getDuties(date).subscribe(dutyData => {
-      this.dailyDuties = dutyData;
-    });
+    this.pickedDay = date;
   }
 
   prepareNewDutyDialog(newDutyFields: { resource: string; day: string, date: Date }) {
     const dialogRef = this.dialog.open(NewDutyDialogComponent, {
       data: {'dutyType': newDutyFields.resource, 'dutyDay': newDutyFields.date},
       minWidth: '800px',
-      minHeight:'500px',
+      minHeight:'400px',
       disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-          console.log('huehue ', result);
           this.dutyService.createNewDuty(result).subscribe(_ => {
-            this.prepareDutiesForMonth(result.dutyDay);
-            this.prepareDutyForDay(result.dutyDay);
+            this.dutyEventService.sendMessageDutyIsResolved({dutyDay: result.dutyDay, acceptance: false} as DutyToAccept);
+            this.prepareDutiesToAccept();
           });
       }
+    });
+  }
+
+  acceptDuties() {
+    this.prepareDutiesToAccept();
+    this.dutyAcceptanceComponent.shouldDisplayForm(true);
+  }
+
+  addDutyType() {
+    this.newDutyTypeComponent.shouldDisplayForm(true);
+  }
+
+  saveNewDutyType(newDutyType: DutyType) {
+    this.dutyService.createDutyType(newDutyType).subscribe(_ => {
+        this.dutyService.getDutyTypes().subscribe(typesData => {
+          this.dutyTypes = typesData;
+        });
+    });
+  }
+
+  saveNewDutyAcceptance(newDutyAcceptance: DutyToAccept) {
+    this.dutyService.createDutyAcceptance(newDutyAcceptance).subscribe(_ => {
+
+      this.prepareDutiesToAccept();
+      this.dutyEventService.sendMessageDutyIsResolved(newDutyAcceptance);
     });
   }
 }

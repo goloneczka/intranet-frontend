@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CalendarDay, Duty, DutyType } from 'src/app/model/duty';
+import { Subscription } from 'rxjs';
+import { CalendarDay, Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
+import { DutyService } from 'src/app/service';
+import { DutyEventService } from 'src/app/service/duty-event.service';
 
 @Component({
   selector: 'app-horizontal-scheduler',
@@ -13,12 +16,9 @@ export class HorizontalSchedulerComponent {
   @Input()
   resources: DutyType[] = [];
 
-  @Input()
   duties: Duty[] = [];
 
   currentDate: Date = new Date();
-  @Output() 
-  currentDateEvent = new EventEmitter<Date>();
 
   currentDayNumber: number = new Date().getDate();
   @Output() 
@@ -27,8 +27,22 @@ export class HorizontalSchedulerComponent {
   @Output() 
   newDutyEvent = new EventEmitter();
 
+  subscription!: Subscription;
+
+  constructor( private dutyService: DutyService, private dutyEventService : DutyEventService) {}
+
   ngOnInit() {
     this.generateCalendar();
+    this.prepareDutiesForMonth(this.currentDate);
+
+    this.subscription = this.dutyEventService.getMessage().subscribe((message : DutyToAccept | null) => {
+      if(message && this.dutyEventService.shouldForceRenderDutiesBeetwenDates(message,
+              new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1),
+              new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0)
+        )){        
+        this.prepareDutiesForMonth(this.currentDate);
+      }
+    });
   }
 
   private generateCalendar() {
@@ -47,6 +61,12 @@ export class HorizontalSchedulerComponent {
       });
       startDate.setDate(startDate.getDate() + 1);
     }
+  }
+
+  private prepareDutiesForMonth(date : Date) {
+    this.dutyService.getDutiesForMonth(date).subscribe(dutyData => {
+      this.duties = dutyData;
+    });
   }
 
   hasDuty(day: CalendarDay, resource: DutyType): boolean {
@@ -96,7 +116,7 @@ export class HorizontalSchedulerComponent {
   showPreviousMonth() {
     const newDate = this.currentDate.setMonth(this.currentDate.getMonth() - 1);
     this.currentDate = new Date(newDate);
-    this.currentDateEvent.emit(this.currentDate);
+    this.prepareDutiesForMonth(this.currentDate);
     this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDayNumber));
     this.generateCalendar();
   }
@@ -104,7 +124,7 @@ export class HorizontalSchedulerComponent {
   showNextMonth() {
     const newDate = this.currentDate.setMonth(this.currentDate.getMonth() + 1);
     this.currentDate = new Date(newDate);
-    this.currentDateEvent.emit(this.currentDate);
+    this.prepareDutiesForMonth(this.currentDate);
     this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDayNumber));
     this.generateCalendar();
   }
@@ -112,8 +132,15 @@ export class HorizontalSchedulerComponent {
   currentMonth() {
     this.currentDate = new Date();
     this.currentDayNumber = this.currentDate.getDate();
-    this.currentDateEvent.emit(this.currentDate);
+    this.prepareDutiesForMonth(this.currentDate);
     this.currentDayEvent.emit(this.currentDate);
     this.generateCalendar();
   }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
 }
