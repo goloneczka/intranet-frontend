@@ -40,6 +40,14 @@ export interface DutyType {
   shortcut: string
 }
 
+export interface DutyListInType {
+
+  dutyType: DutyType
+  dutyList: Duty[]
+  fulfill: number 
+}
+
+
 export interface CalendarDay {
   dayOfMonth: number;
   name: string;

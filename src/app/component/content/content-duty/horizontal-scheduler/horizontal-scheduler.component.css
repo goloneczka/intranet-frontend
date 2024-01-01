@@ -43,7 +43,7 @@
 .selected-day-event {
     margin-left: 2px;
     margin-right: 2px;
-    background-color: #A89985;
+    background-color: #A89985 !important;
     border: 2px solid #ccc !important; 
 }
 
@@ -90,6 +90,10 @@
     cursor: default !important;
 }
 
+.weekend{
+    background-color: #f0f0f0;
+}
+
 button {
     padding: 8px;
     margin: 5px;
@@ -110,9 +114,4 @@ button {
 
 .progres-bar.progres-with-margin {
     margin-top: 38px;
-}
-
-.mat-mdc-progress-bar {
-    --mdc-linear-progress-active-indicator-color: #576E5E;
-    --mdc-linear-progress-track-color: #ccc;
 }

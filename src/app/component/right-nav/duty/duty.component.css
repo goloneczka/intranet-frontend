@@ -1,6 +1,42 @@
-.duty-card {
-  font-size: 13px;
-  text-align: left;
-  margin-bottom: -15px;
-  margin-top: -8px;
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 75%; /* Set the width to 70% */
+  margin: 0 auto; /* Center the component horizontally */
+  align-items: center;
+}
+
+.mat-divider {
+  border-top-color: white;
+}
+
+p {
+  font-family: 'Merriweather';
+  font-size: smaller;
+  margin-bottom: 0;
+}
+
+.nested-text {
+  font-family: 'Roboto';
+  font-size: small;
+}
+
+.main-table {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.type-header {
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* Center the content horizontally */
+}
+
+.nested-td { 
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1px 0 1px;
+
 }

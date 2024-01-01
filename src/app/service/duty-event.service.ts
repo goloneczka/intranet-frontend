@@ -23,13 +23,13 @@ export class DutyEventService {
 
     const dateToCompare = new Date(date);
     dateToCompare.setHours(0,0,0,0);
-    
     return dateToCompare.getTime() === messageDate.getTime() && message.acceptance;
   }
 
   shouldForceRenderDutiesBeetwenDates(message : DutyToAccept, dateStart : Date, dateEnd : Date){
     const messageDate = new Date(message.dutyDay);
-
+    messageDate.setHours(0,0,0,0);
+    
     return messageDate >= dateStart && messageDate <= dateEnd && message.acceptance;
   }
   

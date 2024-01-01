@@ -4,6 +4,8 @@ import { CalendarDay, Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { DutyEventService } from 'src/app/service/duty-event.service';
 
+const WEEKEND_DAYS = ['SOB', 'NIEDZ'];
+
 @Component({
   selector: 'app-horizontal-scheduler',
   templateUrl: './horizontal-scheduler.component.html',
@@ -20,7 +22,6 @@ export class HorizontalSchedulerComponent {
 
   currentDate: Date = new Date();
 
-  currentDayNumber: number = new Date().getDate();
   @Output() 
   currentDayEvent = new EventEmitter<Date>();
 
@@ -57,16 +58,10 @@ export class HorizontalSchedulerComponent {
     while (startDate <= endDate) {
       this.days.push({
         dayOfMonth: startDate.getDate(),
-        name: startDate.toLocaleDateString('en-US', { weekday: 'short' })
+        name: startDate.toLocaleDateString('pl-PL', { weekday: 'short' }).replace(/\.$/, '')
       });
       startDate.setDate(startDate.getDate() + 1);
     }
-  }
-
-  private prepareDutiesForMonth(date : Date) {
-    this.dutyService.getDutiesForMonth(date).subscribe(dutyData => {
-      this.duties = dutyData;
-    });
   }
 
   hasDuty(day: CalendarDay, resource: DutyType): boolean {
@@ -95,8 +90,8 @@ export class HorizontalSchedulerComponent {
   }
 
   toggleDay(day: CalendarDay) {
-    this.currentDayNumber = day.dayOfMonth;
-    this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day.dayOfMonth));
+    this.currentDate.setDate(day.dayOfMonth);
+    this.currentDayEvent.emit(new Date(this.currentDate));
   }
 
   shouldDisableCursor(index : number, resource: DutyType) {
@@ -105,36 +100,57 @@ export class HorizontalSchedulerComponent {
       return indexedDate < new Date() || this.isTotalDutyAssigned({dayOfMonth: index+1, name: ''}, resource);
   }
 
+  isWeekend(index : number) {
+    const indexedDateNumber = index+1;
+    const dayOfMonth = this.days.find(it => it.dayOfMonth === indexedDateNumber)?.name || '';
+    return WEEKEND_DAYS.includes(dayOfMonth.toUpperCase());
+  }
+
   toggleEvent(day: CalendarDay, resource: DutyType) {
-    const date = this.currentDate;
-    date.setDate(day.dayOfMonth);
+    const date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day.dayOfMonth);
     if(date >= new Date() && !this.isTotalDutyAssigned(day, resource)){
       this.newDutyEvent.emit({ resource: resource.type, date: date});
     }
   }
 
   showPreviousMonth() {
-    const newDate = this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-    this.currentDate = new Date(newDate);
-    this.prepareDutiesForMonth(this.currentDate);
-    this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDayNumber));
-    this.generateCalendar();
+    const newDate = this.currentDate.setMonth(
+      this.currentDate.getMonth() - 1,
+      this.getProperDayOfMonth(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1)
+    );
+    this.updateMonthDisplay(newDate);
   }
 
   showNextMonth() {
-    const newDate = this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-    this.currentDate = new Date(newDate);
-    this.prepareDutiesForMonth(this.currentDate);
-    this.currentDayEvent.emit(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDayNumber));
-    this.generateCalendar();
+    const newDate = this.currentDate.setMonth(
+      this.currentDate.getMonth() + 1,
+      this.getProperDayOfMonth(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1)
+    );
+    this.updateMonthDisplay(newDate);
   }
 
   currentMonth() {
-    this.currentDate = new Date();
-    this.currentDayNumber = this.currentDate.getDate();
+    this.updateMonthDisplay();
+  }
+
+  private prepareDutiesForMonth(date : Date) {
+    this.dutyService.getDutiesForMonth(date).subscribe(dutyData => {
+      this.duties = dutyData;
+    });
+  }
+
+  private updateMonthDisplay(date? : number) {
+    this.currentDate = date ? new Date(date) : new Date();
     this.prepareDutiesForMonth(this.currentDate);
     this.currentDayEvent.emit(this.currentDate);
     this.generateCalendar();
+  }
+
+  private getProperDayOfMonth(year: number, month: number): number {
+    const firstDayOfNextMonth = new Date(year, month + 1, 1);
+    const lastDayOfMonth = new Date(firstDayOfNextMonth.getTime() - 1);
+  
+    return this.currentDate.getDate() > lastDayOfMonth.getDate() ? lastDayOfMonth.getDate() : this.currentDate.getDate() ;
   }
 
   ngOnDestroy() {

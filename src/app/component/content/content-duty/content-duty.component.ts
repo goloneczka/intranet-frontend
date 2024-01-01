@@ -8,6 +8,7 @@ import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.compon
 import { DutyAcceptanceComponent } from './duty-acceptance/duty-acceptance.component';
 import { NewDutyTypeComponent } from './new-duty-type/new-duty-type.component';
 import { DutyEventService } from 'src/app/service/duty-event.service';
+import { EditDutyTypeComponent } from './edit-duty-type/edit-duty-type.component';
 
 @Component({
   selector: 'app-content-duty',
@@ -21,6 +22,9 @@ export class ContentDutyComponent {
 
   @ViewChild(NewDutyTypeComponent)
   newDutyTypeComponent!: NewDutyTypeComponent;
+
+  @ViewChild(EditDutyTypeComponent)
+  editDutyTypeComponent!: EditDutyTypeComponent;
 
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
 
@@ -76,6 +80,11 @@ export class ContentDutyComponent {
 
   addDutyType() {
     this.newDutyTypeComponent.shouldDisplayForm(true);
+  }
+
+  editDutyType() {
+    this.editDutyTypeComponent.shouldDisplayForm(true);
+
   }
 
   saveNewDutyType(newDutyType: DutyType) {

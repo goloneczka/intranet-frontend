@@ -59,6 +59,9 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { DutyAcceptanceComponent } from './component/content/content-duty/duty-acceptance/duty-acceptance.component';
 import { NewDutyTypeComponent } from './component/content/content-duty/new-duty-type/new-duty-type.component';
 import { CreationTimeRepresentationPipe } from './service/pipe/creation-time-representation.pipe';
+import { EditDutyTypeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type.component';
+import { EditDutyTypeEditModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-edit-mode/edit-duty-type-edit-mode.component';
+import { EditDutyTypeDisplayModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-display-mode/edit-duty-type-display-mode.component';
 
 
 
@@ -97,7 +100,10 @@ import { CreationTimeRepresentationPipe } from './service/pipe/creation-time-rep
     NewDutyDialogComponent,
     DutyAcceptanceComponent,
     NewDutyTypeComponent,
-    CreationTimeRepresentationPipe
+    CreationTimeRepresentationPipe,
+    EditDutyTypeComponent,
+    EditDutyTypeEditModeComponent,
+    EditDutyTypeDisplayModeComponent
   ],
     imports: [
         CommonModule,

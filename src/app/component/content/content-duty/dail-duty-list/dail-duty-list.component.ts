@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
+import { Duty, DutyListInType, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { DutyEventService } from 'src/app/service/duty-event.service';
 
@@ -11,7 +11,7 @@ import { DutyEventService } from 'src/app/service/duty-event.service';
 })
 export class DailDutyListComponent {
 
-  duties: Duty[] = [];
+  duties: DutyListInType[] = [];
 
   @Input()
   dutyTypes: DutyType[] = [];
@@ -36,9 +36,22 @@ export class DailDutyListComponent {
     this.prepareDutyForDay();
   }
 
-  prepareDutyForDay() { 
+  prepareDutyForDay() {
+    const hoursOfWholeWorkDay : number = 13;
+
     this.dutyService.getDuties(this.day).subscribe(dutyData => {
-      this.duties = dutyData;
+
+      this.duties = this.dutyTypes.map(it => {
+        const singleRow = {dutyType: it, dutyList: new Array(), fulfill: 0};
+
+        dutyData.filter(n_it => n_it.dutyType.type === it.type).forEach(n_it => {
+          singleRow.dutyList.push(n_it);
+          const [startHour, startMinute] = new String(n_it.startTime).split(':').map(Number);
+          const [endHour, endMinute] = new String(n_it.endTime).split(':').map(Number);
+          singleRow.fulfill += ((endHour * 60 + endMinute) - (startHour * 60 + startMinute)) / (hoursOfWholeWorkDay * 60) * 100;
+        });
+        return singleRow;
+      });
     });
   }
 

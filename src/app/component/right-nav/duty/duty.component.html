@@ -1,22 +1,23 @@
-Dyżury:
+<p >Dyżury na dzień {{today | date: 'd/M/yyyy'}}</p>
+
 <div *ngIf="!duties.length">
   <p> no duties to display !</p>
 </div>
 
-<div *ngIf="duties.length" class="card-list">
-  <table>
-    <tr *ngFor="let dutyType of dutyTypes" class="card-list">
-      <td>{{ dutyType.shortcut ? dutyType.shortcut : dutyType.type}}</td>
-      <table>
-        <tr *ngFor="let card of duties | filterDuty : dutyType.type" class="duty-card">
-          <td>{{ card.employeeFirstName }} {{ card.employeeLastName }}</td>
-          <td>
-            {{ card.startTime }} -
-            {{ card.endTime }}
-          </td>
-        </tr>
-      </table>
+<div *ngIf="duties.length" style="width: 100%;">
+  <table class="main-table">
+    <tr *ngFor="let dutyWrapper of duties" style="margin-bottom: 2px;">
+      <td class="type-header">
+          <p>{{dutyWrapper.dutyType.type}} </p>
+          <mat-divider style="color: white;"/>
+      </td>
+      <td class="nested-td">
+        <table>
+          <tr *ngFor="let card of dutyWrapper.dutyList">
+            <td class="nested-text">{{ card.employeeFirstName }} {{ card.employeeLastName }} {{ card.startTime | slice:0:5 }} - {{ card.endTime | slice:0:5 }}</td>
+          </tr>
+        </table>
+      </td>
     </tr>
   </table>
 </div>
-
