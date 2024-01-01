@@ -1,0 +1,32 @@
+<section *ngIf="shouldComponentBeRender">
+    
+    <div class="component">
+        <div *ngIf="!dutyTypes.length">
+            <p> no duties to display !</p>
+        </div>
+
+        <div *ngIf="dutyTypes.length" style="width: 100%;">
+            <table style="width: 100%;">
+              <tr *ngFor="let dutyType of dutyTypes; index as ind" style="margin-bottom: 15px;">
+                <div *ngIf="idOfPostsToEdit.includes(ind); then edit else display"></div>
+                <div>
+                    <ng-template #edit>
+                        <app-edit-duty-type-edit-mode [dutyType]="dutyType" (editEvent)="displayOrEditView($event, ind)"/>
+                    </ng-template>
+                    <ng-template #display>
+                        <app-edit-duty-type-display-mode [dutyType]="dutyType" (editEvent)="displayOrEditView($event, ind)"/>
+                    </ng-template>
+                </div>
+              </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="end-flex">
+        Zakończ edycje rodzajów dyżurów:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+    
+</section>

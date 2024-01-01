@@ -1,0 +1,20 @@
+<section>
+    <div class="main-flex">
+        <form [formGroup]="form">
+            <mat-form-field  style="width: 300px; margin-right: 20px;">
+                <mat-label>Nazwa Dyżuru</mat-label>
+                <input matInput placeholder="Grupa" formControlName="type" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field  style="width: 150px;">
+                <mat-label>Skrót</mat-label>
+                <input matInput placeholder="Grupa" formControlName="shortcut" readonly="true">
+            </mat-form-field>
+        </form>
+
+        <div>
+            <button mat-raised-button (click)="sendEditEvent()" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+            <button mat-raised-button style="margin-left: 5px; width: 75px;" >Usuń</button>
+        </div>
+    </div>
+</section>
