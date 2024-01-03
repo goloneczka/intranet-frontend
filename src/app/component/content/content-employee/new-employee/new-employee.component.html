@@ -1,4 +1,12 @@
 <section *ngIf="shouldComponentBeRender">
+
+    <div class="header">
+      <h1 style="font-family: 'Roboto'; margin-left: 20px;">Dodawanie nowego pracownika</h1>
+      <div style="margin-right: 20px;">
+          <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+      </div>
+    </div>
+
     <form [formGroup]="employeeGroupForm" (ngSubmit)="addEmployee()">
 
         <div class="row">
@@ -66,10 +74,14 @@
             <button mat-icon-button type="submit" [disabled] = "!employeeGroupForm.valid">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
-          
-              <button mat-icon-button (click)="shouldDisplayForm(false)">
-                <mat-icon>remove_circle_outline</mat-icon>
-              </button>
         </div>
       </form>
+
+      <div class="end-flex">
+        Przerwij dodawanie nowego pracownika:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+
 </section>

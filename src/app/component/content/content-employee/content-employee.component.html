@@ -1,22 +1,23 @@
 <div>
-  <div *ngIf="!filteredEmployees.length">
-    <p> no employees to display !</p>
-  </div>
 
   <section *ngIf="isUserAuthenticated">
     <div class="button-row"> 
       <button mat-raised-button (click)="addEmployee()" style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
       <button mat-raised-button (click)="addTeam()" style="margin-left: 5px; background-color: #A89985;">Nowy Zespół</button>
     </div>
-    <div style="margin-bottom: 5px;">
-      <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" style="margin-bottom: 5px;"/>
-    </div>
-    <div style="margin-bottom: 5px;">
-      <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)" style="margin-bottom: 5px;"/>
-    </div>
+
     <mat-divider style="margin-bottom: 5px;"/>
+
+    <div id="admin-components">
+      <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" />
+      <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)"/>
+    </div>
+
   </section>
 
+  <div *ngIf="!filteredEmployees.length">
+    <p> no employees to display !</p>
+  </div>
 
   <section class="flex-container">
     <div>

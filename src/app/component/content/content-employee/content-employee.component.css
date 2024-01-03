@@ -74,3 +74,7 @@ table {
   justify-content: space-between;
   align-items: center;
 }
+
+#admin-components > * {
+  margin: 15px 0 15px 0;
+}

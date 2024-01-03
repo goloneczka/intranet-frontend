@@ -36,3 +36,6 @@ mat-list-item:nth-child(odd) {
   text-align: end;
 }
 
+#admin-components > * {
+  margin: 15px 0 15px 0;
+}

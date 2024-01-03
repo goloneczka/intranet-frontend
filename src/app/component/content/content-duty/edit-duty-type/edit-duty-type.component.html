@@ -1,6 +1,12 @@
 <section *ngIf="shouldComponentBeRender">
     
-    <div class="component">
+        <div class="header">
+            <h1 style="font-family: 'Roboto'; margin-left: 20px;">Edycja istniejących rodzajów dyżurów</h1>
+            <div style="margin-right: 20px;">
+                <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+            </div>
+        </div>
+
         <div *ngIf="!dutyTypes.length">
             <p> no duties to display !</p>
         </div>
@@ -20,7 +26,6 @@
               </tr>
             </table>
         </div>
-    </div>
 
     <div class="end-flex">
         Zakończ edycje rodzajów dyżurów:

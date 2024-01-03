@@ -1,21 +1,23 @@
 <section >
 
-  <div class="button-row"> 
-    <button mat-raised-button (click)="addDutyType()" style="margin-left: 5px; background-color: #A89985;" >Zdefiniuj Nowy</button>
-    <button mat-raised-button (click)="editDutyType()" style="margin-left: 5px; background-color: #A89985;" >Edytuj Istniejące</button>
-    <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
-      <span class="badge">{{ dutiesToAccept.length }}</span>
-      Oczekujące Dyżury
-    </button>
-  </div>
+  <section *ngIf="isUserAuthenticated">
+    <div class="button-row" > 
+      <button mat-raised-button (click)="addDutyType()" style="margin-left: 5px; background-color: #A89985;" >Zdefiniuj Nowy</button>
+      <button mat-raised-button (click)="editDutyType()" style="margin-left: 5px; background-color: #A89985;" >Edytuj Istniejące</button>
+      <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
+        <span class="badge">{{ dutiesToAccept.length }}</span>
+        Oczekujące Dyżury
+      </button>
+    </div>
+    
+    <mat-divider style="margin-bottom: 5px;"></mat-divider>
 
-  <div style="margin-bottom: 5px;">
-    <app-new-duty-type (newDutyTypeEvent)="saveNewDutyType($event)"/>
-    <app-edit-duty-type [dutyTypes]="dutyTypes" style="margin-bottom: 5px;"/>
-    <app-duty-acceptance [duties]="dutiesToAccept" (newDutyAcceptanceEvent)="saveNewDutyAcceptance($event)"/>
-  </div>
-
-  <mat-divider style="margin-bottom: 5px;"/>
+    <div id="admin-components">
+      <app-new-duty-type (newDutyTypeEvent)="saveNewDutyType($event)"/>
+      <app-edit-duty-type [dutyTypes]="dutyTypes" />
+      <app-duty-acceptance [duties]="dutiesToAccept" (newDutyAcceptanceEvent)="saveNewDutyAcceptance($event)"/>
+    </div>
+  </section>
 
   <div style="margin-top: 10px;">
     <app-horizontal-scheduler [resources]="dutyTypes" (currentDayEvent)="prepareDutyForDay($event)"

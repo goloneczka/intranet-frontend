@@ -1,5 +1,12 @@
 <section *ngIf="shouldComponentBeRender">
 
+    <div class="header">
+        <h1 style="font-family: 'Roboto'; margin-left: 20px;">Rozpatrywanie wniosków dyżurowych</h1>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
     <div *ngIf="!duties.length">
         <p> Wszystkie wnioski są obecnie rozpatrzone !</p>
     </div>

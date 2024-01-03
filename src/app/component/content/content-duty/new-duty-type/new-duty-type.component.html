@@ -1,29 +1,35 @@
 <section *ngIf="shouldComponentBeRender">
-    <form [formGroup]="dutyTypeForm" (ngSubmit)="addDutyType()">
-        <div class="header">
-            Nowy Rodzaj Dyżuru
-        </div>
 
-        <div class="row">
-            <mat-form-field style="max-height: 70px; width: 300px;">
-                <mat-label>Dyżur</mat-label>
-                <input matInput placeholder="nazwa ..." formControlName="name">
+    <div class="header">
+        <h1 style="font-family: 'Roboto'; margin-left: 20px;">Nowy rodzaj dyżuru</h1>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <div class="main-flex">
+        <form [formGroup]="dutyTypeForm">
+            <mat-form-field  style="width: 300px; margin-right: 20px;">
+                <mat-label>Nazwa Dyżuru</mat-label>
+                <input matInput placeholder="nazwa ..." formControlName="name" >
             </mat-form-field>
 
-            <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-form-field  style="width: 150px;">
                 <mat-label>Skrót</mat-label>
-                <input matInput placeholder="max 4 litery ..." formControlName="shortcut">
+                <input matInput placeholder="max 4 litery ..." formControlName="shortcut" >
             </mat-form-field>
-        </div>
+        </form>
+
         <div>
-            <button mat-icon-button type="submit" [disabled]="!dutyTypeForm.valid">
-                <mat-icon>add_circle_outline</mat-icon>
-              </button>
-          
-              <button mat-icon-button (click)="shouldDisplayForm(false)">
-                <mat-icon>remove_circle_outline</mat-icon>
-              </button>
+            <button mat-raised-button (click)="addDutyType()" style="margin-left: 5px; width: 75px;" >Zapisz</button>
         </div>
-    </form>
+    </div>
+
+        <div class="end-flex">
+            Przerwij dodawanie nowego rodzaju dyżurów:
+            <button mat-icon-button (click)="shouldDisplayForm(false)">
+                <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+        </div>
 
 </section>

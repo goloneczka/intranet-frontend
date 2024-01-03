@@ -1,4 +1,12 @@
 <section *ngIf="shouldComponentBeRender">
+
+    <div class="header">
+        <h1 style="font-family: 'Roboto'; margin-left: 20px;">Dodaj nowy post w aktualnościach</h1>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
     <form [formGroup]="teamGroupForm" (ngSubmit)="addTeam()">
         <div class="row">
             <mat-form-field style="max-height: 70px; width: 300px;">
@@ -19,10 +27,13 @@
             <button mat-icon-button type="submit" [disabled]="!teamGroupForm.valid">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
-          
-              <button mat-icon-button (click)="shouldDisplayForm(false)">
-                <mat-icon>remove_circle_outline</mat-icon>
-              </button>
         </div>
     </form>
+
+    <div class="end-flex">
+        Przerwij dodawanie nowego zespołu:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
 </section>

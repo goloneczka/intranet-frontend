@@ -1,14 +1,29 @@
-form {
-    margin: auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 800px;
-  }
+:host {
+  display: block;
+  background-color: #f0f0f0;
+}
 
-  .row {
-    width: 100%;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-  }
+.header {
+  width: 100%;
+  background-color: #576E5E;
+  padding: 8px 0 8px 0;
+  color: #fff;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.end-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,4 +1,12 @@
 <section *ngIf="shouldComponentBeRender" >
+
+    <div class="header">
+        <h1 style="font-family: 'Roboto'; margin-left: 20px;">Dodaj nowy post w aktualnościach</h1>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
     <form [formGroup]="postForm" (ngSubmit)="addPost()">
         <div class="post-container">
             <mat-form-field  style="min-width: 350px;">
@@ -10,14 +18,16 @@
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
             
-            <button mat-icon-button (click)="shouldDisplayForm(false)">
-                <mat-icon>remove_circle_outline</mat-icon>
-            </button>
-                
             <quill-editor [modules]="quillConfiguration" [placeholder]="'Wiadomość posta ...'"
                 [styles]="{'min-height': '120px'}"  class="quill-display" formControlName="message">
             </quill-editor>
-
         </div>
     </form>
+
+    <div class="end-flex">
+        Przerwij dodawanie nowego posta:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
 </section>

@@ -1,5 +1,12 @@
 <section *ngIf="shouldComponentBeRender">
 
+  <div class="header">
+    <h1 style="font-family: 'Roboto'; margin-left: 20px;">Dodaj nową grupę w dokumentach</h1>
+    <div style="margin-right: 20px;">
+        <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+    </div>
+  </div>
+
   <form [formGroup]="documentGroupForm" (ngSubmit)="addGroup()">
 
     <mat-form-field style="max-height: 70px;">
@@ -20,8 +27,12 @@
       <mat-icon>add_circle_outline</mat-icon>
     </button>
 
-    <button mat-icon-button (click)="shouldDisplayForm(false)">
-      <mat-icon>remove_circle_outline</mat-icon>
-    </button>
   </form>
+
+  <div class="end-flex">
+    Przerwij dodawanie nowej grupy dokumentów:
+    <button mat-icon-button (click)="shouldDisplayForm(false)">
+        <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+</div>
 </section>

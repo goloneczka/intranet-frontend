@@ -1,16 +1,21 @@
 <div *ngIf="documents$ | async as documents">
-  <div *ngIf="!documents.length">
-    <p> no documents to display !</p>
-  </div>
-
+  
   <section *ngIf="isUserAuthenticated">
     <div class="button-row"> 
       <button mat-raised-button (click)="addGroup()" style="margin-left: 5px; background-color: #A89985;">Nowa Grupa</button>
       <button mat-raised-button (click)="openDialogSorting()" style="margin-left: 5px; background-color: #A89985;">Sortowanie</button>
     </div>
-    <app-new-document-group [docTypes]="docTypes" (newDocumentGroupEvent)="addDocumentGroup($event)" />
+
     <mat-divider/>
+
+    <div id="admin-components">
+      <app-new-document-group [docTypes]="docTypes" (newDocumentGroupEvent)="addDocumentGroup($event)" />
+    </div>
   </section>
+
+  <div *ngIf="!documents.length">
+    <p> no documents to display !</p>
+  </div>
 
   <div *ngFor="let docType of docTypes">
     <div class="center-align">
