@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {Duty, DutyListInType, DutyToAccept, DutyType} from "../../../model/duty";
+import {Duty, DutyListInType, DutyToAccept, DutyType, DutyTypeMessage} from "../../../model/duty";
 import {DutyService} from "../../../service/duty.service";
 import { DutyEventService } from 'src/app/service/duty-event.service';
 import { Subscription } from 'rxjs';
+import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
 
 @Component({
   selector: 'app-duty',
@@ -14,21 +15,30 @@ export class DutyComponent {
   duties: DutyListInType[] = [];
   dutyTypes: DutyType[] = [];
   subscription!: Subscription;
+  dutyTypeEventSubscription!: Subscription;
   today: Date = new Date();
 
 
-  constructor(private dutyService: DutyService, private dutyEventService: DutyEventService) { }
+  constructor(private dutyService: DutyService, private dutyEventService: DutyEventService, private dutyTypeEventSevice: DutyTypeEventService) { }
 
   ngOnInit(): void {
     this.dutyService.getDutyTypes().subscribe(typesData => {
       this.dutyTypes = typesData;
       this.prepareDutyForDay();
+
     });
 
     this.subscription = this.dutyEventService.getMessage().subscribe((message : DutyToAccept | null) => {
       if(message && this.dutyEventService.shouldForceRenderDuties(message, this.today)){
         this.prepareDutyForDay();
       }
+    });
+
+    this.dutyTypeEventSubscription = this.dutyTypeEventSevice.getMessage().subscribe((message : DutyTypeMessage | null) => {
+      this.dutyService.getDutyTypes().subscribe(typesData => {
+        this.dutyTypes = typesData;
+        this.prepareDutyForDay();
+      });
     });
   }
 
@@ -52,9 +62,8 @@ export class DutyComponent {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+      this.subscription?.unsubscribe();
+      this.dutyTypeEventSubscription?.unsubscribe();
   }
 
 }

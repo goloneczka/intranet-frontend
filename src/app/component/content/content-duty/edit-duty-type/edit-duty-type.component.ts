@@ -20,11 +20,13 @@ export class EditDutyTypeComponent {
     this.shouldComponentBeRender = val; 
   }
 
-  displayOrEditView(isAdd: boolean, ind: number) {
-    if(isAdd){
+  displayOrEditView(event: {operation: string}, ind: number) {
+    if(event.operation === 'TO_EDIT'){
       this.idOfPostsToEdit.push(ind);
-    } else {
+    } else if(event.operation === 'TO_DISPLAY') {
       this.idOfPostsToEdit = this.idOfPostsToEdit.filter(v => v != ind);
+    } else if(event.operation === 'DELETED') {
+      this.idOfPostsToEdit = this.idOfPostsToEdit.map(v => ind > v ? ind-1 : ind );
     }
   }
 

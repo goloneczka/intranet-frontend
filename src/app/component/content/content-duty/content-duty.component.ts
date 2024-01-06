@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
+import { Duty, DutyToAccept, DutyType, DutyTypeMessage } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.component';
@@ -9,6 +9,8 @@ import { DutyAcceptanceComponent } from './duty-acceptance/duty-acceptance.compo
 import { NewDutyTypeComponent } from './new-duty-type/new-duty-type.component';
 import { DutyEventService } from 'src/app/service/duty-event.service';
 import { EditDutyTypeComponent } from './edit-duty-type/edit-duty-type.component';
+import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-content-duty',
@@ -33,14 +35,27 @@ export class ContentDutyComponent {
 
   dutyTypes: DutyType[] = [];
 
+  dutyTypeEventSubscription!: Subscription;
 
-  constructor(private dutyService: DutyService, private fb: FormBuilder, public dialog: MatDialog, private dutyEventService: DutyEventService) {}
+
+  constructor(private dutyService: DutyService,
+      private fb: FormBuilder,
+      public dialog: MatDialog,
+      private dutyEventService: DutyEventService,
+      private dutyTypeEventSevice: DutyTypeEventService
+      ) {}
 
   ngOnInit(): void {
     this.dutyService.getDutyTypes().subscribe(typesData => {
       this.dutyTypes = typesData;
       this.prepareDutyForDay(new Date());
       this.prepareDutiesToAccept();
+    });
+
+    this.dutyTypeEventSubscription = this.dutyTypeEventSevice.getMessage().subscribe((message : DutyTypeMessage | null) => {
+      this.dutyService.getDutyTypes().subscribe(typesData => {
+        this.dutyTypes = typesData;
+      });
     });
   }
 
@@ -89,9 +104,7 @@ export class ContentDutyComponent {
 
   saveNewDutyType(newDutyType: DutyType) {
     this.dutyService.createDutyType(newDutyType).subscribe(_ => {
-        this.dutyService.getDutyTypes().subscribe(typesData => {
-          this.dutyTypes = typesData;
-        });
+      this.dutyTypeEventSevice.sendMessageDutyTypeAdded(newDutyType);
     });
   }
 
@@ -102,4 +115,10 @@ export class ContentDutyComponent {
       this.dutyEventService.sendMessageDutyIsResolved(newDutyAcceptance);
     });
   }
+
+
+  ngOnDestroy() {
+      this.dutyTypeEventSubscription?.unsubscribe();
+  }
+  
 }

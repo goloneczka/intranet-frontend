@@ -1,9 +1,5 @@
 <p >Dyżury na dzień {{today | date: 'd/M/yyyy'}}</p>
 
-<div *ngIf="!duties.length">
-  <p> no duties to display !</p>
-</div>
-
 <div *ngIf="duties.length" style="width: 100%;">
   <table class="main-table">
     <tr *ngFor="let dutyWrapper of duties" style="margin-bottom: 2px;">

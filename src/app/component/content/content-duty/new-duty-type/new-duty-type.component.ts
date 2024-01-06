@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DutyType } from 'src/app/model/duty';
+import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
 
 @Component({
   selector: 'app-new-duty-type',
@@ -15,7 +16,7 @@ export class NewDutyTypeComponent {
   @Output() newDutyTypeEvent = new EventEmitter<DutyType>();
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dutyTypeEventService: DutyTypeEventService) {
     this.dutyTypeForm = this.fb.group({
       name: ['', [Validators.required]],
       shortcut: ['']
@@ -28,8 +29,8 @@ export class NewDutyTypeComponent {
 
   addDutyType() {
     const controlsForm = this.dutyTypeForm.controls;
-    this.newDutyTypeEvent.emit({'type': controlsForm['name'].value,
-                            'shortcut': controlsForm['shortcut'].value
+    this.newDutyTypeEvent.emit({
+      'type': controlsForm['name'].value,'shortcut': controlsForm['shortcut'].value
     });
     this.shouldComponentBeRender = false;
     this.dutyTypeForm.reset();

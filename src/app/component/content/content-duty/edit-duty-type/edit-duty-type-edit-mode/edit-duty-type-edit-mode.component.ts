@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DutyType } from 'src/app/model/duty';
+import { DutyService } from 'src/app/service';
+import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
 
 @Component({
   selector: 'app-edit-duty-type-edit-mode',
@@ -11,11 +13,11 @@ export class EditDutyTypeEditModeComponent {
 
   @Input() dutyType!: DutyType
 
-  @Output() editEvent = new EventEmitter<boolean>();
+  @Output() editEvent = new EventEmitter<{operation: string}>();
 
   form: FormGroup;  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dutyService: DutyService, private dutyTypeEventService: DutyTypeEventService) {
     
     this.form = this.fb.group({
       type: [this.dutyType?.type, [Validators.required]],
@@ -31,21 +33,17 @@ export class EditDutyTypeEditModeComponent {
   }
   
   sendEditEvent() {
-    this.editEvent.emit(false);
+    this.editEvent.emit({operation: 'TO_DISPLAY'});
   }
-
-
-  deletePost() {
-    // this.deleteEvent.emit(this.card);
-  }
-  
 
   editDutyType() {
-    if(this.form.valid){
-      // const title: string = this.postForm.controls['title'].value;
-      // const message: string = this.postForm.controls['message'].value;
-      // this.editPostEvent.emit({'title': title, 'message': message});
-      // this.editEvent.emit(false);
-    }
+    const type: string = this.form.controls['type'].value;
+    const shortcut: string = this.form.controls['shortcut'].value;
+
+    this.dutyService.editDutyType({type: type, shortcut: shortcut}, this.dutyType.type).subscribe(_ => {
+      this.editEvent.emit({operation: 'TO_DISPLAY'});
+      this.dutyTypeEventService.sendMessageDutyTypeEdited(this.dutyType);
+    });
   }
+  
 }

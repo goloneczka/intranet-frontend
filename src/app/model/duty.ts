@@ -40,6 +40,12 @@ export interface DutyType {
   shortcut: string
 }
 
+export interface DutyTypeMessage {
+
+  dutyType: DutyType
+  operation: string
+}
+
 export interface DutyListInType {
 
   dutyType: DutyType

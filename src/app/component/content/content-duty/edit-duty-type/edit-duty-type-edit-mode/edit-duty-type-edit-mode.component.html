@@ -13,7 +13,7 @@
         </form>
 
         <div>
-            <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+            <button mat-raised-button  (click)="editDutyType()" style="margin-left: 5px; width: 75px;" [disabled]="!form.valid">Zapisz</button>
             <button mat-raised-button (click)="sendEditEvent()" style="margin-left: 5px; ; width: 75px;" >Cofnij</button>
         </div>
     </div>

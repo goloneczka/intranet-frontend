@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DutyType } from 'src/app/model/duty';
+import { DutyService } from 'src/app/service';
+import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
 
 @Component({
   selector: 'app-edit-duty-type-display-mode',
@@ -11,11 +13,11 @@ export class EditDutyTypeDisplayModeComponent {
 
   @Input() dutyType!: DutyType
 
-  @Output() editEvent = new EventEmitter<boolean>();
+  @Output() editEvent = new EventEmitter<{operation: string}>();
 
   form: FormGroup;  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dutyTypeEventService: DutyTypeEventService, private dutyService: DutyService) {
     
     this.form = this.fb.group({
       type: [this.dutyType?.type, [Validators.required]],
@@ -31,12 +33,14 @@ export class EditDutyTypeDisplayModeComponent {
   }
 
   sendEditEvent() {
-    this.editEvent.emit(true);
+    this.editEvent.emit({operation: 'TO_EDIT'});
   }
 
 
-  deletePost() {
-    // this.deleteEvent.emit(this.card);
+  deleteDutyType() {
+    this.dutyService.deleteDutyType(this.dutyType?.type).subscribe(_ => {
+      this.editEvent.emit({operation: 'DELETED'});
+      this.dutyTypeEventService.sendMessageDutyTypeDeleted(this.dutyType);
+    });
   }
-  
 }

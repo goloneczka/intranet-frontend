@@ -6,6 +6,7 @@ import {Duty, DutyToAccept, DutyToSave, DutyType} from "../model/duty";
 @Injectable()
 export class DutyService {
   
+
   private DUTY_URL = environment.API_URL + '/duty';
   private DUTY_DATE_URL = environment.API_URL + '/duty-date';
   private DUTY_TO_ACCEPT_URL = environment.API_URL + '/duty-to-accept';
@@ -39,6 +40,14 @@ export class DutyService {
 
   createDutyType(newDutyType: DutyType) {
     return this.http.post<void>(this.DUTY_TYPE_URL, newDutyType);
+  }
+
+  deleteDutyType(type: string) {
+    return this.http.delete<void>(`${this.DUTY_TYPE_URL}/${type}`);
+  }
+
+  editDutyType(dutyType: DutyType, type: string) {
+    return this.http.put<void>(`${this.DUTY_TYPE_URL}/${type}`, dutyType);
   }
 
   createDutyAcceptance(newDutyAcceptance: DutyToAccept) {
