@@ -1,17 +1,31 @@
+  .post-row { 
+    margin-bottom: 30px;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+
+  }
+
+  .post-main-header {
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    background-color: #fff;
+  }
 
   .post-header {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
-    margin-bottom: 10px;
+    font-family: 'Merriweather';
   }
   
-  .post-content {
-    margin-bottom: 10px;
-  }
-  
-  .post-footer {
+  .post-under-head {
     font-size: 0.8em;
+    font-family: 'Merriweather';
+    margin-bottom: 5px
+  }
+
+  .post-under-head p{
     color: #888;
+    display: inline;
   }
   
   .center-align {
@@ -19,3 +33,9 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .main-text {
+    font-family: 'Roboto';
+  }
+
+  img{max-width:100% !important;}

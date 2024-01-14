@@ -1,9 +1,3 @@
-.button-row {
-  margin: 5px 0 5px 0;
-  display: flex;
-  align-items: center;
-}
-
 :host {
   display: flex;
   flex-direction: column;
@@ -11,32 +5,28 @@
 }
 
 
-.post-container {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.post-header {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.post-content {
-  margin-bottom: 10px;
-}
-
-.post-footer {
-  font-size: 0.8em;
-  color: #888;
-}
-
-.center-align {
+.button-row {
+  margin: 5px 0 5px 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+
+.post-row { 
+  margin-bottom: 30px;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+
+}
+
+.post-main-header {
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  background-color: #fff;
+}
+
+.paginator {
+  background-color: transparent;
 }
 
 #admin-components > * {

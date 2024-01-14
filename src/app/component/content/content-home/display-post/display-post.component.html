@@ -1,13 +1,21 @@
-<div class="center-align">
-    <div class="post-header"> {{ card.title }}</div>
-    <div *ngIf="isUserAuthenticated">
-      <button mat-icon-button (click)="sendEditEvent()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button (click)="deletePost()">
-        <mat-icon>remove_circle_outline</mat-icon>
-      </button>
+<div class="post-row">
+
+  <div class="post-main-header">
+    <div class="center-align">
+      <div class="post-header"> {{ card.title }}</div>
+      <div *ngIf="isUserAuthenticated">
+        <button mat-icon-button (click)="sendEditEvent()"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button (click)="deletePost()"><mat-icon>remove_circle_outline</mat-icon></button>
+      </div>
     </div>
+
+    <div class="post-under-head"> 
+      <p>Autor:</p> {{ card.user }}<p>, </p>
+      <p>Dodano:</p> {{ card.creationTime | creationTimeRepresentation}}
+    </div>
+  </div>
+
+  <div class="main-text" [innerHTML]="card.message | SafeHtml"></div>
+
 </div>
-<div class="post-content" [innerHTML]="card.message | SafeHtml"></div>
-<div class="post-footer"> {{ card.user }}, {{ card.creationTime | date: 'd/M/yyyy, H:mm'}} </div>
+

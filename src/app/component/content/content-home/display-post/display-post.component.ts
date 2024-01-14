@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Post } from 'src/app/model/post';
 
 @Component({
   selector: 'app-display-post',
   templateUrl: './display-post.component.html',
-  styleUrls: ['./display-post.component.css']
+  styleUrls: ['./display-post.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DisplayPostComponent {
 

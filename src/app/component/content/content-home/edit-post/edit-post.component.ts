@@ -28,6 +28,7 @@ export class EditPostComponent {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],
         [{ header: [1, 2, 3, false] }],
+        ['link', 'image']
       ],
     };
   }

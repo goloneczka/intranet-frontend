@@ -1,9 +1,13 @@
-.quill-display{
+  form {
+    margin-bottom: 30px;
+  }
+  
+  .quill-display{
     width: 100%;
-}
+    background-color: white;
+  }
 
-
-.post-header {
+  .post-header {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 10px;

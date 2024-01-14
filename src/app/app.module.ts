@@ -62,6 +62,7 @@ import { CreationTimeRepresentationPipe } from './service/pipe/creation-time-rep
 import { EditDutyTypeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type.component';
 import { EditDutyTypeEditModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-edit-mode/edit-duty-type-edit-mode.component';
 import { EditDutyTypeDisplayModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-display-mode/edit-duty-type-display-mode.component';
+import { DisplayDailyPostComponent } from './component/content/content-home/display-daily-post/display-daily-post.component';
 
 
 
@@ -103,7 +104,8 @@ import { EditDutyTypeDisplayModeComponent } from './component/content/content-du
     CreationTimeRepresentationPipe,
     EditDutyTypeComponent,
     EditDutyTypeEditModeComponent,
-    EditDutyTypeDisplayModeComponent
+    EditDutyTypeDisplayModeComponent,
+    DisplayDailyPostComponent
   ],
     imports: [
         CommonModule,

@@ -2,9 +2,7 @@
   <div class="button-row"> 
     <button mat-raised-button (click)="addPost()" style="margin-left: 5px; background-color: #A89985;">Nowy Post</button>
   </div>
-
   <mat-divider/>
-
   <div id="admin-components">
     <app-new-post (newPostEvent)="savePost($event)" />
   </div>
@@ -16,8 +14,11 @@
   </div>
 
   <div *ngIf="posts.length" style="margin-top: 5px;">
-    <div *ngFor="let card of posts | PostOrder; index as ind" class="post-container">
+    <div *ngIf="dailyPost$ | async as dailyPost" class="post-row">
+      <app-display-daily-post [dailyPost]="dailyPost"/>
+    </div>
 
+    <div *ngFor="let card of posts | PostOrder; index as ind">
       <div *ngIf="idOfPostsToEdit.includes(ind); then edit else display"></div>
       <ng-template #edit>
         <app-edit-post [card]="card" 
@@ -27,6 +28,19 @@
         <app-display-post [card]="card" [isUserAuthenticated]="isUserAuthenticated"
             (deleteEvent)="deletePost($event)" (editEvent)="displayOrEditView($event, ind)"/>
       </ng-template>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <mat-paginator #paginator
+               (page)="handlePageEvent($event)"
+               [length]="pagination.length"
+               [pageSize]="10"
+               [showFirstLastButtons]="true"
+               [hidePageSize]="true"
+               [pageIndex]="pagination.pageIndex"
+               class="paginator"
+               aria-label="Select page">
+      </mat-paginator>
     </div>
   </div>
 
