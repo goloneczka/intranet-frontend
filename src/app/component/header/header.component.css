@@ -4,6 +4,11 @@
   width: 100%/* Make the parent component take up 100% of available space */
 }
 
+.left-field{
+  display: flex;
+  flex-direction: column;
+}
+
 .center-align {
   display: flex;
   justify-content: space-between;
@@ -14,3 +19,4 @@
   /* override angular class */
   vertical-align: middle;
 }
+

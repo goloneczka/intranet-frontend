@@ -1,14 +1,42 @@
-<div>
-  <button mat-button class="menu-button" (click)="setContent(ContentEnum.HOME)">
-    <span>{{ContentEnum.HOME | ContentTabDisplay}}</span>
-  </button>
-  <button mat-button class="menu-button" (click)="setContent(ContentEnum.EMPLOYEE)">
-    <span>{{ContentEnum.EMPLOYEE | ContentTabDisplay}}</span>
-  </button>
-  <button mat-button class="menu-button" (click)="setContent(ContentEnum.DOCUMENT)">
-    <span>{{ContentEnum.DOCUMENT | ContentTabDisplay}}</span>
-  </button>
-  <button mat-button class="menu-button" (click)="setContent(ContentEnum.DUTY)">
-    <span>{{ContentEnum.DUTY | ContentTabDisplay}}</span>
-  </button>
-</div>
+<section>
+  <button mat-button style="margin-top: 6px;margin-bottom: 13px;" (click)="resizeLeftNav()"> <img src="assets/images/menu_dots.png"/></button>
+  <mat-divider style="background-color: white;" />
+
+  <div *ngIf="isFullLeftNav; then fullSize else some"> </div>
+
+  <ng-template #fullSize>
+    <button mat-button class="menu-button" (click)="setContent(ContentEnum.HOME)">
+      <mat-icon> chat_bubble_outline</mat-icon>
+      <span>{{ContentEnum.HOME | ContentTabDisplay}}</span>
+    </button>
+    <button mat-button class="menu-button" (click)="setContent(ContentEnum.EMPLOYEE)">
+      <mat-icon>people_outline</mat-icon>
+      <span>{{ContentEnum.EMPLOYEE | ContentTabDisplay}}</span>
+    </button>
+    <button mat-button class="menu-button" (click)="setContent(ContentEnum.DOCUMENT)">
+      <mat-icon>folder_open</mat-icon>
+      <span>{{ContentEnum.DOCUMENT | ContentTabDisplay}}</span>
+    </button>
+    <button mat-button class="menu-button" (click)="setContent(ContentEnum.DUTY)">
+      <mat-icon>bookmark_border</mat-icon>
+      <span>{{ContentEnum.DUTY | ContentTabDisplay}}</span>
+    </button>
+  </ng-template>
+
+  <ng-template #some>
+    <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.HOME)">
+      <mat-icon style="margin-right: 0; transform: scale(1.3);"> chat_bubble_outline</mat-icon>
+    </button>
+    <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.EMPLOYEE)">
+      <mat-icon style="margin-right: 0; transform: scale(1.3);"> people_outline</mat-icon>
+    </button>
+    <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.DOCUMENT)">
+      <mat-icon style="margin-right: 0; transform: scale(1.3);"> folder_open</mat-icon>
+    </button>
+    <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.DUTY)">
+      <mat-icon style="margin-right: 0; transform: scale(1.3);"> bookmark_border</mat-icon>
+    </button>
+  </ng-template>
+
+    
+</section>

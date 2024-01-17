@@ -3,13 +3,19 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
-mat-icon {
-  margin-right: 3px;
+.menu-button-some {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
+img {
+  max-width: 40px;
+  max-height: 35px;
+}
 
 .mat-mdc-button.mat-unthemed {
   --mdc-text-button-label-text-color: white !important;

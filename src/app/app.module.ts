@@ -63,6 +63,7 @@ import { EditDutyTypeComponent } from './component/content/content-duty/edit-dut
 import { EditDutyTypeEditModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-edit-mode/edit-duty-type-edit-mode.component';
 import { EditDutyTypeDisplayModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-display-mode/edit-duty-type-display-mode.component';
 import { DisplayDailyPostComponent } from './component/content/content-home/display-daily-post/display-daily-post.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 
 
@@ -105,7 +106,8 @@ import { DisplayDailyPostComponent } from './component/content/content-home/disp
     EditDutyTypeComponent,
     EditDutyTypeEditModeComponent,
     EditDutyTypeDisplayModeComponent,
-    DisplayDailyPostComponent
+    DisplayDailyPostComponent,
+    FooterComponent
   ],
     imports: [
         CommonModule,

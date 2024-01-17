@@ -8,12 +8,20 @@ import {contentTab} from "../../model/content-tab";
 })
 export class LeftNavComponent {
 
+  isFullLeftNav : boolean = true;
   @Output() contentTypeChangeEvent = new EventEmitter<contentTab>();
+  @Output() resizeEvent = new EventEmitter<boolean>();
 
-  ContentEnum = contentTab
+
+  ContentEnum = contentTab;
 
 
   setContent(contentTypeChange: contentTab) {
-    this.contentTypeChangeEvent.emit(contentTypeChange)
+    this.contentTypeChangeEvent.emit(contentTypeChange);
+  }
+
+  resizeLeftNav() {
+    this.isFullLeftNav = !this.isFullLeftNav;
+    this.resizeEvent.emit(this.isFullLeftNav);
   }
 }

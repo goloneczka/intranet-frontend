@@ -1,5 +1,4 @@
 .sidenav {
-  border: 1px solid white;
   width: 200px;
   background: #576E5E;
   color: white;
@@ -8,12 +7,27 @@
 }
 
 .sidenav.left-sidenav {
+  position: fixed;
+  padding-top: 8px;
+  
+}
+
+.full-left-nav {
   width: 200px;
+  padding: 6px;
+}
+
+.some-left-nav {
+  width: 70px;
+  padding: 1px;
 }
 
 .sidenav.right-sidenav {
   width: 400px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
+
 
 mat-toolbar {
   background: #A89985;
@@ -31,6 +45,26 @@ mat-sidenav-container {
     min-height: calc(100vh - 65px);
 }
 
-.mat-drawer-content {
+
+/* where it has usage ?? */
+ .mat-drawer-content {
   overflow: hidden !important;
+} 
+
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 50px; /* Set same as footer's height */
+}
+
+.footer-positon {
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
+  height: 50px;
+  /* margin-left: 200px; */
 }

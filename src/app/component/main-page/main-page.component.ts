@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {contentTab} from "../../model/content-tab";
 import {AuthenticationService} from "../../service/authentication.service";
 
@@ -9,10 +9,10 @@ import {AuthenticationService} from "../../service/authentication.service";
 })
 export class MainPageComponent implements OnInit {
 
-  public contentEnum = contentTab
-  public contentType : contentTab = contentTab.HOME
-
-  public authenticatedUserName : string | undefined
+  contentEnum = contentTab
+  contentType : contentTab = contentTab.HOME
+  authenticatedUserName : string | undefined
+  isFullLeftNav : boolean = true;
 
   constructor(private authService : AuthenticationService) {}
 
@@ -22,6 +22,10 @@ export class MainPageComponent implements OnInit {
 
   contentTypeChange(value: contentTab) {
     this.contentType = value
+  }
+
+  resizeLeftNav(flag : boolean){
+    this.isFullLeftNav = flag;
   }
 
 }
