@@ -18,10 +18,10 @@ export class EditPostComponent {
   quillConfiguration: any;
 
   constructor(private fb: FormBuilder) {
-    
     this.postForm = this.fb.group({
       title: [this.card?.title, [Validators.required]],
       message: [this.card?.message, [Validators.required]],
+      date: [this.card?.eventDate]
     });
 
     this.quillConfiguration = {
@@ -35,7 +35,11 @@ export class EditPostComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['card'] && changes['card'].currentValue) {
-      this.postForm.patchValue(this.card);
+      this.postForm.patchValue({
+        title: this.card.title,
+        message: this.card.message,
+        date: this.card.eventDate?.toString()
+      });
     }
   }
 
@@ -43,7 +47,9 @@ export class EditPostComponent {
     if(this.postForm.valid){
       const title: string = this.postForm.controls['title'].value;
       const message: string = this.postForm.controls['message'].value;
-      this.editPostEvent.emit({'title': title, 'message': message});
+      const date: string = this.postForm.controls['date'].value;
+
+      this.editPostEvent.emit({'title': title, 'message': message, eventDate: new Date(date).toISOString()});
       this.editEvent.emit(false);
     }
   }

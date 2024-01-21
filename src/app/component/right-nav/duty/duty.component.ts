@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {Duty, DutyListInType, DutyToAccept, DutyType, DutyTypeMessage} from "../../../model/duty";
 import {DutyService} from "../../../service/duty.service";
-import { DutyEventService } from 'src/app/service/duty-event.service';
+import { DutyEventService } from 'src/app/service/event/duty-event.service';
 import { Subscription } from 'rxjs';
-import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
+import { DutyTypeEventService } from 'src/app/service/event/duty-type-event.service';
 
 @Component({
   selector: 'app-duty',

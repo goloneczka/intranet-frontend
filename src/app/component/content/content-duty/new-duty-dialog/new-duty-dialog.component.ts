@@ -40,7 +40,7 @@ export class NewDutyDialogComponent {
 
   updateResult(form: {dutyDay : Date, startTime: string, employeeMail : string, endTime: string, dutyType : string}) {
     this.result = {
-      'dutyDay': form.dutyDay,
+      'dutyDay': form.dutyDay.toISOString(),
       'startTime': form.startTime,
       'endTime': form.endTime,
       'employeeMail': form.employeeMail,

@@ -12,7 +12,7 @@ export class MainPageComponent implements OnInit {
   contentEnum = contentTab
   contentType : contentTab = contentTab.HOME
   authenticatedUserName : string | undefined
-  isFullLeftNav : boolean = true;
+  isFullLeftNav : boolean = false;
 
   constructor(private authService : AuthenticationService) {}
 

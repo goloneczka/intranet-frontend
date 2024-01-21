@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
-import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
+import { DutyTypeEventService } from 'src/app/service/event/duty-type-event.service';
 
 @Component({
   selector: 'app-edit-duty-type-display-mode',

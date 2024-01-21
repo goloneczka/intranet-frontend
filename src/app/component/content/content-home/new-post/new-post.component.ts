@@ -21,12 +21,14 @@ export class NewPostComponent {
     this.postForm = this.fb.group({
       title: ['', [Validators.required]],
       message: ['', [Validators.required]],
+      date: ['']
     });
 
     this.quillConfiguration = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],
         [{ header: [1, 2, 3, false] }],
+        ['link', 'image']
       ],
     };
   }
@@ -40,7 +42,8 @@ export class NewPostComponent {
     if(this.postForm.valid){
       const title: string = this.postForm.controls['title'].value;
       const message: string = this.postForm.controls['message'].value;
-      this.newPostEvent.emit({'title': title, 'message': message});
+      const date: string = this.postForm.controls['date'].value;
+      this.newPostEvent.emit({'title': title, 'message': message, eventDate: new Date(date).toISOString()});
       this.shouldComponentBeRender = false;
       this.postForm.reset();
     }

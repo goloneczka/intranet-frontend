@@ -11,11 +11,6 @@ body {
   margin-right: 1px;
 }
 
-.cal-month-view .cal-day-cell {
-  min-height: auto !important;
-  height: 65px !important;
-}
-
 .error {
    --mdc-snackbar-container-color: #930703;
    --mat-mdc-snack-bar-button-color: #fff;

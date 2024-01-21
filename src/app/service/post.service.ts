@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {DailyPost, Post, PostToSave} from "../model/post";
+import {DailyPost, Post, PostEvent, PostToSave} from "../model/post";
 
 @Injectable()
 export class PostService {
   
   private POST_URL = environment.API_URL + '/post';
+  private POST_EVENT_URL = environment.API_URL + '/post-events';
   private DAILY_POST_URL = environment.API_URL + '/daily-post';
   private COUNT_POST = environment.API_URL + '/count-post';
 
@@ -19,6 +20,10 @@ export class PostService {
 
   getDailyPost() {
     return this.http.get<DailyPost>(this.DAILY_POST_URL);
+  }
+
+  getPostsEvent() {
+    return this.http.get<PostEvent[]>(this.POST_EVENT_URL);
   }
 
   savePost(post: PostToSave) {

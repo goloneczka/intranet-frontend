@@ -29,7 +29,7 @@ export interface DutyToSave {
 
   dutyType: string
   employeeMail: string
-  dutyDay: Date
+  dutyDay: string
   startTime: string
   endTime: string
 }

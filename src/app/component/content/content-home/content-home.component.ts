@@ -5,6 +5,7 @@ import {PostService} from "../../../service/post.service";
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PostEventService } from 'src/app/service/event/post-event.service';
 
 @Component({
   selector: 'app-content-home',
@@ -23,7 +24,9 @@ export class ContentHomeComponent {
   pagination = {length: 0, pageIndex: 0, size: 10};
   countAvaiablePosts: number = 0;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,
+              private postEventService: PostEventService
+            ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);
@@ -42,6 +45,10 @@ export class ContentHomeComponent {
     this.postService.savePost(post).subscribe(_ => {
       this.idOfPostsToEdit = [];
       this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);
+      this.postEventService.sendMessagePostToSaveAdded(post);
+      this.postService.countAllAvaiablePosts().subscribe(data => {
+              this.pagination.length = data;
+        });
     });
   }
 
@@ -57,6 +64,7 @@ export class ContentHomeComponent {
     this.postService.deletePost(post.title).subscribe(_ => {
       this.idOfPostsToEdit = [];
       this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);
+      this.postEventService.sendMessagePostToSavedDeleted(post);
     });
   }
 
@@ -64,10 +72,13 @@ export class ContentHomeComponent {
     this.postService.editPost(title, post).subscribe(_ => {
       this.idOfPostsToEdit = [];
       this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);
+      this.postEventService.sendMessageDutyTypeEdited(post);
+
     });
   }
 
   handlePageEvent(e: PageEvent) {
+    this.idOfPostsToEdit = [];
     this.pagination.pageIndex = e.pageIndex;
     this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);
   }

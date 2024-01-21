@@ -8,7 +8,7 @@ import {contentTab} from "../../model/content-tab";
 })
 export class LeftNavComponent {
 
-  isFullLeftNav : boolean = true;
+  isFullLeftNav : boolean = false;
   @Output() contentTypeChangeEvent = new EventEmitter<contentTab>();
   @Output() resizeEvent = new EventEmitter<boolean>();
 

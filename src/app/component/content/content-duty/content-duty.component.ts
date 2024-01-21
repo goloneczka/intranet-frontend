@@ -7,9 +7,9 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.component';
 import { DutyAcceptanceComponent } from './duty-acceptance/duty-acceptance.component';
 import { NewDutyTypeComponent } from './new-duty-type/new-duty-type.component';
-import { DutyEventService } from 'src/app/service/duty-event.service';
+import { DutyEventService } from 'src/app/service/event/duty-event.service';
 import { EditDutyTypeComponent } from './edit-duty-type/edit-duty-type.component';
-import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
+import { DutyTypeEventService } from 'src/app/service/event/duty-type-event.service';
 import { Subscription } from 'rxjs';
 
 @Component({

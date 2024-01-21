@@ -31,10 +31,9 @@ import {ContentHomeComponent, ContentEmployeeComponent, ContentDocumentComponent
         NewDocumentGroupComponent, SortingDialogComponent } from './component/content/index';
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
-         BasicAuthInterceptor, PostOrderPipe, SafeHtmlPipe } from './service/index';
+         BasicAuthInterceptor, SafeHtmlPipe } from './service/index';
 import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
 import { DutyComponent } from './component/right-nav/duty/duty.component';
-import {CalendarComponent} from "./component/right-nav/calendar/calendar.component";
 import {RightNavParentComponent} from "./component/right-nav/right-nav-parent/right-nav-parent.component";
 import { HeaderComponent } from './component/header/header.component';
 import {CustomDateFormatterImpl} from "./service/calendar-date-formatter";
@@ -43,7 +42,7 @@ import { MainPageComponent } from './component/main-page/main-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { QuillModule } from 'ngx-quill';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DisplayPostComponent } from './component/content/content-home/display-post/display-post.component';
 import { EditPostComponent } from './component/content/content-home/edit-post/edit-post.component';
 import { EmployeeDetailsComponent } from './component/content/content-employee/employee-details/employee-details.component';
@@ -64,6 +63,7 @@ import { EditDutyTypeEditModeComponent } from './component/content/content-duty/
 import { EditDutyTypeDisplayModeComponent } from './component/content/content-duty/edit-duty-type/edit-duty-type-display-mode/edit-duty-type-display-mode.component';
 import { DisplayDailyPostComponent } from './component/content/content-home/display-daily-post/display-daily-post.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { MonthlyCalendarComponent } from './component/right-nav/monthly-calendar/monthly-calendar.component';
 
 
 
@@ -77,11 +77,9 @@ import { FooterComponent } from './component/footer/footer.component';
     DutyComponent,
     FilterDutyPipe,
     FilterDocumentPipe,
-    CalendarComponent,
     RightNavParentComponent,
     HeaderComponent,
     ContentTabDisplayPipe,
-    PostOrderPipe,
     LoginComponent,
     MainPageComponent,
     NewDocumentGroupComponent,
@@ -107,7 +105,8 @@ import { FooterComponent } from './component/footer/footer.component';
     EditDutyTypeEditModeComponent,
     EditDutyTypeDisplayModeComponent,
     DisplayDailyPostComponent,
-    FooterComponent
+    FooterComponent,
+    MonthlyCalendarComponent
   ],
     imports: [
         CommonModule,
@@ -151,6 +150,7 @@ import { FooterComponent } from './component/footer/footer.component';
     AuthenticationService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

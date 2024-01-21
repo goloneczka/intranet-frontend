@@ -4,6 +4,13 @@ export interface Post {
   title: string
   user: string
   creationTime: Date
+  eventDate: Date
+}
+
+export interface PostEvent {
+
+  title: string
+  eventDate: Date
 }
 
 export interface DailyPost {
@@ -20,5 +27,10 @@ export interface PostToSave {
 
   message: string
   title: string
+  eventDate: string
 }
 
+export interface PostToSaveMessage {
+  postToSave: PostToSave | Post
+  operation: string
+}

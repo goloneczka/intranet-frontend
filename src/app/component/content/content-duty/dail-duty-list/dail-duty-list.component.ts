@@ -2,7 +2,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Duty, DutyListInType, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
-import { DutyEventService } from 'src/app/service/duty-event.service';
+import { DutyEventService } from 'src/app/service/event/duty-event.service';
 
 @Component({
   selector: 'app-dail-duty-list',

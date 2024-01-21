@@ -9,19 +9,36 @@
 
     <form [formGroup]="postForm" (ngSubmit)="addPost()">
         <div class="post-container">
-            <mat-form-field  style="min-width: 350px;">
-                <mat-label>Nazwa Posta</mat-label>
-                <input matInput placeholder="Grupa" formControlName="title">
-            </mat-form-field>
-    
-            <button mat-icon-button type="submit">
-                <mat-icon>add_circle_outline</mat-icon>
-            </button>
+
+            <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 15px;">
+                <mat-form-field  style="width: 350px;">
+                    <mat-label>Nazwa Posta</mat-label>
+                    <input matInput placeholder="Grupa" formControlName="title">
+                </mat-form-field>
+                
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-form-field style="max-height: 70px; width: 200px; margin-bottom: -1.25em;">
+                        <mat-label>Kiedy</mat-label>
+                        <input matInput [matDatepicker]="datepicker" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker></mat-datepicker>
+                      </mat-form-field>
+                      <small style="color: #333; width: 200px;">Wybierz datę, jeśli chcesz dodać wydarzenie do kalendarza.</small>
+                </div>
+            </div>
             
             <quill-editor [modules]="quillConfiguration" [placeholder]="'Wiadomość posta ...'"
                 [styles]="{'min-height': '120px'}"  class="quill-display" formControlName="message">
             </quill-editor>
         </div>
+
+        <div class="end-flex">
+            Zapisz:
+            <button mat-icon-button type="submit">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+
     </form>
 
     <div class="end-flex">
@@ -30,4 +47,5 @@
             <mat-icon>remove_circle_outline</mat-icon>
         </button>
     </div>
+
 </section>

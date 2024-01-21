@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CalendarDay, Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
-import { DutyEventService } from 'src/app/service/duty-event.service';
+import { DutyEventService } from 'src/app/service/event/duty-event.service';
 
 const WEEKEND_DAYS = ['SOB', 'NIEDZ'];
 

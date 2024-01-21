@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DutyType } from 'src/app/model/duty';
-import { DutyTypeEventService } from 'src/app/service/duty-type-event.service';
+import { DutyTypeEventService } from 'src/app/service/event/duty-type-event.service';
 
 @Component({
   selector: 'app-new-duty-type',

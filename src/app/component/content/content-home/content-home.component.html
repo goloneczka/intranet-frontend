@@ -18,7 +18,7 @@
       <app-display-daily-post [dailyPost]="dailyPost"/>
     </div>
 
-    <div *ngFor="let card of posts | PostOrder; index as ind">
+    <div *ngFor="let card of posts; index as ind">
       <div *ngIf="idOfPostsToEdit.includes(ind); then edit else display"></div>
       <ng-template #edit>
         <app-edit-post [card]="card" 
