@@ -1,0 +1,101 @@
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures equal width for all columns */
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    width: 14.28%; /* 100% divided by 7 columns */
+    color: black;
+    background-color: white;
+
+  }
+
+  .body th,
+  .body td {
+    border: none;
+    padding-bottom: 13px;
+  }
+  
+  th {
+    background-color: #A89985;
+    color: white;
+  }
+
+  .other-month {
+    color: #ccc; /* Grey background for days from different months */
+    pointer-events: none;
+  }
+
+  td div {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .selected::before {
+    content: ''; /* Create a pseudo-element */
+    width: 35px; /* Adjust the width to make the circle larger */
+    height: 35px; /* Adjust the height to make the circle larger */
+    background-color: #ccc; /* Change this to the desired background color for the circle */
+    border-radius: 50%;
+    position: absolute;
+    top: 65%; /* Position the circle vertically at the center of the cell */
+    left: 50%; /* Position the circle horizontally at the center of the cell */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .today::before {
+    content: ''; /* Create a pseudo-element */
+    width: 35px; /* Adjust the width to make the circle larger */
+    height: 35px; /* Adjust the height to make the circle larger */
+    background-color: #A89985;  /* Change this to the desired background color for the circle */
+    border-radius: 50%;
+    position: absolute;
+    top: 65%; /* Position the circle vertically at the center of the cell */
+    left: 50%; /* Position the circle horizontally at the center of the cell */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  td div:hover::before {
+    content: ''; /* Create a pseudo-element */
+    width: 35px; /* Adjust the width to make the circle larger */
+    height: 35px; /* Adjust the height to make the circle larger */
+    background-color: #eee; /* Change this to the desired background color for the circle */
+    border-radius: 50%;
+    position: absolute;
+    top: 65%; /* Position the circle vertically at the center of the cell */
+    left: 50%; /* Position the circle horizontally at the center of the cell */
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .circle {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    top: 20px; /* Position the circle vertically at the center of the cell */
+    border-radius: 50%;
+  }
+
+  .circle-one{
+    background-color: #15ee80;
+    left: 25%;
+  }
+
+  .circle-two{
+    background-color: #15ee80;
+    left: 45%;
+  }
+
+  .circle-three{
+    background-color: #15ee80;
+    left: 65%;
+  }
