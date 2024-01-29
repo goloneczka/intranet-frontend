@@ -1,0 +1,15 @@
+<div class="global-post-row-display">
+    <div class="global-post-main-header-display">
+      <div class="global-center-align">
+        <div class="global-post-header"> {{ postToDisplay.title }}</div>
+      </div>
+  
+      <div class="global-post-under-head"> 
+        <p>Autor:</p> {{ postToDisplay.user }}<p>, </p>
+        <p>Dodano:</p> {{ postToDisplay.creationTime | creationTimeRepresentation}}
+      </div>
+    </div>
+  
+    <div class="global-main-text-display" [innerHTML]="postToDisplay.message | SafeHtml"></div>
+  </div>
+  

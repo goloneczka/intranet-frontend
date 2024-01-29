@@ -1,0 +1,37 @@
+
+.global-post-row-display { 
+    margin-bottom: 30px;
+    border-top: 2px solid #ccc;
+    margin: 25px;
+}
+
+.global-post-main-header-display {
+    border-bottom: 2px solid #ccc;
+    width: 100%;
+    background-color: #fff;
+}
+
+.global-post-under-head {
+    font-size: 0.8em;
+    font-family: 'Merriweather';
+    margin-bottom: 5px
+  }
+
+  .global-post-under-head p{
+    color: #888;
+    display: inline;
+  }
+  
+  .global-center-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+.global-main-text-display {
+    font-family: 'Roboto';
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.global-main-text-display img{max-width:85% !important;}
