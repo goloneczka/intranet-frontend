@@ -1,4 +1,28 @@
 <div>
-  <app-monthly-calendar />
-  <app-duty/>
+  <div *ngIf="dailyPost" style="margin-bottom: 15px;">
+    <div class="post-header">
+            Strona PKO BP Finat
+    </div>
+    <div class="post-under-head"> 
+        <p> Dzisiaj jest {{today | date: 'fullDate'}}. </p>
+        <p> Wschód słońca {{dailyPost.sunrise}}, zachód {{dailyPost.sunset}}</p>
+        <p> Imieniny {{dailyPost.nameDayStrings}}</p>
+        <p *ngIf="dailyPost.calendarHolidayStrings.length"> Święta i Wydarzenia: {{dailyPost.calendarHolidayStrings}}</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <app-duty/>
+  </div>
+
+  <div *ngIf="postsEvent$ | async as postsEvent" class="post-container"> 
+    <app-monthly-calendar [postsEvent]="postsEvent" (choosenDayEvent)="(prepareEventsForDay($event))"/>
+    <p>Zdarzenia na dzień {{eventsDate | date: 'd/M/yyyy'}}</p>
+    <table style="width: 100%;">
+      <tr *ngFor="let title of events" (click)="prepareNewDisplayPostDialog(title)">
+        <td class="circle"></td>
+        <td >{{title}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

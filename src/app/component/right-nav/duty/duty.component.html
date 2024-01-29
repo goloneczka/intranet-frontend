@@ -1,19 +1,24 @@
-<p >Dyżury na dzień {{today | date: 'd/M/yyyy'}}</p>
-
-<div *ngIf="duties.length" style="width: 100%;">
-  <table class="main-table">
-    <tr *ngFor="let dutyWrapper of duties" style="margin-bottom: 2px;">
-      <td class="type-header">
-          <p>{{dutyWrapper.dutyType.type}} </p>
-          <mat-divider style="color: white;"/>
-      </td>
-      <td class="nested-td">
-        <table>
-          <tr *ngFor="let card of dutyWrapper.dutyList">
-            <td class="nested-text">{{ card.employeeFirstName }} {{ card.employeeLastName }} {{ card.startTime | slice:0:5 }} - {{ card.endTime | slice:0:5 }}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+<div >
+  <p style="font-weight: bold; margin-bottom: 0; font-size: 1.05em;   font-family: 'Merriweather';">Zaplanowane Dyżury</p>
 </div>
+
+<section>
+  <div *ngIf="duties.length" style="width: 100%;">
+    <table class="main-table">
+      <tr *ngFor="let dutyWrapper of duties" >
+        <td class="type-header">
+            <p>{{dutyWrapper.dutyType.type}} </p>
+            <mat-divider style="color: white;"/>
+        </td>
+        <td class="nested-td" >
+          <table style="width: 100%;">
+            <tr *ngFor="let card of dutyWrapper.dutyList">
+              <td class="nested-text">{{ card.employeeFirstName }} {{ card.employeeLastName }}</td>
+              <td class="nested-text"> {{ card.startTime | slice:0:5 }} - {{ card.endTime | slice:0:5 }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>

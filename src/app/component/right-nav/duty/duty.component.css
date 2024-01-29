@@ -1,7 +1,7 @@
-:host {
+section {
   display: flex;
   flex-direction: column;
-  width: 75%; /* Set the width to 70% */
+  width: 85%; /* Set the width to 70% */
   margin: 0 auto; /* Center the component horizontally */
   align-items: center;
 }
@@ -10,15 +10,14 @@
   border-top-color: white;
 }
 
-p {
+.type-header p {
   font-family: 'Merriweather';
-  font-size: smaller;
   margin-bottom: 0;
 }
 
 .nested-text {
   font-family: 'Roboto';
-  font-size: small;
+  font-size: 0.9em;
 }
 
 .main-table {
@@ -35,8 +34,13 @@ p {
 
 .nested-td { 
   display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1px 0 1px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1px 0 1px;
 
+}
+
+.nested-td tr {
+  display: flex;
+  justify-content: space-between;
 }

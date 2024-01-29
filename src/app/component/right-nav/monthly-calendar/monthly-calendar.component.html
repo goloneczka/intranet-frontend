@@ -1,22 +1,26 @@
 <div >
-    <p style="margin-bottom: 0;">{{ datePipe.transform(currentYear + '-' + currentMonth, 'MMMM yyyy') }}</p>
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']">{{ day }}</th>
-        </tr>
-      </thead>
-      <tbody class="body">
-        <tr *ngFor="let week of getWeeks(); index as ind " >
-          <td *ngFor="let day of week" >
-            <div *ngIf="day !== null" [ngClass]="{ 'other-month': day.isCurrentMonth === false, 'today': isToday(day), 'selected': isSelected(day) }" (click)="chooseSelectedDay(day)">
-              {{ day.number }}
-              <span *ngIf="hasEvents(day, 1)" class="circle circle-one"></span>
-              <span *ngIf="hasEvents(day, 2)" class="circle circle-two"></span>
-              <span *ngIf="hasEvents(day, 3)" class="circle circle-three"></span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <p style="margin-bottom: 0; font-weight: bold; font-size: 1.05em; font-family: 'Merriweather';">Zaplanowane Wydarzenia</p>
   </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody class="body">
+      <tr *ngFor="let week of getWeeks(); index as ind " >
+        <td *ngFor="let day of week" >
+          <div *ngIf="day !== null" [ngClass]="{ 'other-month': day.isCurrentMonth === false, 'today': isToday(day), 'selected': isSelected(day) }" (click)="chooseSelectedDay(day)">
+            {{ day.number }}
+            <span *ngIf="hasEvents(day, 1)" class="circle circle-one"></span>
+            <span *ngIf="hasEvents(day, 2)" class="circle circle-two"></span>
+            <span *ngIf="hasEvents(day, 3)" class="circle circle-three"></span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

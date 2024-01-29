@@ -43,7 +43,7 @@ export class NewPostComponent {
       const title: string = this.postForm.controls['title'].value;
       const message: string = this.postForm.controls['message'].value;
       const date: string = this.postForm.controls['date'].value;
-      this.newPostEvent.emit({'title': title, 'message': message, eventDate: new Date(date).toISOString()});
+      this.newPostEvent.emit({'title': title, 'message': message, eventDate: date ? new Date(date).toISOString() : null});
       this.shouldComponentBeRender = false;
       this.postForm.reset();
     }

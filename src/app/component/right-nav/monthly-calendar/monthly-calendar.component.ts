@@ -1,9 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { PostEvent, PostToSave, PostToSaveMessage } from 'src/app/model/post';
-import { PostService } from 'src/app/service';
-import { PostEventService } from 'src/app/service/event/post-event.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PostEvent } from 'src/app/model/post';
+
 
 @Component({
   selector: 'app-monthly-calendar',
@@ -12,8 +10,10 @@ import { PostEventService } from 'src/app/service/event/post-event.service';
 })
 export class MonthlyCalendarComponent {
 
+  @Input()
   postsEvent: PostEvent[]=[];
-  subscription!: Subscription;
+  @Output()
+  choosenDayEvent = new EventEmitter<Date>();
   
   currentMonth!: number;
   currentYear!: number;
@@ -24,25 +24,15 @@ export class MonthlyCalendarComponent {
   selectedNumber: number| null = null;
 
   constructor(
-     public datePipe: DatePipe,
-     private postService: PostService,
-     private postEventService: PostEventService
+     public datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
-    this.postService.getPostsEvent().subscribe(data => {
-      this.postsEvent = data;
-    });
-    this.subscription = this.postEventService.getMessage().subscribe((message : PostToSaveMessage | null) => {
-        if(message && this.postEventService.shouldForceRenderPostsEvent(message)){
-          this.postService.getPostsEvent().subscribe(data => {
-            this.postsEvent = data;
-          });
-        }
-      });
     const currentDate = new Date();
     this.currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
     this.currentYear = currentDate.getFullYear();
+    this.choosenDayEvent.emit(currentDate);
+
     this.calculateCalendar();
   }
 
@@ -110,12 +100,14 @@ export class MonthlyCalendarComponent {
   chooseSelectedDay(day: {number: number, isCurrentMonth: boolean}) {
     if(day.isCurrentMonth) {
       this.selectedNumber = day.number;
+      const date = new Date(this.currentYear, this.currentMonth-1, this.selectedNumber);
+      this.choosenDayEvent.emit(date);
     }
   }
 
   hasEvents(day: {number: number, isCurrentMonth: boolean}, eventNumber: number): boolean{
     return day.isCurrentMonth && this.postsEvent
-    .filter(it => new Date(it.eventDate).getDate() === day.number)
-    .length >= eventNumber;
+      .filter(it => new Date(it.eventDate).getDate() === day.number)
+      .length >= eventNumber;
   }
 }

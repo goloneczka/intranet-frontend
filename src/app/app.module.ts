@@ -64,6 +64,7 @@ import { EditDutyTypeDisplayModeComponent } from './component/content/content-du
 import { DisplayDailyPostComponent } from './component/content/content-home/display-daily-post/display-daily-post.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { MonthlyCalendarComponent } from './component/right-nav/monthly-calendar/monthly-calendar.component';
+import { DisplayPostDialogComponent } from './component/right-nav/display-post-dialog/display-post-dialog.component';
 
 
 
@@ -106,7 +107,8 @@ import { MonthlyCalendarComponent } from './component/right-nav/monthly-calendar
     EditDutyTypeDisplayModeComponent,
     DisplayDailyPostComponent,
     FooterComponent,
-    MonthlyCalendarComponent
+    MonthlyCalendarComponent,
+    DisplayPostDialogComponent
   ],
     imports: [
         CommonModule,

@@ -30,7 +30,9 @@ export class PostEventService {
   }
 
   shouldForceRenderPostsEvent(message : PostToSaveMessage) : boolean{
-    const checkingDate = new Date(message.postToSave.eventDate);
+    const date = message.postToSave.eventDate;
+    if(!date) {return false;}
+    const checkingDate = new Date(date);
     const now = new Date();
     checkingDate.setHours(0,0,0,0);
 

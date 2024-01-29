@@ -13,13 +13,11 @@ export class NewDutyDialogComponent {
 
   dutyGroupForm: FormGroup;
   result: DutyToSave;
-
   dutyShadow: DutyToSave;
   
   constructor(@Inject(MAT_DIALOG_DATA) private newDutyFieldsToCreate: any, private fb: FormBuilder) {
 
     this.result = this.dutyShadow = {...newDutyFieldsToCreate};
-    console.log(newDutyFieldsToCreate);
 
     this.dutyGroupForm = this.fb.group({
       dutyDay: [this.dutyShadow.dutyDay, [Validators.required]],

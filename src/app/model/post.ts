@@ -27,7 +27,7 @@ export interface PostToSave {
 
   message: string
   title: string
-  eventDate: string
+  eventDate: string | null
 }
 
 export interface PostToSaveMessage {

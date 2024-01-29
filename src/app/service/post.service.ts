@@ -18,6 +18,10 @@ export class PostService {
     return this.http.get<Post[]>(this.POST_URL, {params: queryParams});
   }
 
+  getPost(title: string) {
+    return this.http.get<Post>(`${this.POST_URL}/${title}`);
+  }
+
   getDailyPost() {
     return this.http.get<DailyPost>(this.DAILY_POST_URL);
   }

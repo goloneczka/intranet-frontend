@@ -49,7 +49,7 @@ export class EditPostComponent {
       const message: string = this.postForm.controls['message'].value;
       const date: string = this.postForm.controls['date'].value;
 
-      this.editPostEvent.emit({'title': title, 'message': message, eventDate: new Date(date).toISOString()});
+      this.editPostEvent.emit({'title': title, 'message': message, eventDate: date?  new Date(date).toISOString() : null});
       this.editEvent.emit(false);
     }
   }

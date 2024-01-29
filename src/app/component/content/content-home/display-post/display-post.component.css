@@ -1,41 +1,41 @@
-  .post-row { 
+  .global-post-row { 
     margin-bottom: 30px;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
 
   }
 
-  .post-main-header {
+  .global-post-main-header {
     border-bottom: 2px solid #ccc;
     width: 100%;
     background-color: #fff;
   }
 
-  .post-header {
+  .global-post-header {
     font-size: 1.1em;
     font-weight: bold;
     font-family: 'Merriweather';
   }
   
-  .post-under-head {
+  .global-post-under-head {
     font-size: 0.8em;
     font-family: 'Merriweather';
     margin-bottom: 5px
   }
 
-  .post-under-head p{
+  .global-post-under-head p{
     color: #888;
     display: inline;
   }
   
-  .center-align {
+  .global-center-align {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .main-text {
+  .global-main-text {
     font-family: 'Roboto';
   }
 
-  .main-text img{max-width:100% !important;}
+  .global-main-text img{max-width:100% !important;}
