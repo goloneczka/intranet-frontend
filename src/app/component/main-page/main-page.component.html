@@ -12,17 +12,18 @@
         </mat-sidenav>
   
       <mat-sidenav-content [ngStyle]="{ 'margin-left': isFullLeftNav ? '200px' : '70px' }">
-        <div class="content">
-          <app-content-home *ngIf="contentType === contentEnum.HOME" />
-          <app-content-employee *ngIf="contentType === contentEnum.EMPLOYEE" />
-          <app-content-document *ngIf="contentType === contentEnum.DOCUMENT" />
-          <app-content-duty *ngIf="contentType === contentEnum.DUTY" />
+        <div class="flexy-content">
+          <div class="content">
+            <app-content-home *ngIf="contentType === contentEnum.HOME" />
+            <app-content-employee *ngIf="contentType === contentEnum.EMPLOYEE" />
+            <app-content-document *ngIf="contentType === contentEnum.DOCUMENT" />
+            <app-content-duty *ngIf="contentType === contentEnum.DUTY" />
+          </div>
+          <div class="sidenav right-sidenav">
+            <app-right-nav-parent/>
+          </div>
         </div>
       </mat-sidenav-content>
-  
-      <mat-sidenav mode="side" opened="true"  position="end" class="sidenav right-sidenav">
-        <app-right-nav-parent/>
-      </mat-sidenav>
 
     </mat-sidenav-container>
     <app-footer class="footer-positon" [ngStyle]="{ 'margin-left': isFullLeftNav ? '200px' : '70px' }"/>
