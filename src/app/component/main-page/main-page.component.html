@@ -18,14 +18,16 @@
             <app-content-employee *ngIf="contentType === contentEnum.EMPLOYEE" />
             <app-content-document *ngIf="contentType === contentEnum.DOCUMENT" />
             <app-content-duty *ngIf="contentType === contentEnum.DUTY" />
+            <app-content-link *ngIf="contentType === contentEnum.LINK" />
           </div>
+
           <div class="sidenav right-sidenav">
             <app-right-nav-parent/>
           </div>
         </div>
       </mat-sidenav-content>
-
     </mat-sidenav-container>
+    
     <app-footer class="footer-positon" [ngStyle]="{ 'margin-left': isFullLeftNav ? '200px' : '70px' }"/>
 
   </body>

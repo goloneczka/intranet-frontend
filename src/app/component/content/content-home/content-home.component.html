@@ -14,10 +14,6 @@
   </div>
 
   <div *ngIf="posts.length" style="margin-top: 5px;">
-    <!-- <div *ngIf="dailyPost$ | async as dailyPost" class="post-row">
-      <app-display-daily-post [dailyPost]="dailyPost"/>
-    </div> -->
-
     <div *ngFor="let card of posts; index as ind">
       <div *ngIf="idOfPostsToEdit.includes(ind); then edit else display"></div>
       <ng-template #edit>
