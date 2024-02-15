@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 85%; /* Make the parent component take up 100% of available space */
+  }
+
+.button-row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+#admin-components > * {
+margin: 15px 0 15px 0;
+}
+
+
+.link-container-flex {
+    display: flex;
+}
+
+.link-container-flex .left {
+    flex: 0 0 55%;
+    
+}
+
+.link-container-flex .right {
+    flex: 0 0 45%;
+
+}

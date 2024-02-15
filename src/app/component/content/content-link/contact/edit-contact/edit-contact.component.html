@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Edycja Kontakt/Link</h2>
+<div class="mat-typography">
+  <form [formGroup]="contactForm" (ngSubmit)="editContact()">
+
+    <div class="row">
+        <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Nazwa</mat-label>
+            <input matInput placeholder="Nazwa Kontaktu ..." formControlName="contactName">
+        </mat-form-field>
+        
+        <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Kontakt</mat-label>
+            <input matInput placeholder="Kontakt ..." formControlName="contact">
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field style="max-height: 70px">
+            <mat-label>W kolejności za</mat-label>
+            <mat-select formControlName="orderContact">
+              <mat-option *ngFor="let contact of contactsShadow; let i = index" [value]="contact.orderContact" [ngClass]="{'first-option': i === 0}">
+                  {{contact.contactName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="row" style="align-items: stretch;">
+        <mat-radio-group formControlName="type">
+            <mat-radio-button [checked]="true" value="phone" >Numer</mat-radio-button>
+            <mat-radio-button value="mail" >Mail</mat-radio-button>
+            <mat-radio-button value="language" >Witryna</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cofnij</button>
+        <button mat-button [disabled]="!contactForm.valid" type="submit">Zapisz</button>
+    </mat-dialog-actions>
+
+  </form>
+</div>
+
+

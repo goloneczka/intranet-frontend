@@ -1,0 +1,27 @@
+<div *ngIf="isUserAuthenticated">
+    <div style="display: inline-flex; justify-content: space-between; width: 100%;">
+        <div class="button-row">
+        </div>
+        <div class="button-row"> 
+            <button mat-raised-button (click)="addContact()" style="margin-left: 5px; background-color: #A89985;">Nowy Kontakt</button>
+            <button mat-raised-button (click)="sortingContacts()" style="margin-left: 5px; background-color: #A89985;">Sortowanie</button>
+          </div>
+    </div>
+
+    <mat-divider style="margin-bottom: 5px;"/>
+
+    <div id="admin-components">
+      <app-new-contact [contacts$]="contacts$" (addedEvent)="reRender()"/>
+      <app-sorting-contacts [contacts$]="contacts$" (contactsChanged)="reRender()"/>
+    </div>
+</div>
+
+<div class="link-container-flex">
+    <div class="left">
+        <app-enviroment ></app-enviroment>
+    </div >
+
+    <div class="right">
+        <app-contact [contacts$]="contacts$"  (contactsChanged)="reRender()"></app-contact>
+    </div>
+</div>

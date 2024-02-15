@@ -1,0 +1,35 @@
+
+<section *ngIf="shouldComponentBeRender" >
+    <div class="header">
+        <h3 style="font-family: 'Roboto'; margin-left: 20px;">Posortuj Linki i Kontakty</h3>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <div >
+        <div class="form-container">
+            <div cdkDropList class="sort-list" (cdkDropListDropped)="onDrop($event)">
+                <div *ngFor="let item of contactsShadow; let i = index" cdkDrag [cdkDragData]="item" class="single-item">
+                    <div class="placeholder" *cdkDragPlaceholder></div>
+                    {{ item.contactName }}
+                </div>
+            </div>
+        </div>
+
+        <div class="end-flex">
+            Zapisz:
+            <button mat-icon-button (click)="saveOrder()">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+    <div class="end-flex">
+        Przerwij sortowanie linów/kontaktów:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+
+</section>

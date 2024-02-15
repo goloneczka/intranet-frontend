@@ -1,0 +1,20 @@
+.button-row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  #admin-components > * {
+    margin: 15px 0 15px 0;
+  }
+
+  .contact-row {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+  }
+
+  .down-text {
+    color: #888;
+    font-size: smaller;
+  }

@@ -1,0 +1,53 @@
+<section *ngIf="shouldComponentBeRender" >
+
+    <div class="header">
+        <h3 style="font-family: 'Roboto'; margin-left: 20px;">Dodaj nowy kontakt lub link</h3>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <form [formGroup]="contactForm" (ngSubmit)="addContact()">
+        <div class="form-container">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Nazwa</mat-label>
+                <input matInput placeholder="Nazwa Kontaktu ..." formControlName="contactName">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Kontakt</mat-label>
+                <input matInput placeholder="Kontakt ..." formControlName="contact">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px">
+                <mat-label>W kolejności za</mat-label>
+                <mat-select formControlName="orderContact">
+                  <mat-option *ngFor="let contact of contactsShadow; let i = index" [value]="contact.orderContact" [ngClass]="{'first-option': i === 0}">
+                      {{contact.contactName}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-radio-group formControlName="type">
+                <mat-radio-button [checked]="true" value="phone" >Numer</mat-radio-button>
+                <mat-radio-button value="mail" >Mail</mat-radio-button>
+                <mat-radio-button value="language" >Witryna</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="end-flex">
+            Zapisz:
+            <button mat-icon-button type="submit" [disabled] = "!contactForm.valid">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </form>
+    
+    <div class="end-flex">
+        Przerwij dodawanie nowego linku/kontaktu:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+
+</section>
