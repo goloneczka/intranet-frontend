@@ -1,12 +1,13 @@
 <section *ngIf="contacts$ | async as contacts">
-  <p style="font-size: larger;"> Kontakty i Linki</p>
+  <p style="font-size: larger; font-weight: bolder; font-family: 'Merriweather';"> Kontakty </p>
   <div *ngFor="let card of contacts; index as ind">
+
     <div class="contact-row">
       <div>
-        <p>{{ card.contactName }} </p>
-        <div style="display: inline-flex; align-items: center;">
+        <p class="upper-text">{{ card.contactName }} </p>
+        <div class="down-text-with-icon">
           <mat-icon style="margin-right: 3px;">{{card.type}}</mat-icon>
-          <p class="down-text">{{ card.contact }} </p>
+          <p  style="font-family: 'Roboto';">{{ card.contact }} </p>
         </div>
       </div>
 
@@ -19,6 +20,7 @@
         </button>
       </div>
     </div>
+
   </div>
 
 </section>

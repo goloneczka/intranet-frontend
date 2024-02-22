@@ -17,14 +17,15 @@ margin: 15px 0 15px 0;
 
 .link-container-flex {
     display: flex;
+    justify-content: space-between;
 }
 
 .link-container-flex .left {
-    flex: 0 0 55%;
+    flex: 0 0 49%;
     
 }
 
 .link-container-flex .right {
-    flex: 0 0 45%;
+    flex: 0 0 49%;
 
 }

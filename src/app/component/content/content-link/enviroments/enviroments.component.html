@@ -1,1 +1,36 @@
-<p>enviroments works!</p>
+<section *ngIf="envApps$ | async as envApps">
+    <p style="font-size: larger; font-weight: bolder; font-family: 'Merriweather';"> Aplikacje </p>
+    <div *ngFor="let dirtyCard of touchedEnvApps; index as ind">
+  
+      <div *ngIf="dirtyCard.obj as card" class="contact-row">
+        <div>
+          <div class="envs">
+            <div *ngIf="card.prodUrl" [class.selected]="!dirtyCard.touched" (click)="touching(false, ind)"> Środowisko Produkcyjne </div>
+            <div *ngIf="card.testUrl" [class.selected]="dirtyCard.touched" (click)="touching(true, ind)"> Środowisko Testowe </div>
+          </div>
+          <div style="display: flex; align-items: end;">
+            <p class="upper-text">{{ card.name }} </p>
+            <div class="tag-container">
+                <div *ngFor="let tag of card.envAppTagsDto; index as ind_n" >
+                    <p > {{ tag.name }} </p>
+                </div>
+            </div>
+          </div>
+          <p>{{ !dirtyCard.touched ? card.prodUrl : card.testUrl}}</p>
+          <p>{{ !dirtyCard.touched ? card.prodComment : card.testComment }}</p>
+        </div>
+  
+        <div *ngIf="isUserAuthenticated">
+          <button mat-icon-button >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteContact(card)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </section>
+  

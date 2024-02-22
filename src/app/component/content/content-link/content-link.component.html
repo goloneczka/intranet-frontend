@@ -1,27 +1,31 @@
 <div *ngIf="isUserAuthenticated">
     <div style="display: inline-flex; justify-content: space-between; width: 100%;">
         <div class="button-row">
+            <button mat-raised-button (click)="addEnv()" style="margin-left: 5px; background-color: #A89985;">Nowa Aplikacja</button>
+            <button mat-raised-button (click)="sortingEnv()" style="margin-left: 5px; background-color: #A89985;">Sortowanie</button>
         </div>
         <div class="button-row"> 
             <button mat-raised-button (click)="addContact()" style="margin-left: 5px; background-color: #A89985;">Nowy Kontakt</button>
             <button mat-raised-button (click)="sortingContacts()" style="margin-left: 5px; background-color: #A89985;">Sortowanie</button>
-          </div>
+        </div>
     </div>
 
     <mat-divider style="margin-bottom: 5px;"/>
 
     <div id="admin-components">
-      <app-new-contact [contacts$]="contacts$" (addedEvent)="reRender()"/>
-      <app-sorting-contacts [contacts$]="contacts$" (contactsChanged)="reRender()"/>
+      <app-new-env-app [applications$]="envApps$" (addedEvent)="reRenderApps()" />
+      <app-sorting-env-app [applications$]="envApps$" (applicationsChanged)="reRenderApps()"/>
+      <app-new-contact [contacts$]="contacts$" (addedEvent)="reRenderContacts()"/>
+      <app-sorting-contacts [contacts$]="contacts$" (contactsChanged)="reRenderContacts()"/>
     </div>
 </div>
 
 <div class="link-container-flex">
     <div class="left">
-        <app-enviroment ></app-enviroment>
+        <app-enviroment [envApps$]="envApps$"></app-enviroment>
     </div >
 
     <div class="right">
-        <app-contact [contacts$]="contacts$"  (contactsChanged)="reRender()"></app-contact>
+        <app-contact [contacts$]="contacts$"  (contactsChanged)="reRenderContacts()"></app-contact>
     </div>
 </div>

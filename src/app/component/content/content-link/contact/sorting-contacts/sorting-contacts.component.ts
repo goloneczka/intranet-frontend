@@ -49,10 +49,11 @@ export class SortingContactsComponent {
         return it;
     }).filter(it => it !== null);
 
-    if(contactsToUpdate.length){{
+    if(contactsToUpdate.length){
       this.contactService.updateOrders(contactsToUpdate).subscribe(_ => {});    
       this.contactsChanged.emit();
-    }}
+      this.shouldDisplayForm(false);
+    }
   }
 
 }

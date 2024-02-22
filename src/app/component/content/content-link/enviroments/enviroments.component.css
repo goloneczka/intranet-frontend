@@ -1,0 +1,66 @@
+.button-row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  #admin-components > * {
+    margin: 15px 0 15px 0;
+  }
+
+  .contact-row {
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+.upper-text {
+  margin-bottom: 2px;
+  font-weight: bolder;
+  font-family: 'Merriweather';
+  margin-right: 10px;
+}
+
+.tag-container {
+    display: flex;
+  }
+
+.tag-container p {
+    margin: 4px; /* Remove default margin for p elements */
+  }
+
+.tag-container div {
+    margin-right: 10px; /* Adjust margin as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    background-color: #576E5E;
+  }
+
+.tag-container div:hover {
+    background-color: #3D4D40;
+  }
+
+.envs {
+    display: flex;
+  }
+
+.envs div {
+    padding-top: 8px;
+    padding-right: 5px;
+    font-size: smaller;
+    font-weight: bolder;
+    font-family: 'Roboto';
+    margin: 0 4px 2px 0;
+}
+
+.envs div.selected {
+  border-bottom: 2px solid #576E5E;
+}
+
+.envs div:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}

@@ -1,6 +1,7 @@
 export * from './post.service';
 export * from './employee.service';
 export * from './document.service';
+export * from './application.service';
 export * from './duty.service';
 export * from './authentication.service';
 export * from './pipe/filter-duty.pipe';

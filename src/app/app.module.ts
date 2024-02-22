@@ -34,6 +34,7 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
@@ -57,7 +58,9 @@ import {ContentHomeComponent, NewPostComponent,
 
 import {ContentLinkComponent, ContactComponent,
    EnviromentsComponent, NewContactComponent,
-  SortingContactsComponent, EditContactComponent} from './component/content/content-link';
+  SortingContactsComponent, EditContactComponent,
+  NewEnvAppComponent, EditEnvAppComponent,
+  SortingEnvAppComponent} from './component/content/content-link';
 
 import {RightNavParentComponent, DutyComponent,
   MonthlyCalendarComponent, DisplayPostDialogComponent} from './component/right-nav';
@@ -66,7 +69,7 @@ import {RightNavParentComponent, DutyComponent,
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
         BasicAuthInterceptor, SafeHtmlPipe, CreationTimeRepresentationPipe,
-        ContactService } from './service/index';
+        ContactService, ApplicationService } from './service/index';
 
 import { HeaderComponent } from './component/header/header.component';
 import { LoginComponent } from './component/login-component/login.component';
@@ -120,7 +123,10 @@ import { FooterComponent } from './component/footer/footer.component';
     EnviromentsComponent,
     NewContactComponent,
     SortingContactsComponent,
-    EditContactComponent
+    EditContactComponent,
+    NewEnvAppComponent,
+    EditEnvAppComponent,
+    SortingEnvAppComponent
   ],
     imports: [
         CommonModule,
@@ -154,7 +160,8 @@ import { FooterComponent } from './component/footer/footer.component';
         MatProgressBarModule,
         NgxMatTimepickerModule,
         DragDropModule,
-        MatRadioModule
+        MatRadioModule,
+        MatTabsModule
     ],
   providers: [
     PostService,
@@ -164,6 +171,7 @@ import { FooterComponent } from './component/footer/footer.component';
     ContactService,
     MatSnackBar,
     AuthenticationService,
+    ApplicationService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     DatePipe
