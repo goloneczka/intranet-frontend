@@ -1,1 +1,70 @@
-<p>edit-env works!</p>
+<h2 mat-dialog-title>Edycja Kontakt/Link</h2>
+<div class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="editContact()">
+
+    <div class="form-container">
+        <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Nazwa</mat-label>
+            <input matInput placeholder="Nazwa Kontaktu ..." formControlName="envAppName">
+        </mat-form-field>
+    </div>
+
+    <div class="flex-envs">
+        <div class="left-env">
+            <div class="form-container">
+                <p> Aplikacja Produkcyjna</p>
+    
+                <mat-form-field style="max-height: 70px; width: 300px;">
+                    <mat-label>Url</mat-label>
+                    <input matInput placeholder="Kontakt ..." formControlName="prodUrl">
+                </mat-form-field>
+
+                <mat-form-field style="max-height: 70px; width: 300px;">
+                    <mat-label>Komentarz</mat-label>
+                    <input matInput placeholder="Kontakt ..." formControlName="prodComment">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="right-env">
+            <div class="form-container">
+                <p> Aplikacja Testowa</p>
+    
+                <mat-form-field style="max-height: 70px; width: 300px;">
+                    <mat-label>Url</mat-label>
+                    <input matInput placeholder="Kontakt ..." formControlName="testUrl">
+                </mat-form-field>
+
+                <mat-form-field style="max-height: 70px; width: 300px;">
+                    <mat-label>Komentarz</mat-label>
+                    <input matInput placeholder="Kontakt ..." formControlName="testComment">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <mat-form-field style="max-height: 70px">
+            <mat-label>W kolejności za</mat-label>
+            <mat-select formControlName="order">
+              <mat-option *ngFor="let envApp of envAppsShadow; let i = index" [value]="envApp.order" [ngClass]="{'first-option': i === 0}">
+                  {{envApp.envAppName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="max-height: 70px; width: 300px;">
+            <mat-label>Tagi</mat-label>
+            <input matInput placeholder="Rozdzielone znakiem ;" formControlName="tags">
+        </mat-form-field>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cofnij</button>
+        <button mat-button [disabled]="!form.valid" type="submit">Zapisz</button>
+    </mat-dialog-actions>
+
+  </form>
+</div>
+
+

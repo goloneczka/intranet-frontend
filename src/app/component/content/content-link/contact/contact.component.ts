@@ -14,7 +14,7 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 export class ContactComponent {
 
   @Input()
-  contacts$ : Observable<Contact[]> = of([]);
+  contacts : Contact[] = [];
   @Output()
   contactsChanged = new EventEmitter<void>();
 
@@ -32,11 +32,10 @@ export class ContactComponent {
   }
 
   openDialogEdit(contactToEdit: Contact) {
-    this.contacts$.subscribe(data => {
-      const contacts = data
+      const contacts = this.contacts
         .filter(it => it.contactName !== contactToEdit.contactName)
         .map(it => {
-          it.orderContact = it.orderContact > contactToEdit.orderContact ? it.orderContact-- : it.orderContact;
+          it.orderContact = it.orderContact > contactToEdit.orderContact ? --it.orderContact : it.orderContact;
           return it;
         });
 
@@ -52,7 +51,6 @@ export class ContactComponent {
           this.contactsChanged.emit();
         }
       });
-    })
   }
 
 }

@@ -12,7 +12,7 @@ import { ContactService } from 'src/app/service';
 export class SortingContactsComponent {
 
   @Input()
-  contacts$ : Observable<Contact[]> = of([]);
+  contacts : Contact[] = [];
   @Output()
   contactsChanged = new EventEmitter<void>();
   
@@ -22,16 +22,12 @@ export class SortingContactsComponent {
   constructor(private contactService: ContactService) {}
   
   ngOnChanges(): void {
-    this.contacts$.subscribe(data => {
-      this.contactsShadow = data?.map(({contactName, orderContact}) => ({contactName, orderContact}));
-    });
+    this.contactsShadow = this.contacts?.map(({contactName, orderContact}) => ({contactName, orderContact}));
   }
 
   shouldDisplayForm(val : boolean) {
     if(!val) {
-      this.contacts$.subscribe(data => {
-        this.contactsShadow = data?.map(({contactName, orderContact}) => ({contactName, orderContact}));
-      });
+        this.contactsShadow = this.contacts?.map(({contactName, orderContact}) => ({contactName, orderContact}));
     }
     this.shouldComponentBeRender = val;
   }

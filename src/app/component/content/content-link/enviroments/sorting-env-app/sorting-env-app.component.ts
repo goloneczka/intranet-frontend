@@ -12,7 +12,7 @@ import { ApplicationService } from 'src/app/service';
 export class SortingEnvAppComponent {
   
   @Input()
-  applications$ : Observable<EnvApplication[]> = of([]);
+  applications : EnvApplication[] = [];
   @Output()
   applicationsChanged = new EventEmitter<void>();
   
@@ -22,16 +22,12 @@ export class SortingEnvAppComponent {
   constructor(private applicationService: ApplicationService) {}
   
   ngOnChanges(): void {
-    this.applications$.subscribe(data => {
-      this.applicationsShadow = data?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
-    });
+      this.applicationsShadow = this.applications?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
   }
 
   shouldDisplayForm(val : boolean) {
     if(!val) {
-      this.applications$.subscribe(data => {
-        this.applicationsShadow = data?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
-      });
+        this.applicationsShadow = this.applications?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
     }
     this.shouldComponentBeRender = val;
   }

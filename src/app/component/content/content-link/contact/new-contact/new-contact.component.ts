@@ -13,7 +13,7 @@ import { ContactService } from 'src/app/service/contact.service';
 export class NewContactComponent {
 
   @Input()
-  contacts$ : Observable<Contact[]> = of([]);
+  contacts : Contact[] = [];
   @Output()
   addedEvent = new EventEmitter<void>();
 
@@ -35,13 +35,11 @@ export class NewContactComponent {
   }
 
   ngOnChanges(): void {
-    this.contacts$.subscribe(data => {
-      this.contactsShadow = cloneDeep(data);
+      this.contactsShadow = cloneDeep(this.contacts);
       this.contactsShadow.forEach(it => it.orderContact++);
       this.contactsShadow.unshift({
         contactName: 'Jako Pierwsza', orderContact: 1
       });
-    });
   }
 
   shouldDisplayForm(val : boolean) {

@@ -13,19 +13,27 @@
     <mat-divider style="margin-bottom: 5px;"/>
 
     <div id="admin-components">
-      <app-new-env-app [applications$]="envApps$" (addedEvent)="reRenderApps()" />
-      <app-sorting-env-app [applications$]="envApps$" (applicationsChanged)="reRenderApps()"/>
-      <app-new-contact [contacts$]="contacts$" (addedEvent)="reRenderContacts()"/>
-      <app-sorting-contacts [contacts$]="contacts$" (contactsChanged)="reRenderContacts()"/>
+        <div *ngIf="envApps$ | async as envApps">
+            <app-sorting-env-app [applications]="envApps" (applicationsChanged)="reRenderApps()"/>
+            <app-new-env-app [applications]="envApps" (addedEvent)="reRenderApps()" />
+        </div>
+        <div *ngIf="contacts$ | async as contacts">
+            <app-new-contact [contacts]="contacts" (addedEvent)="reRenderContacts()"/>
+            <app-sorting-contacts [contacts]="contacts" (contactsChanged)="reRenderContacts()"/>
+        </div>
     </div>
 </div>
 
 <div class="link-container-flex">
     <div class="left">
-        <app-enviroment [envApps$]="envApps$"></app-enviroment>
+        <div *ngIf="envApps$ | async as envApps">
+            <app-enviroment [envApps]="envApps" (envAppsChanged)="reRenderApps()"></app-enviroment>
+        </div>
     </div >
 
     <div class="right">
-        <app-contact [contacts$]="contacts$"  (contactsChanged)="reRenderContacts()"></app-contact>
+        <div *ngIf="contacts$ | async as contacts">
+            <app-contact [contacts]="contacts"  (contactsChanged)="reRenderContacts()"></app-contact>
+        </div>
     </div>
 </div>

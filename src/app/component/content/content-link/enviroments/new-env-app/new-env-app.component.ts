@@ -20,7 +20,7 @@ export class NewEnvAppComponent {
   addedEvent = new EventEmitter<void>();
 
   @Input()
-  applications$ : Observable<EnvApplication[]> = of([]);
+  applications : EnvApplication[] = [];
 
   constructor(private fb: FormBuilder,
     private applicationService: ApplicationService
@@ -38,12 +38,10 @@ export class NewEnvAppComponent {
  }
 
   ngOnChanges(): void {
-    this.applications$.subscribe(data => {
-      this.appsShadow = data?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
-      this.appsShadow.forEach(it => it.order++);
-      this.appsShadow.unshift({
-        envAppName: 'Jako Pierwsza', order: 1
-      });
+    this.appsShadow = this.applications?.map(({name, orderNumber}) => ({envAppName: name, order: orderNumber}));
+    this.appsShadow.forEach(it => it.order++);
+    this.appsShadow.unshift({
+      envAppName: 'Jako Pierwsza', order: 1
     });
   }
 
