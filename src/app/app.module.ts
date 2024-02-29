@@ -41,7 +41,7 @@ import {LeftNavComponent} from './component/left-nav/left-nav.component';
 
 import { ContentDocumentComponent, NewDocumentDialogComponent,
   EditDocumentGroupDialogComponent, NewDocumentGroupComponent,
-  SortingDialogComponent } from './component/content/content-document/index';
+  SortingDocumentComponent, EditDocumentDialogComponent } from './component/content/content-document/index';
 
 import {ContentDutyComponent, DailDutyListComponent,
   DutyAcceptanceComponent, EditDutyTypeComponent,
@@ -94,7 +94,7 @@ import { FooterComponent } from './component/footer/footer.component';
     LoginComponent,
     MainPageComponent,
     NewDocumentGroupComponent,
-    SortingDialogComponent,
+    SortingDocumentComponent,
     EditDocumentGroupDialogComponent,
     NewDocumentDialogComponent,
     NewPostComponent,
@@ -126,7 +126,8 @@ import { FooterComponent } from './component/footer/footer.component';
     EditContactComponent,
     NewEnvAppComponent,
     EditEnvAppComponent,
-    SortingEnvAppComponent
+    SortingEnvAppComponent,
+    EditDocumentDialogComponent
   ],
     imports: [
         CommonModule,

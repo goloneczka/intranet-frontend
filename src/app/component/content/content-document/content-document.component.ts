@@ -5,9 +5,10 @@ import {Document, DocumentGroup} from "../../../model/document";
 import {LocalStorageService} from "./../../../service/local-storage.service";
 import { NewDocumentGroupComponent } from './new-document-group/new-document-group.component';
 import { MatDialog } from '@angular/material/dialog';
-import { SortingDialogComponent } from './sorting-dialog/sorting-dialog.component';
+import { SortingDocumentComponent } from './sorting-document/sorting-document.component';
 import { EditDocumentGroupDialogComponent } from './edit-document-group-dialog/edit-document-group-dialog.component';
 import { NewDocumentDialogComponent } from './new-document-dialog/new-document-dialog.component';
+import { EditDocumentDialogComponent } from './edit-document-dialog/edit-document-dialog.component';
 
 @Component({
   selector: 'app-content-document',
@@ -18,6 +19,9 @@ export class ContentDocumentComponent {
 
   @ViewChild(NewDocumentGroupComponent)
   documentGroupChild!: NewDocumentGroupComponent;
+
+  @ViewChild(SortingDocumentComponent)
+  sortingDocumentComponent!: SortingDocumentComponent;
 
   documents$: Observable<Document[]> = of([]);
   docTypes: DocumentGroup[] = [];
@@ -35,7 +39,7 @@ export class ContentDocumentComponent {
     this.documentService.getDocumentData(fileName).subscribe(data => {
         const blob = new Blob([data], { type: 'application/pdf' });
         window.open(URL.createObjectURL(blob), '_blank');
-      })
+      });
   }
 
   addGroup() {
@@ -54,6 +58,11 @@ export class ContentDocumentComponent {
     });
   }
 
+  reRender() {
+    this.documents$ = this.documentService.getDocuments();
+    this.initDocumentGroups();
+  }
+
   private initDocumentGroups(){
     this.documentService.getDocumentTypes().subscribe(docTypes => {
       docTypes.push({'topic': '', 'order': docTypes.length+1 });
@@ -62,17 +71,7 @@ export class ContentDocumentComponent {
   }
 
   openDialogSorting() {
-    const dialogRef = this.dialog.open(SortingDialogComponent,
-       {data: this.docTypes, minWidth: '500px', minHeight:'200px', disableClose: true}
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result?.length){
-        this.documentService.saveDocumentOrderTypes(result).subscribe(_ => {
-          this.initDocumentGroups();
-        });
-      }
-    });
+    this.sortingDocumentComponent.shouldDisplayForm(true);
   }
 
   openDialogEdit(groupToEdit: DocumentGroup) {
@@ -90,9 +89,33 @@ export class ContentDocumentComponent {
     });
   }
 
+  openDialogEditDoc(doc: Document, event: Event) {
+    event.stopPropagation();
+
+    const dialogRef = this.dialog.open(EditDocumentDialogComponent, {
+      data: {document: doc, documentGroups: this.docTypes},
+      minWidth: '700px',
+      minHeight:'300px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.documents$ = this.documentService.getDocuments();
+      }
+    });
+  }
+
+  deleteDoc(doc: Document, event: Event) {
+    event.stopPropagation();
+    this.documentService.deleteDocument(doc.fileName).subscribe(_ => {
+      this.documents$ = this.documentService.getDocuments();
+    });
+  }
+
   addDocument(docGrupe : string) {
     const dialogRef = this.dialog.open(NewDocumentDialogComponent,
-      {data: docGrupe, minWidth: '500px', minHeight:'200px', disableClose: true}
+      {data: docGrupe, minWidth: '700px', minHeight:'200px', disableClose: true}
    );
 
    dialogRef.afterClosed().subscribe(result => {

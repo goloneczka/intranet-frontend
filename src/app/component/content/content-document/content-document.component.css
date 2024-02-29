@@ -8,10 +8,7 @@ mat-list-item:nth-child(odd) {
   width: 85%; /* Make the parent component take up 100% of available space */
 }
 
-.stylize-center-item {
-  margin: 0;
-  font-style: oblique;
-}
+
 
 .button-row {
   margin: 5px 0 5px 0;
@@ -27,15 +24,42 @@ mat-list-item:nth-child(odd) {
 
 .mat-icon { 
   /* override angular class */
-  vertical-align: middle;
-}
-
-.post-footer {
-  font-size: 0.8em;
-  color: #888;
-  text-align: end;
+  /* vertical-align: middle; */
 }
 
 #admin-components > * {
   margin: 15px 0 15px 0;
+}
+
+.doc-card {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+  margin: 5px;
+  cursor: pointer;
+  min-height: 50px;
+}
+
+.doc-card:hover {
+  background-color: #EEEFF2;
+}
+
+.doc-header {
+  font-size: 1.1em;
+  font-family: 'Merriweather';
+  margin: 4px 0 4px 0;
+}
+
+.doc-under-head {
+  font-size: 0.9em;
+  font-family: 'Roboto';
+  margin: 2px 0 2px;
+}
+
+.doc-date {
+  font-size: 0.9em;
+  font-family: 'Merriweather';
+  margin: 0;
 }

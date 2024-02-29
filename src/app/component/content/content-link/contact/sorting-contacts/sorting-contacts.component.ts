@@ -46,9 +46,10 @@ export class SortingContactsComponent {
     }).filter(it => it !== null);
 
     if(contactsToUpdate.length){
-      this.contactService.updateOrders(contactsToUpdate).subscribe(_ => {});    
-      this.contactsChanged.emit();
-      this.shouldDisplayForm(false);
+      this.contactService.updateOrders(contactsToUpdate).subscribe(_ => {
+        this.contactsChanged.emit();
+        this.shouldDisplayForm(false);
+      });    
     }
   }
 

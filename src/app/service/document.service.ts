@@ -5,7 +5,6 @@ import {Document, DocumentGroup, DocumentToSave} from "../model/document";
 
 @Injectable()
 export class DocumentService {
-  
 
   private DOCUMENT_URL = environment.API_URL + '/document';
   private DOCUMENT_DATA_URL = environment.API_URL + '/document-data';
@@ -33,16 +32,26 @@ export class DocumentService {
     return this.http.get(this.DOCUMENT_DATA_URL, {params: queryParams, responseType: 'blob'});
   }
 
+  deleteDocument(fileName: string) {
+    return this.http.delete<void>(`${this.DOCUMENT_URL}/${fileName}`);
+  }
+
+  edit(document: DocumentToSave, currentFileName: string) {
+    let queryParams = new FormData();
+    queryParams.append('pdfFile', document.data);
+    queryParams.append('comment',  document.comment);
+    queryParams.append('topic', document.topic);
+    queryParams.append('fileName', document.fileName);
+    
+    return this.http.put<void>(`${this.DOCUMENT_URL}/${currentFileName}`, queryParams);
+  }
+
   public getDocumentTypes() {
     return this.http.get<DocumentGroup[]>(this.DOCUMENT_GROUP_URL);
   }
 
   public saveDocumentOrderTypes(groups : DocumentGroup[]) {
-    const groupsCopy: DocumentGroup[] = [...groups]
-    if(groupsCopy[groupsCopy.length-1].topic == ''){
-      groupsCopy.pop();
-    }
-    return this.http.post<void>(this.DOCUMENT_GROUP_ORDER_URL, groupsCopy);
+    return this.http.post<void>(this.DOCUMENT_GROUP_ORDER_URL, groups);
   }
 
   public saveDocumentType(newGroup: DocumentGroup) {

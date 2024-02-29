@@ -10,6 +10,7 @@
 
     <div id="admin-components">
       <app-new-document-group [docTypes]="docTypes" (newDocumentGroupEvent)="addDocumentGroup($event)" />
+      <app-sorting-document [groupsData]="docTypes"  (groupsChanged)="reRender()"/>
     </div>
   </section>
 
@@ -17,16 +18,17 @@
     <p> no documents to display !</p>
   </div>
 
-  <div *ngFor="let docType of docTypes">
+  <div *ngFor="let docType of docTypes" style="margin: 10px 0 20px;">
     <div class="center-align">
-      <div>
-        {{docType.topic}}
+      <div style="display: flex; align-items: center;">
+        <p class="doc-header" style="font-weight: bold; "> {{docType.topic + (docType.topic.length ? ':' : '')}} </p>
         <span *ngIf="isUserAuthenticated" >
           <button mat-icon-button (click)="addDocument(docType.topic)" >
-            <mat-icon>insert_drive_file</mat-icon>
+            <mat-icon>add_circle_outline</mat-icon>
           </button>
         </span>
       </div>
+
       <div *ngIf="isUserAuthenticated && docType.topic">
         <button mat-icon-button (click)="openDialogEdit(docType)">
           <mat-icon>edit</mat-icon>
@@ -36,14 +38,29 @@
         </button>
       </div>
     </div> 
-    
-    <mat-nav-list>
-      <mat-list-item *ngFor="let doc of documents | FilterDocument : docType.topic" (click)="getDocumentData(doc.fileName)">
-        <h3 matListItemTitle style="font-weight: bold">{{ doc.fileName }} </h3>
-        <p matListItemLine class="stylize-center-item"> {{doc.comment}}</p>
-        <p matListItemLine class="post-footer"> {{(doc.creator?.length) ? (doc.creator + ',') : ('')}} {{doc.creationTime | date: 'd/M/yyyy, H:mm'}} </p>
-      </mat-list-item>
-    </mat-nav-list>
+
+    <div style="background-color: #E0D8CC; padding: 1px; border-radius: 5px; border: #D2C4B6 solid;" >
+      <div *ngFor="let doc of documents | FilterDocument : docType.topic">
+        <div (click)="getDocumentData(doc.fileName)" class="doc-card">
+          <div>
+            <p class="doc-header"> {{ doc.fileName }}</p>
+            <p class="doc-under-head"> {{doc.comment}} </p>
+          </div>
+          <div style="display: inline-flex; align-items: center;">
+            <p class="doc-date"> {{doc.creationTime | date: 'd-M-yyyy, H:mm'}}</p>
+            <div *ngIf="isUserAuthenticated " >
+              <button mat-icon-button (click)="openDialogEditDoc(doc, $event)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteDoc(doc, $event)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

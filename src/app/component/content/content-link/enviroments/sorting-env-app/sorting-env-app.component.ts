@@ -46,9 +46,10 @@ export class SortingEnvAppComponent {
     }).filter(it => it !== null);
 
     if(applicationsToUpdate.length){{
-      this.applicationService.updateEnvAppsOrder(applicationsToUpdate).subscribe(_ => {});    
-      this.applicationsChanged.emit();
-      this.shouldDisplayForm(false);
+      this.applicationService.updateEnvAppsOrder(applicationsToUpdate).subscribe(_ => {
+        this.applicationsChanged.emit();
+        this.shouldDisplayForm(false);
+      });    
     }}
   }
 }
