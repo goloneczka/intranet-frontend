@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Edycja Dokumentu</h2>
+<div class="mat-typography">
+  <form [formGroup]="documentForm" (ngSubmit)="editDocument()">
+
+    <div class="form">
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Nazwa</mat-label>
+                <input matInput placeholder="Nazwa Dokumentu ..." formControlName="fileName">
+            </mat-form-field>
+            
+            <span class="file-form">
+                <button type="button" mat-raised-button (click)="fileInput.click()" style="width: 130px;">Choose File</button>
+                <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+                <p style="font-size: x-small; color: #888;">{{(inputFileName.length>30)? (inputFileName | slice:0:30)+'...':(inputFileName)}}</p>
+            </span>
+        </div>
+
+        <div class="row">
+            <mat-form-field style="max-height: 70px; width: 300px;">
+                <mat-label>Komentarz</mat-label>
+                <input matInput placeholder="Komentarz ..." formControlName="comment">
+            </mat-form-field>
+
+            <mat-form-field style="max-height: 70px">
+                <mat-label>Grupa</mat-label>
+                <mat-select formControlName="topic">
+                <mat-option *ngFor="let doc of documentGroupsShadow; let i = index" [value]="doc.topic" >
+                    {{doc.topic}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cofnij</button>
+        <button mat-button [disabled]="!documentForm.valid" type="submit">Zapisz</button>
+    </mat-dialog-actions>
+
+  </form>
+</div>
+
+
