@@ -25,12 +25,21 @@
   .card-display {
     background-color: #D2C4B6;
     display: inline-block;
-    margin: 10px;
+    margin: 5px;
     width: 240px;
     height: 80px;
+    overflow: auto;
   }
 
   .card-row {
     display: flex;
     justify-content: space-between;
+  }
+
+  .mat-mdc-card-header {
+    padding: 10px 10px ;
+  }
+
+  .mat-mdc-card-title {
+    line-height: 23px;
   }

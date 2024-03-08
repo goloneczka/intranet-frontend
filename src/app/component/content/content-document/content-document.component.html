@@ -21,7 +21,7 @@
   <div *ngFor="let docType of docTypes" style="margin: 10px 0 20px;">
     <div class="center-align">
       <div style="display: flex; align-items: center;">
-        <p class="doc-header" style="font-weight: bold; "> {{docType.topic + (docType.topic.length ? ':' : '')}} </p>
+        <p class="doc-header" > {{docType.topic + (docType.topic.length ? ':' : '')}} </p>
         <span *ngIf="isUserAuthenticated" >
           <button mat-icon-button (click)="addDocument(docType.topic)" >
             <mat-icon>add_circle_outline</mat-icon>

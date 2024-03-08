@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team } from 'src/app/model/employee';
 
@@ -14,6 +14,7 @@ export class NewEmployeeTeamComponent {
   teamGroupForm: FormGroup;
 
   @Output() newTeamEvent = new EventEmitter<Team>();
+  teamArrayShadow: Set<String> = new Set();
 
 
   constructor(private fb: FormBuilder) {
@@ -21,6 +22,11 @@ export class NewEmployeeTeamComponent {
       name: ['', [Validators.required]],
       parentTeam: ['']
     });
+  }
+
+  ngOnChanges(_: SimpleChanges): void {
+    const teamArray = ['', ...this.teamArrayInput];
+    this.teamArrayShadow = new Set(teamArray);
   }
 
   shouldDisplayForm(val: boolean) {

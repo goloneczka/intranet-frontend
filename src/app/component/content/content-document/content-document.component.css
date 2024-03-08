@@ -8,8 +8,6 @@ mat-list-item:nth-child(odd) {
   width: 85%; /* Make the parent component take up 100% of available space */
 }
 
-
-
 .button-row {
   margin: 5px 0 5px 0;
   display: flex;
@@ -22,10 +20,6 @@ mat-list-item:nth-child(odd) {
   align-items: center;
 }
 
-.mat-icon { 
-  /* override angular class */
-  /* vertical-align: middle; */
-}
 
 #admin-components > * {
   margin: 15px 0 15px 0;

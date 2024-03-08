@@ -1,0 +1,10 @@
+.main-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.empty-element::before {
+    content: 'Nadrzędny';
+    font-style: italic;
+  }

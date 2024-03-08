@@ -35,6 +35,7 @@ import {HTTP_INTERCEPTORS,  HttpClientModule} from "@angular/common/http";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
@@ -51,7 +52,9 @@ import {ContentDutyComponent, DailDutyListComponent,
 
 import {ContentEmployeeComponent, EditEmployeeTeamDialogComponent,
   EmployeeDetailsComponent, NewEmployeeComponent,
-  NewEmployeeTeamComponent} from './component/content/content-employee/index';
+  NewEmployeeTeamComponent, EditTeamComponent, 
+  EditTeamDisplayModeComponent, EditTeamEditModeComponent,
+  EmployeeMigrationComponent } from './component/content/content-employee/index';
 
 import {ContentHomeComponent, NewPostComponent,
   EditPostComponent, DisplayPostComponent} from './component/content/content-home';
@@ -127,7 +130,11 @@ import { FooterComponent } from './component/footer/footer.component';
     NewEnvAppComponent,
     EditEnvAppComponent,
     SortingEnvAppComponent,
-    EditDocumentDialogComponent
+    EditDocumentDialogComponent,
+    EditTeamComponent, 
+    EditTeamDisplayModeComponent,
+    EditTeamEditModeComponent,
+    EmployeeMigrationComponent
   ],
     imports: [
         CommonModule,
@@ -162,7 +169,8 @@ import { FooterComponent } from './component/footer/footer.component';
         NgxMatTimepickerModule,
         DragDropModule,
         MatRadioModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule
     ],
   providers: [
     PostService,

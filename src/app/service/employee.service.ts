@@ -30,6 +30,14 @@ export class EmployeeService {
   public deleteEmployee(email: string) {
     return this.http.delete<void>(`${this.EMPLOYEE_URL}/${email}`);
   }
+
+  public deleteTeam(name: string) {
+    return this.http.delete<void>(`${this.TEAM}/${name}`);
+  }
+
+  public updateTeam(team: Team, oldName : string) {
+    return this.http.put<void>(`${this.TEAM}/${oldName}`, team);
+  }
   
 
   public saveTeam(team: Team) {
@@ -44,6 +52,12 @@ export class EmployeeService {
     const treeSearch = new EmployeeTreeSearch(teamName);
     treeSearch.find(tree);
     return treeSearch.response;
+  }
+
+  gesTeamParentInTree(teamName: string, tree: TeamTree) : string  {
+    const treeSearch = new EmployeeTreeSearch(teamName);
+    treeSearch.findParentName(tree, null);
+    return treeSearch.response[0] || '';
   }
 }
 
@@ -71,6 +85,16 @@ class EmployeeTreeSearch {
   private prepareResponseTeamNames(tree: TeamTree) {
     this.response.push(tree.team.teamName);
     tree.children.forEach(it => this.prepareResponseTeamNames(it));
+  }
+
+  findParentName(tree: TeamTree, parentTree: TeamTree | null) {
+    if(this.nameToFind === tree.team?.teamName) {
+      this.response = [parentTree?.team?.teamName || ''];
+      this.searchFlag = false;
+    }
+    if(this.searchFlag) {
+      tree.children.forEach(it => this.findParentName(it, tree));
+    }
   }
 
 

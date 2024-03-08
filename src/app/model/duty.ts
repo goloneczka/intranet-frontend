@@ -50,7 +50,7 @@ export interface DutyListInType {
 
   dutyType: DutyType
   dutyList: Duty[]
-  fulfill: number 
+  fulfill: number
 }
 
 

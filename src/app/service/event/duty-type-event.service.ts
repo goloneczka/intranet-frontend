@@ -25,9 +25,7 @@ export class DutyTypeEventService {
     this.sendMessageDutyType(dutyType, 'ADD');
   }
 
-
   getMessage(): Observable<DutyTypeMessage | null> {
     return this.messageSource.asObservable();
   }
-  
 }

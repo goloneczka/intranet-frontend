@@ -23,7 +23,6 @@ export class EditEmployeeTeamDialogComponent {
     this.result = this.employeeShadow = {...dataToEditEmployeeTeam.emp};
 
     const teamArray = [...this.dataToEditEmployeeTeam.teamNames];
-    teamArray.splice(0, 1);
     this.teamNamesShadow = new Set(teamArray);
 
     this.employeeGroupForm = this.fb.group({

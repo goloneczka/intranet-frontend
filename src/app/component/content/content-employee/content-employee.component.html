@@ -4,6 +4,8 @@
     <div class="button-row"> 
       <button mat-raised-button (click)="addEmployee()" style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
       <button mat-raised-button (click)="addTeam()" style="margin-left: 5px; background-color: #A89985;">Nowy Zespół</button>
+      <button mat-raised-button (click)="editTeam()" style="margin-left: 5px; background-color: #A89985;">Edytuj Zespoły</button>
+      <button mat-raised-button style="margin-left: 5px; background-color: #A89985;">Migracja</button>
     </div>
 
     <mat-divider style="margin-bottom: 5px;"/>
@@ -11,18 +13,14 @@
     <div id="admin-components">
       <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" />
       <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)"/>
+      <app-edit-team [teamTreeInput]="teamTree" ></app-edit-team>
     </div>
-
   </section>
 
-  <div *ngIf="!filteredEmployees.length">
-    <p> no employees to display !</p>
-  </div>
-
   <section class="flex-container">
-    <div>
+    <p class="emp-header">
       Wyszukaj Współpracowników
-    </div>
+    </p>
     <div>
       <form [formGroup]="filterForm" class="filter-form">
         <mat-form-field class="filter-form-item">
@@ -36,35 +34,49 @@
             <mat-option *ngFor="let team of teamNames" [value]="team" >
                 {{team}}
             </mat-option>
-        </mat-select>
+          </mat-select>
+          <button *ngIf="filterForm.controls['teamName'].value"
+                 matSuffix
+                 mat-icon-button
+                 type="button"
+                 aria-label="Clear"
+                 (click)="filterForm.controls['teamName'].setValue(null); $event.stopPropagation()">
+           <mat-icon>close</mat-icon>
+         </button>
         </mat-form-field>
       </form>
     </div>
   </section>
 
-  <table>
-    <tr *ngFor="let emp of filteredEmployees" >
-      <div class="center-align">
-        <div>
-          <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
-            <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
-               {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}
-            </div>
-            <div class="text-emp">
-               {{ emp.firstName }} {{ emp.lastName }}, {{ emp.title }}
-            </div>
-          </td>
+  <div style="background-color: #E0D8CC; padding: 1px; border-radius: 5px; border: #D2C4B6 solid; overflow: auto; max-height: 700px;" >
+    <div *ngIf="loading" class="spinner-overlay">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+    <table>
+      <tr *ngFor="let emp of filteredEmployees" >
+        <div class="center-align">
+          <div>
+            <td class="row-emp-item" [ngClass]="emp.major ? 'major-emp' : 'empty-space'">
+              <div class="circle-with-text-gpt" (click)="openDialogDetails(emp)">
+                {{ (emp.firstName | slice:0:1) }}{{ (emp.lastName | slice:0:1) }}
+              </div>
+              <div class="text-emp">
+                {{ emp.firstName }} {{ emp.lastName }}, {{ emp.title }}
+              </div>
+            </td>
+          </div>
+          <div *ngIf="isUserAuthenticated">
+            <button mat-icon-button (click)=openDialogEdit(emp)>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)=deleteEmployee(emp)>
+              <mat-icon>remove_circle_outline</mat-icon>
+            </button>
+          </div>
         </div>
-        <div *ngIf="isUserAuthenticated">
-          <button mat-icon-button (click)=openDialogEdit(emp)>
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button (click)=deleteEmployee(emp)>
-            <mat-icon>remove_circle_outline</mat-icon>
-          </button>
-        </div>
-      </div>
-    </tr>
-  </table>
+      </tr>
+    </table>
+  </div>
+
 </div>
 

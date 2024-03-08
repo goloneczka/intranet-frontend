@@ -1,0 +1,33 @@
+<section *ngIf="shouldComponentBeRender">
+    
+    <div class="header">
+        <h1 style="font-family: 'Roboto'; margin-left: 20px;">Edycja istniejących zespołów</h1>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <div *ngIf="teams.length" style="width: 100%;">
+        <table style="width: 100%;">
+          <tr *ngFor="let team of teams; index as ind" style="margin-bottom: 15px;">
+            <div *ngIf="idsToEdit.includes(ind); then edit else display"></div>
+            <div>
+                <ng-template #edit>
+                    <app-edit-team-edit-mode [team]="team"  [teamNames]="teamNames" (editEvent)="displayOrEditView($event, ind)"/>
+                </ng-template>
+                <ng-template #display>
+                    <app-edit-team-display-mode [team]="team" (editEvent)="displayOrEditView($event, ind)"/>
+                </ng-template>
+            </div>
+          </tr>
+        </table>
+    </div>
+
+<div class="end-flex">
+    Zakończ edycje zespołów:
+    <button mat-icon-button (click)="shouldDisplayForm(false)">
+        <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+</div>
+
+</section>

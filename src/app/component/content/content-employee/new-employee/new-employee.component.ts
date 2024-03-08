@@ -34,7 +34,6 @@ export class NewEmployeeComponent implements OnChanges {
 
   ngOnChanges(_: SimpleChanges): void {
     const teamArray = [...this.teamArrayInput];
-    teamArray.splice(0, 1);
     this.teamArrayShadow = new Set(teamArray);
   }
 

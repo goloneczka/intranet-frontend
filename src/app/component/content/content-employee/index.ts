@@ -3,3 +3,7 @@ export * from './edit-employee-team-dialog/edit-employee-team-dialog.component';
 export * from './employee-details/employee-details.component';
 export * from './new-employee/new-employee.component';
 export * from './new-employee-team/new-employee-team.component';
+export * from './edit-team/edit-team.component';
+export * from './edit-team/edit-team-display-mode/edit-team-display-mode.component';
+export * from './edit-team/edit-team-edit-mode/edit-team-edit-mode.component';
+export * from './employee-migration/employee-migration.component'

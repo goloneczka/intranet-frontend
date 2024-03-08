@@ -1,0 +1,24 @@
+<section>
+    <div class="main-flex">
+        <form [formGroup]="form" (ngSubmit)="edit()">
+            <mat-form-field  style="width: 275px; margin-right: 20px;">
+                <mat-label>Nazwa Zespołu</mat-label>
+                <input matInput placeholder="Grupa" formControlName="teamName">
+            </mat-form-field>
+
+            <mat-form-field style="width: 275px;">
+                <mat-label>Zespół Nadrzędny</mat-label>
+                <mat-select formControlName="parentTeamName" [value]="this.team.parentTeamName">
+                    <mat-option *ngFor="let teamShadow of teamNamesShadow" [value]="teamShadow" [ngClass]="{'empty-element': teamShadow === ''}" >
+                        {{teamShadow}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+
+        <div>
+            <button mat-raised-button  (click)="edit()" style="margin-left: 5px; width: 75px;" [disabled]="!form.valid">Zapisz</button>
+            <button mat-raised-button (click)="sendEditEvent()" style="margin-left: 5px; ; width: 75px;" >Cofnij</button>
+        </div>
+    </div>
+</section>

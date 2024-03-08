@@ -6,10 +6,12 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, pairwise, startWith } from 'rxjs';
+import { Subscription, debounceTime, pairwise, startWith } from 'rxjs';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewEmployeeTeamComponent } from './new-employee-team/new-employee-team.component';
 import { EditEmployeeTeamDialogComponent } from './edit-employee-team-dialog/edit-employee-team-dialog.component';
+import { EditTeamComponent } from './edit-team/edit-team.component';
+import { EmployeeEventService } from 'src/app/service/event/employee-event.service';
 
 
 @Component({
@@ -23,19 +25,23 @@ export class ContentEmployeeComponent implements OnInit{
   newEmployeeChild!: NewEmployeeComponent;
   @ViewChild(NewEmployeeTeamComponent)
   newEmployeeTeamChild!: NewEmployeeTeamComponent;
+  @ViewChild(EditTeamComponent)
+  editTeamComponent!: EditTeamComponent;
 
   employees : Employee[] = [];
   filteredEmployees : Employee[] = [];
   teamNames : Set<String> = new Set();
-
   teamTree! : TeamTree;
   teamNamesToFilter : string[] = []; 
-
   filterForm: FormGroup;
-
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  loading : boolean = false;
+  empEventSubscription!: Subscription;
 
-  constructor(private employeeService: EmployeeService, public dialog: MatDialog, private fb: FormBuilder) {
+  constructor(private employeeService: EmployeeService,
+      public dialog: MatDialog,
+      private fb: FormBuilder,
+      private empEventService: EmployeeEventService) {
     this.filterForm = this.fb.group({
       name: [''],
       teamName: ['']
@@ -43,7 +49,7 @@ export class ContentEmployeeComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.initEmployees();
+    this.initEmployeesAndTeams();
 
     this.filterForm.valueChanges
       .pipe(
@@ -56,19 +62,35 @@ export class ContentEmployeeComponent implements OnInit{
           }
           this.filterData(next);
       });
-  }
 
-  private initEmployees() {
-    this.employeeService.getEmployees().subscribe(data => {
-      this.employees = this.filteredEmployees = data;
-      
-      this.employeeService.getTeamsTree().subscribe(data => {
-        this.teamTree = data;
-        this.teamNames = new Set(this.employeeService.gesNestedTeamsInTree('', this.teamTree).sort());
-      })
+    this.empEventSubscription = this.empEventService.getMessage().subscribe((_ : {operation: string}| null) => {
+      this.initEmployeesAndTeams();
+      this.filterForm.controls['name'].setValue('');
+      this.filterForm.controls['teamName'].setValue('');
     });
   }
 
+  private initEmployeesAndTeams() {
+    this.loading = true;
+    this.employeeService.getEmployees().subscribe(data => {
+      this.employees = data;
+      this.filterData(this.filterForm.value);
+      this.initTeamsPromise().then(_ => this.loading = false);
+    });
+  }
+
+  private initTeamsPromise() {
+    return new Promise<void>(resolve => {
+      this.employeeService.getTeamsTree().subscribe(data => {
+        this.teamTree = data;
+
+        const tempTeamNames = this.employeeService.gesNestedTeamsInTree('', this.teamTree).sort();
+        tempTeamNames.shift();
+        this.teamNames = new Set(tempTeamNames);
+        resolve();
+      });
+    });
+  }
 
   private filterData(filters: { name: string; teamName: string }) {
     this.filteredEmployees = this.employees.filter((item) => {
@@ -93,14 +115,14 @@ export class ContentEmployeeComponent implements OnInit{
     const dialogRef = this.dialog.open(EditEmployeeTeamDialogComponent, {
         data: {'emp': emp, 'teamNames': this.teamNames},
         minWidth: '800px',
-        minHeight:'500px',
+        minHeight:'400px',
         disableClose: true
       });
 
       dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.employeeService.updateEmployee(result).subscribe(_ => {
-            this.initEmployees();
+            this.initEmployeesAndTeams();
           });
         }
       });
@@ -109,28 +131,39 @@ export class ContentEmployeeComponent implements OnInit{
 
   deleteEmployee(empToDelete: Employee) {
     this.employeeService.deleteEmployee(empToDelete.email).subscribe(_ => {
-      this.initEmployees();
+      this.initEmployeesAndTeams();
+      this.filterForm.reset();
+      this.empEventService.sendMessageEmployeeDelete();
     })
   }
 
   addEmployee() {
-    this.newEmployeeChild.shouldDisplayForm(true);
+    this.initTeamsPromise().then(_ => this.newEmployeeChild.shouldDisplayForm(true));
   }
 
   saveEmployee(emp : Employee) {
     this.employeeService.saveEmployee(emp).subscribe(_ => {
-      this.initEmployees();
+      this.initEmployeesAndTeams();
     });
   }
 
   addTeam() {
-    this.newEmployeeTeamChild.shouldDisplayForm(true);
+    this.initTeamsPromise().then(_ => this.newEmployeeTeamChild.shouldDisplayForm(true));
+  }
+
+  editTeam() {
+    this.editTeamComponent.shouldDisplayForm(true);
   }
 
   saveTeam(team : Team) { 
     this.employeeService.saveTeam(team).subscribe(_ => {
-      this.initEmployees();
+      this.initTeamsPromise();
     });
   }
+
+  ngOnDestroy() {
+    this.empEventSubscription?.unsubscribe();
+}
+
 
 }
