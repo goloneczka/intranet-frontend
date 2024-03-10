@@ -11,6 +11,9 @@ export interface Employee {
   teamName: string
 }
 
+export interface EmployeeMail {
+  email: string
+}
 
 export interface Team {
   teamName: string

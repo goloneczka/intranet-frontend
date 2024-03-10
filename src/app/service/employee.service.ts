@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Employee,  Team,  TeamTree} from "../model/employee";
+import {Employee,  EmployeeMail,  Team,  TeamTree} from "../model/employee";
 
 @Injectable()
 export class EmployeeService {
-
+  
   private EMPLOYEE_URL = environment.API_URL + '/employee';
+  private EMPLOYEE_TEAM_URL = environment.API_URL + '/employee-by-team';
   private TEAM = environment.API_URL + '/team';
 
   constructor(private http: HttpClient) {}
@@ -17,6 +18,16 @@ export class EmployeeService {
 
   public getEmployee(email : string) {
     return this.http.get<Employee>(`${this.EMPLOYEE_URL}/${email}`);
+  }
+
+  getEmployeesByTeam(team: string) {
+    const queryParams = new HttpParams().append('team', team);
+    return this.http.get<Employee[]>(this.EMPLOYEE_TEAM_URL, {params: queryParams});
+  }
+
+  migrateEmployees(from: string, to: string, employeesToMigrate: EmployeeMail[]) {
+    const queryParams = new HttpParams().append('from', from).append('to', to);
+    return this.http.post<void>(this.EMPLOYEE_TEAM_URL, employeesToMigrate, {params: queryParams});
   }
 
   public saveEmployee(employee: Employee) {

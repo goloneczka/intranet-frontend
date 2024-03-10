@@ -33,6 +33,9 @@ export class EditTeamComponent {
 
   shouldDisplayForm(val : boolean) {
     this.shouldComponentBeRender = val; 
+    if(val){
+      this.idsToEdit = [];
+    }
   }
 
   displayOrEditView(event: {operation: string}, ind: number) {

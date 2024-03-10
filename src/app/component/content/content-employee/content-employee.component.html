@@ -5,7 +5,7 @@
       <button mat-raised-button (click)="addEmployee()" style="margin-left: 5px; background-color: #A89985;">Nowy Pracownik</button>
       <button mat-raised-button (click)="addTeam()" style="margin-left: 5px; background-color: #A89985;">Nowy Zespół</button>
       <button mat-raised-button (click)="editTeam()" style="margin-left: 5px; background-color: #A89985;">Edytuj Zespoły</button>
-      <button mat-raised-button style="margin-left: 5px; background-color: #A89985;">Migracja</button>
+      <button mat-raised-button (click)="openMigration()" style="margin-left: 5px; background-color: #A89985;">Migracja</button>
     </div>
 
     <mat-divider style="margin-bottom: 5px;"/>
@@ -13,6 +13,7 @@
     <div id="admin-components">
       <app-new-employee [teamArrayInput]="teamNames" (newEmployeeEvent)="saveEmployee($event)" />
       <app-new-employee-team [teamArrayInput]="teamNames" (newTeamEvent)="saveTeam($event)"/>
+      <app-employee-migration [teamArrayInput]="teamNames" (migrationDoneEvent)="onMigrationDoneEvent()"/>
       <app-edit-team [teamTreeInput]="teamTree" ></app-edit-team>
     </div>
   </section>
@@ -48,7 +49,7 @@
     </div>
   </section>
 
-  <div style="background-color: #E0D8CC; padding: 1px; border-radius: 5px; border: #D2C4B6 solid; overflow: auto; max-height: 700px;" >
+  <div style="background-color: #E0D8CC; padding: 1px; border-radius: 5px; border: #D2C4B6 solid; overflow: auto; max-height: 700px; margin-bottom: 20px;" >
     <div *ngIf="loading" class="spinner-overlay">
       <mat-spinner diameter="50"></mat-spinner>
     </div>

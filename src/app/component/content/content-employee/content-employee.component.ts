@@ -12,6 +12,7 @@ import { NewEmployeeTeamComponent } from './new-employee-team/new-employee-team.
 import { EditEmployeeTeamDialogComponent } from './edit-employee-team-dialog/edit-employee-team-dialog.component';
 import { EditTeamComponent } from './edit-team/edit-team.component';
 import { EmployeeEventService } from 'src/app/service/event/employee-event.service';
+import { EmployeeMigrationComponent } from './employee-migration/employee-migration.component';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class ContentEmployeeComponent implements OnInit{
   newEmployeeTeamChild!: NewEmployeeTeamComponent;
   @ViewChild(EditTeamComponent)
   editTeamComponent!: EditTeamComponent;
+  @ViewChild(EmployeeMigrationComponent)
+  employeeMigrationComponent!:EmployeeMigrationComponent
 
   employees : Employee[] = [];
   filteredEmployees : Employee[] = [];
@@ -161,9 +164,17 @@ export class ContentEmployeeComponent implements OnInit{
     });
   }
 
+  openMigration() {
+    this.initTeamsPromise().then(_ => this.employeeMigrationComponent.shouldDisplayForm(true));
+  }
+
   ngOnDestroy() {
     this.empEventSubscription?.unsubscribe();
-}
+  }
+
+  onMigrationDoneEvent() {
+    this.initEmployeesAndTeams();
+  }
 
 
 }

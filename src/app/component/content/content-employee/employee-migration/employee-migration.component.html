@@ -1,1 +1,52 @@
-<p>employee-migration works!</p>
+<section *ngIf="shouldComponentBeRender">
+    <div class="header">
+        <h3 style="font-family: 'Roboto'; margin-left: 20px;">Migracja pracowników między zespołami</h3>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <div [formGroup]="form" (ngSubmit)="update()">
+        <div style="width: 100%;justify-content: center;display: inline-flex">
+            <mat-form-field style="max-height: 70px; width: 200px; margin-right: 10px;">
+                <mat-label>Skąd</mat-label>
+                <mat-select formControlName="from" (selectionChange)="onSelectionFromChange($event)">
+                    <mat-option *ngFor="let team of teamArrayInput" [value]="team" >
+                        {{team}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="max-height: 70px; width: 200px;">
+                <mat-label>Dokąd</mat-label>
+                <mat-select formControlName="to">
+                    <mat-option *ngFor="let team of teamArrayInputShadow" [value]="team" >
+                        {{team}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+
+        <div class="form-container">
+            <div class="sort-list" >
+                <div *ngFor="let item of employees; let i = index" class="single-item" [ngClass]="{'selected-item': item.touched}" (click)="onClickEmployee(i)">
+                    {{ item.employee.firstName + ' ' + item.employee.lastName }}
+                </div>
+            </div>
+        </div>
+
+        <div class="end-flex">
+            Zapisz:
+            <button mat-icon-button (click)="update()" [disabled]="!form.valid">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+    <div class="end-flex">
+        Przerwij migracje pracowników:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+</section>
