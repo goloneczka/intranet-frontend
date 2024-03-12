@@ -11,17 +11,17 @@
     <div class="scheduler-container">
         <div class="header">
           <div class="cell"> Dzień / &nbsp;Dyżur </div>
-          <div class="cell pointer" *ngFor="let day of days; let i = index" (click)="toggleDay(day)" [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i)}">
-            <div style="font-weight: bolder;">{{ day.dayOfMonth }}</div>
-            <div style="font-weight: bolder;">{{ day.name }}</div>
+          <div class="cell pointer" *ngFor="let day of days; let i = index" (click)="toggleDay(day)" [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i), 'today': isToday(i)}">
+            <div style="font-family: 'Roboto'">{{ day.dayOfMonth }}</div>
+            <div style="font-family: 'Roboto'">{{ day.name }}</div>
           </div>
         </div>
       
         <div class="body">
           <div class="row" *ngFor="let res of resources">
-            <div class="res-column" style="font-weight: bolder;" >{{ res.shortcut.length ? res.shortcut : res.type.length < 5 ? res.type : res.type.substring(0,4).concat('.') }}</div>
+            <div class="res-column" style="font-family: 'Roboto'" >{{ res.shortcut.length ? res.shortcut : res.type.length < 5 ? res.type : res.type.substring(0,4).concat('.') }}</div>
             <div class="cell pointer" *ngFor="let day of days; let i = index"
-                (click)="toggleEvent(day, res)"  [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i), 'disable-cursor': shouldDisableCursor(i, res)}">
+                (click)="toggleEvent(day, res)"  [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i), 'disable-cursor': shouldDisableCursor(i, res), 'today': isToday(i)}">
                 <div >
                     <div *ngIf="hasDuty(day, res)">
                       <div *ngIf="isTotalDutyAssigned(day, res); else notTotalDuty" class="progres-flex">

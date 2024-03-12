@@ -47,7 +47,7 @@
             <p class="doc-under-head"> {{doc.comment}} </p>
           </div>
           <div style="display: inline-flex; align-items: center;">
-            <p class="doc-date"> {{doc.creationTime | date: 'd-M-yyyy, H:mm'}}</p>
+            <p class="doc-date"> {{doc.creationTime | date: 'd/M/yyyy, H:mm'}}</p>
             <div *ngIf="isUserAuthenticated " >
               <button mat-icon-button (click)="openDialogEditDoc(doc, $event)">
                 <mat-icon>edit</mat-icon>

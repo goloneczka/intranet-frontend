@@ -96,7 +96,7 @@ export class HorizontalSchedulerComponent {
 
   shouldDisableCursor(index : number, resource: DutyType) {
       const indexedDate = new Date(this.currentDate);
-      indexedDate.setDate(index+1);
+      indexedDate.setDate(index+2);
       return indexedDate < new Date() || this.isTotalDutyAssigned({dayOfMonth: index+1, name: ''}, resource);
   }
 
@@ -106,9 +106,20 @@ export class HorizontalSchedulerComponent {
     return WEEKEND_DAYS.includes(dayOfMonth.toUpperCase());
   }
 
+  isToday(index : number){
+    const today = new Date();
+    const indexedDateNumber = index+1;
+
+    return indexedDateNumber === today.getDate() &&
+      today.getMonth() === this.currentDate.getMonth() &&
+      today.getFullYear() === this.currentDate.getFullYear() 
+  }
+
   toggleEvent(day: CalendarDay, resource: DutyType) {
     const date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day.dayOfMonth);
-    if(date >= new Date() && !this.isTotalDutyAssigned(day, resource)){
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    if(date >= now && !this.isTotalDutyAssigned(day, resource)){
       this.newDutyEvent.emit({ resource: resource.type, date: date});
     }
   }
