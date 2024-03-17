@@ -1,0 +1,95 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 85%; /* Make the parent component take up 100% of available space */
+  }
+
+  .button-row {
+    margin: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  #admin-components > * {
+    margin: 15px 0 15px 0;
+  }
+  
+  
+  .header {
+    width: 100%;
+    background-color: #576E5E;
+    padding: 5px 0 5px 0;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row-emp-item {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    position: relative;
+  }
+  
+  .circle-with-text-gpt {
+    margin-left: 5px;
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 50%;
+    background-color: #576E5E; /* Change this color as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  
+  .text-emp{
+    font-family: 'Roboto';
+    margin-left: 15px;
+    flex: 1 0 90%;
+  }
+  
+  .center-align {
+    background-color: #fff;
+    padding: 1px;
+    margin: 2px;
+  }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 60%; /* Set your desired width here */
+    }
+
+    /* Set width for the second column */
+    th:nth-child(2),
+    td:nth-child(2) {
+        text-align: center;
+        width: 35%; /* Set your desired width here */
+    }
+
+    /* Set width for the third column */
+    th:nth-child(3),
+    td:nth-child(3) {
+        text-align: center;
+        width: 5%; /* Set your desired width here */
+    }
+
+  .param-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .param-row-nested{
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .param-row-nested > * {
+    margin-right: 5px;
+  }

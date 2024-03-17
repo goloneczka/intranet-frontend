@@ -1,0 +1,247 @@
+<section *ngIf="isUserAuthenticated">
+
+    <div class="button-row"> 
+        <button mat-raised-button  style="margin-left: 5px; background-color: #A89985;">Nowy Użytkownik</button>
+        <button mat-raised-button  style="margin-left: 5px; background-color: #A89985;">Zmiana Hasła</button>
+      </div>
+      <mat-divider/>
+      <div id="admin-components">
+        <app-new-user />
+        <app-change-password />
+      </div>
+
+    <div style="background-color: #f0f0f0; margin-bottom: 20px;">
+        <div class="header">
+            <h4 style="font-family: 'Roboto'; margin-left: 20px;">Twoje Dane</h4>
+        </div>
+
+        <div>
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <mat-form-field  style="width: 150px;" >
+                        <mat-label>Imię</mat-label>
+                        <input matInput placeholder="imie" [disabled]="userToDisplay" [(ngModel)]="logedUser.firstName">
+                    </mat-form-field>
+                    <mat-form-field style="width: 150px;" >
+                        <mat-label>Nazwisko</mat-label>
+                        <input matInput placeholder="nazwisko" [disabled]="userToDisplay" [(ngModel)]="logedUser.lastName">
+                    </mat-form-field>
+                </div>
+
+                <div class="param-row-nested">
+                    <mat-form-field  style="width: 150px;" >
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="email" [disabled]="userToDisplay" [(ngModel)]="logedUser.email">
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="!userToDisplay; then edit_logged else display_logged"></div>
+                <ng-template #edit_logged>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button  (click)="undoEditUser()" style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_logged>
+                    <div>
+                        <button mat-raised-button  (click)="editModeUser()" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #f0f0f0; ; margin-bottom: 20px;">
+        <div class="header">
+            <h4 style="font-family: 'Roboto'; margin-left: 20px;">Użytkownicy </h4>
+        </div>
+
+        <div style="background-color: #E0D8CC; padding: 1px; border: #D2C4B6 solid; overflow: auto; max-height: 700px; margin-bottom: 20px;"  *ngIf="users$ | async as users">
+            <table style="width: 100%;">
+                <tr style="font-family: 'Roboto'; color: #3D4D40;">
+                    <th>Użytkownik</th>
+                    <th>Uprawnienia</th>
+                    <th>Aktywny</th>
+                </tr>
+                <tr *ngFor="let admin of users" class="center-align">
+                    <td class="row-emp-item" >
+                        <div class="circle-with-text-gpt" >
+                            {{ (admin.firstName | slice:0:1) }}{{ (admin.lastName | slice:0:1) }}
+                        </div>
+                        <div class="text-emp">
+                            {{ admin.firstName }} {{ admin.lastName }}
+                        </div>
+                    </td>
+                    <td>
+                        <mat-checkbox (change)="checkboxManagerChanged(admin)">Administrator</mat-checkbox>
+                        <mat-checkbox (change)="checkboxAdminChanged(admin)">Kierownik</mat-checkbox>
+                    </td>
+                    <td>
+                        <mat-checkbox (change)="checkboxEnabledChanged(admin)"></mat-checkbox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-left: 45%; padding-bottom: 10px;">
+            <button mat-raised-button style="margin-left: 5px; width: 75px;" >Zapisz</button>
+            <button mat-raised-button style="margin-left: 5px; width: 75px;" >Wycofaj</button>
+        </div>
+    </div>
+
+    <div style="background-color: #f0f0f0;">
+        <div class="header">
+            <h4 style="font-family: 'Roboto'; margin-left: 20px;">Parametry </h4>
+        </div>
+
+        <div>
+            <div>
+                <div class="param-row">
+                    <div class="param-row-nested">
+                        <p>Godziny dyżurów</p>
+                        <mat-form-field  style="width: 150px;" >
+                            <mat-label>Od</mat-label>
+                            <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(0)" [(ngModel)]="param_duty_time_start">
+                        </mat-form-field>
+                        <mat-form-field  style="width: 150px;" >
+                            <mat-label>Do</mat-label>
+                            <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(0)" [(ngModel)]="param_duty_time_end">
+                        </mat-form-field>
+                        <mat-icon matTooltip="wartość podglądowa">help_outline</mat-icon>
+                    </div>
+    
+                    <div *ngIf="idsToEdit.includes(0); then edit_0 else display_0"></div>
+                    <ng-template #edit_0>
+                        <div>
+                            <button mat-raised-button  (click)="saveDutyTimeParam()" style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                            <button mat-raised-button  (click)="undoEdit(0)" style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                        </div>
+                    </ng-template>
+                    <ng-template #display_0>
+                        <div>
+                            <button mat-raised-button  (click)="editMode(0)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                        </div>
+                    </ng-template>
+                    
+                </div>
+            </div>
+            
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <p>Twitter url</p>
+                    <mat-form-field  style="width: 150px;">
+                        <mat-label>Do</mat-label>
+                        <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(1)">
+                    </mat-form-field>
+                    <mat-checkbox [disabled]="!idsToEdit.includes(1)">Aktywny</mat-checkbox>
+                </div>
+
+                <div *ngIf="idsToEdit.includes(1); then edit_1 else display_1"></div>
+                <ng-template #edit_1>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button  (click)="undoEdit(1)"  style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_1>
+                    <div>
+                        <button mat-raised-button  (click)="editMode(1)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <p>Facebook url</p>
+                    <mat-form-field  style="width: 150px;">
+                        <mat-label>Do</mat-label>
+                        <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(2)">
+                    </mat-form-field>
+                    <mat-checkbox [disabled]="!idsToEdit.includes(2)">Aktywny</mat-checkbox>
+                </div>
+
+                <div *ngIf="idsToEdit.includes(2); then edit_2 else display_2"></div>
+                <ng-template #edit_2>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button   (click)="undoEdit(2)" style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_2>
+                    <div>
+                        <button mat-raised-button  (click)="editMode(2)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <p>Linkedin url</p>
+                    <mat-form-field  style="width: 150px;">
+                        <mat-label>Do</mat-label>
+                        <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(3)">
+                    </mat-form-field>
+                    <mat-checkbox [disabled]="!idsToEdit.includes(3)" >Aktywny</mat-checkbox>
+                </div>
+
+                <div *ngIf="idsToEdit.includes(3); then edit_3 else display_3"></div>
+                <ng-template #edit_3>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button  (click)="undoEdit(3)"  style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_3>
+                    <div>
+                        <button mat-raised-button  (click)="editMode(3)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <p>Youtube url</p>
+                    <mat-form-field  style="width: 150px;">
+                        <mat-label>Do</mat-label>
+                        <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(4)">
+                    </mat-form-field>
+                    <mat-checkbox [disabled]="!idsToEdit.includes(4)">Aktywny</mat-checkbox>
+                </div>
+
+                <div *ngIf="idsToEdit.includes(4); then edit_4 else display_4"></div>
+                <ng-template #edit_4>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button  (click)="undoEdit(4)" style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_4>
+                    <div>
+                        <button mat-raised-button  (click)="editMode(4)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="param-row">
+                <div class="param-row-nested">
+                    <p>Instagram url</p>
+                    <mat-form-field  style="width: 150px;">
+                        <mat-label>Do</mat-label>
+                        <input matInput placeholder="Godzina" [disabled]="!idsToEdit.includes(5)">
+                    </mat-form-field>
+                    <mat-checkbox [disabled]="!idsToEdit.includes(5)" >Aktywny</mat-checkbox>
+                </div>
+
+                <div *ngIf="idsToEdit.includes(5); then edit_5 else display_5"></div>
+                <ng-template #edit_5>
+                    <div>
+                        <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+                        <button mat-raised-button  (click)="undoEdit(5)" style="margin-left: 5px; width: 75px;" >Cofnij</button>
+                    </div>
+                </ng-template>
+                <ng-template #display_5>
+                    <div>
+                        <button mat-raised-button  (click)="editMode(5)" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+</section>
