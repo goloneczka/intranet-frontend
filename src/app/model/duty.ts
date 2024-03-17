@@ -11,6 +11,12 @@ export interface Duty {
   creationTime: Date
 }
 
+export interface DutyParam {
+
+  hoursStart: string
+  hoursEnd: string
+}
+
 export interface DutyToAccept {
 
   employeeFirstName: string

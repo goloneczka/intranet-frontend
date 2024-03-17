@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Duty, DutyToAccept, DutyType, DutyTypeMessage } from 'src/app/model/duty';
+import { Duty, DutyParam, DutyToAccept, DutyType, DutyTypeMessage } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.component';
@@ -35,6 +35,8 @@ export class ContentDutyComponent {
 
   dutyTypes: DutyType[] = [];
 
+  dutyParam!: DutyParam;
+
   dutyTypeEventSubscription!: Subscription;
 
 
@@ -51,6 +53,10 @@ export class ContentDutyComponent {
       this.prepareDutyForDay(new Date());
       this.prepareDutiesToAccept();
     });
+
+    this.dutyService.getDutyParams().subscribe(data => {
+      this.dutyParam = data;
+    })
 
     this.dutyTypeEventSubscription = this.dutyTypeEventSevice.getMessage().subscribe((message : DutyTypeMessage | null) => {
       this.dutyService.getDutyTypes().subscribe(typesData => {

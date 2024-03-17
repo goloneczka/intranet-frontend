@@ -8,16 +8,17 @@
         <div class="current-month">{{ currentDate | date: 'MMMM yyyy' }}</div>
     </div>
     
-    <div class="scheduler-container">
+    <div class="scheduler-container" #container>
         <div class="header">
           <div class="cell"> Dzień / &nbsp;Dyżur </div>
-          <div class="cell pointer" *ngFor="let day of days; let i = index" (click)="toggleDay(day)" [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i), 'today': isToday(i)}">
+          <div class="cell pointer" *ngFor="let day of days; let i = index" [id]="'day_'+i"
+            (click)="toggleDay(day)" [ngClass]="{'selected-day-event': i+1===currentDate.getDate(), 'weekend': isWeekend(i), 'today': isToday(i)}">
             <div style="font-family: 'Roboto'">{{ day.dayOfMonth }}</div>
             <div style="font-family: 'Roboto'">{{ day.name }}</div>
           </div>
         </div>
       
-        <div class="body">
+        <div *ngIf="dutyParam && resources" class="body">
           <div class="row" *ngFor="let res of resources">
             <div class="res-column" style="font-family: 'Roboto'" >{{ res.shortcut.length ? res.shortcut : res.type.length < 5 ? res.type : res.type.substring(0,4).concat('.') }}</div>
             <div class="cell pointer" *ngFor="let day of days; let i = index"

@@ -20,11 +20,11 @@
   </section>
 
   <div style="margin-top: 10px;">
-    <app-horizontal-scheduler [resources]="dutyTypes" (currentDayEvent)="prepareDutyForDay($event)"
-        (newDutyEvent)="prepareNewDutyDialog($event)"/>
+    <app-horizontal-scheduler [resources]="dutyTypes" [dutyParam]="dutyParam"
+        (currentDayEvent)="prepareDutyForDay($event)" (newDutyEvent)="prepareNewDutyDialog($event)"/>
   </div>
   
   <div style="margin-top: 40px;">
-    <app-dail-duty-list [dutyTypes]="dutyTypes" [day]="pickedDay"/>
+    <app-dail-duty-list [dutyTypes]="dutyTypes" [day]="pickedDay" [dutyParam]="dutyParam"/>
   </div>
 </section>

@@ -9,7 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule } from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -36,6 +36,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 import {LeftNavComponent} from './component/left-nav/left-nav.component';
@@ -68,11 +69,14 @@ import {ContentLinkComponent, ContactComponent,
 import {RightNavParentComponent, DutyComponent,
   MonthlyCalendarComponent, DisplayPostDialogComponent} from './component/right-nav';
 
+import {ContentSettingsComponent, NewUserComponent,
+  ChangePasswordComponent} from './component/content/content-settings';
+
 
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
         BasicAuthInterceptor, SafeHtmlPipe, CreationTimeRepresentationPipe,
-        ContactService, ApplicationService } from './service/index';
+        ContactService, ApplicationService, UserService } from './service/index';
 
 import { HeaderComponent } from './component/header/header.component';
 import { LoginComponent } from './component/login-component/login.component';
@@ -134,13 +138,17 @@ import { FooterComponent } from './component/footer/footer.component';
     EditTeamComponent, 
     EditTeamDisplayModeComponent,
     EditTeamEditModeComponent,
-    EmployeeMigrationComponent
+    EmployeeMigrationComponent,
+    ContentSettingsComponent,
+    NewUserComponent,
+    ChangePasswordComponent
   ],
     imports: [
         CommonModule,
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
+        FormsModule,
         BrowserAnimationsModule,
         MatToolbarModule,
         MatSidenavModule,
@@ -170,7 +178,8 @@ import { FooterComponent } from './component/footer/footer.component';
         DragDropModule,
         MatRadioModule,
         MatTabsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatCheckboxModule
     ],
   providers: [
     PostService,
@@ -181,6 +190,7 @@ import { FooterComponent } from './component/footer/footer.component';
     MatSnackBar,
     AuthenticationService,
     ApplicationService,
+    UserService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     DatePipe

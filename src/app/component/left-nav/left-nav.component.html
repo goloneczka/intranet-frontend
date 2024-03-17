@@ -25,6 +25,10 @@
       <mat-icon>phonelink</mat-icon>
       <span>{{ContentEnum.LINK | ContentTabDisplay}}</span>
     </button>
+    <button mat-button class="menu-button" (click)="setContent(ContentEnum.ADMIN)" *ngIf="isUserAuthenticated">
+      <mat-icon>settings</mat-icon>
+      <span>{{ContentEnum.ADMIN | ContentTabDisplay}}</span>
+    </button>
   </ng-template>
 
   <ng-template #some>
@@ -42,6 +46,9 @@
     </button>
     <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.LINK)">
       <mat-icon style="margin-right: 0; transform: scale(1.3);"> phonelink</mat-icon>
+    </button>
+    <button mat-button class="menu-button-some" (click)="setContent(ContentEnum.ADMIN)" *ngIf="isUserAuthenticated">
+      <mat-icon style="margin-right: 0; transform: scale(1.3);"> settings</mat-icon>
     </button>
   </ng-template>
 

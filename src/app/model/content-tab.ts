@@ -4,7 +4,8 @@ export enum contentTab {
   EMPLOYEE = 'EMPLOYEE',
   DOCUMENT = 'DOCUMENT',
   DUTY = 'DUTY',
-  LINK = 'LINK'
+  LINK = 'LINK',
+  ADMIN = 'ADMIN'
 }
 
 export const contextTabRender = new Map([
@@ -12,5 +13,6 @@ export const contextTabRender = new Map([
   [contentTab.EMPLOYEE, 'Współpracownicy'],
   [contentTab.DOCUMENT, 'Dokumenty'],
   [contentTab.DUTY, 'Dyżury'],
-  [contentTab.LINK, 'Sieć']
+  [contentTab.LINK, 'Sieć'],
+  [contentTab.ADMIN, 'Ustawienia']
 ]);

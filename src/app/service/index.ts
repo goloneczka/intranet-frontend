@@ -3,6 +3,7 @@ export * from './employee.service';
 export * from './document.service';
 export * from './application.service';
 export * from './duty.service';
+export * from './user.service';
 export * from './authentication.service';
 export * from './pipe/filter-duty.pipe';
 export * from './pipe/content-tab.pipe';

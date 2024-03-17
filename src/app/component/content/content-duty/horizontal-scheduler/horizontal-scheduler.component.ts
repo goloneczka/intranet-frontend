@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CalendarDay, Duty, DutyToAccept, DutyType } from 'src/app/model/duty';
+import { CalendarDay, Duty, DutyParam, DutyToAccept, DutyType } from 'src/app/model/duty';
 import { DutyService } from 'src/app/service';
 import { DutyEventService } from 'src/app/service/event/duty-event.service';
 
@@ -12,11 +12,16 @@ const WEEKEND_DAYS = ['SOB', 'NIEDZ'];
   styleUrls: ['./horizontal-scheduler.component.css']
 })
 export class HorizontalSchedulerComponent {
+  
+  @ViewChild('container')
+  container!: ElementRef;
 
   days: CalendarDay[] = [];
 
   @Input()
   resources: DutyType[] = [];
+  @Input()
+  dutyParam: DutyParam = {hoursEnd: '00:00', hoursStart: '00:00'};
 
   duties: Duty[] = [];
 
@@ -30,7 +35,9 @@ export class HorizontalSchedulerComponent {
 
   subscription!: Subscription;
 
-  constructor( private dutyService: DutyService, private dutyEventService : DutyEventService) {}
+  constructor( private dutyService: DutyService,
+     private dutyEventService : DutyEventService,
+     private elementRef: ElementRef) {}
 
   ngOnInit() {
     this.generateCalendar();
@@ -44,6 +51,14 @@ export class HorizontalSchedulerComponent {
         this.prepareDutiesForMonth(this.currentDate);
       }
     });
+  }
+
+  ngAfterViewInit() {
+    const containerElement = this.container.nativeElement;
+    const rowElement = this.elementRef.nativeElement.querySelector('#day_' + this.currentDate.getDate());
+    if (rowElement && this.currentDate.getDate() > 7) {
+      containerElement.scrollLeft = rowElement.offsetLeft/2 - 50;
+    };
   }
 
   private generateCalendar() {
@@ -75,7 +90,10 @@ export class HorizontalSchedulerComponent {
   }
 
   isTotalDutyAssigned(day: CalendarDay, resource: DutyType): boolean {
-    const hoursOfWholeWorkDay : number = 13;
+    const [paramStartHour, paramStartMinute, paramsStartSecond] = new String(this.dutyParam.hoursStart).split(':').map(Number);
+    const [paramEndHour, paramEndMinute, paramsEndSecond] = new String(this.dutyParam.hoursEnd).split(':').map(Number);
+    const hoursOfWholeWorkDay : number = (paramEndHour - paramStartHour) * 60;
+
     return this.duties.filter(apiDuty => {
       const apiDutyDay = new Date(apiDuty.dutyDay);
       return apiDutyDay.getDate() === day.dayOfMonth &&
@@ -86,7 +104,7 @@ export class HorizontalSchedulerComponent {
         const [startHour, startMinute] = new String(curIt.startTime).split(':').map(Number);
         const [endHour, endMinute] = new String(curIt.endTime).split(':').map(Number);
         return sum + (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
-      }, 0) === hoursOfWholeWorkDay * 60;
+      }, 0) >= hoursOfWholeWorkDay;
   }
 
   toggleDay(day: CalendarDay) {

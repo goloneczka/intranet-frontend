@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environment/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Duty, DutyToAccept, DutyToSave, DutyType} from "../model/duty";
+import {Duty, DutyParam, DutyToAccept, DutyToSave, DutyType} from "../model/duty";
 
 @Injectable()
-export class DutyService {
-  
+export class DutyService {  
 
   private DUTY_URL = environment.API_URL + '/duty';
+  private DUTY_PARAM_URL = environment.API_URL + '/duty-param';
   private DUTY_DATE_URL = environment.API_URL + '/duty-date';
   private DUTY_TO_ACCEPT_URL = environment.API_URL + '/duty-to-accept';
   private DUTY_TYPE_URL = environment.API_URL + '/duty-type';
@@ -53,6 +53,14 @@ export class DutyService {
   createDutyAcceptance(newDutyAcceptance: DutyToAccept) {
     return this.http.post<void>(this.DUTY_TO_ACCEPT_URL,
        {dutyUuid: newDutyAcceptance.uuid, result: newDutyAcceptance.acceptance});
+  }
+
+  getDutyParams() {
+    return this.http.get<DutyParam>(this.DUTY_PARAM_URL);
+  }
+
+  updateDutyParams(dutyParam : DutyParam){
+    return this.http.post<void>(this.DUTY_PARAM_URL, dutyParam);
   }
   
 }
