@@ -31,6 +31,9 @@ export class NewEmployeeTeamComponent {
 
   shouldDisplayForm(val: boolean) {
     this.shouldComponentBeRender = val;
+    if(!this.shouldComponentBeRender) {
+      this.teamGroupForm.reset();
+    }
   }
 
   addTeam() {

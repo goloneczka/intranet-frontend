@@ -10,11 +10,21 @@
         </ul>
       </div>
       <div class="footer-social">
-        <a href="https://twitter.com" target="_blank"><img src="assets/images/social_twitter.png"/></a>
-        <a href="https://facebook.com" target="_blank"><img src="assets/images/social_facebook.png"/></a>
-        <a href="https://linkedin.com" target="_blank"><img src="assets/images/social_linkedin.png"/></a>
-        <a href="https://youtube.com" target="_blank"><img src="assets/images/social_youtube.png"/></a>
-        <a href="https://instagram.com" target="_blank"><img src="assets/images/social_instagram.png"/></a>
+        <span *ngIf="socialMediaTwitter && socialMediaTwitter.active">
+          <a [href]="socialMediaTwitter.link" target="_blank"><img src="assets/images/social_twitter.png"/></a>
+        </span>
+        <span *ngIf="socialMediaFacebook && socialMediaFacebook.active">
+          <a [href]="socialMediaFacebook.link" target="_blank"><img src="assets/images/social_facebook.png"/></a>
+        </span>
+        <span *ngIf="socialMediaLinkedin && socialMediaLinkedin.active">
+          <a [href]="socialMediaLinkedin.link" target="_blank"><img src="assets/images/social_linkedin.png"/></a>
+        </span>
+        <span *ngIf="socialMediaYoutube && socialMediaYoutube.active">
+          <a [href]="socialMediaYoutube.link" target="_blank"><img src="assets/images/social_youtube.png"/></a>
+        </span>
+        <span *ngIf="socialMediaInstagram && socialMediaInstagram.active">
+          <a [href]="socialMediaInstagram.link" target="_blank"><img src="assets/images/social_instagram.png"/></a>
+        </span>
       </div>
     </div>
     <div class="footer-bottom">

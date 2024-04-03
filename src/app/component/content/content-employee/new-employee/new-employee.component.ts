@@ -39,6 +39,9 @@ export class NewEmployeeComponent implements OnChanges {
 
   shouldDisplayForm(val: boolean) {
     this.shouldComponentBeRender = val;
+    if(!this.shouldComponentBeRender) {
+      this.employeeGroupForm.reset();
+    }
   }
 
   addEmployee() {

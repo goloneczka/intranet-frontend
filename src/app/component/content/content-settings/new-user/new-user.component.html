@@ -1,1 +1,44 @@
-<p>new-user works!</p>
+
+<section *ngIf="shouldComponentBeRender" >
+    <div class="header">
+        <h4 style="font-family: 'Roboto'; margin-left: 20px;">Dodawanie nowego użytkownika</h4>
+        <div style="margin-right: 20px;">
+            <button mat-icon-button (click)="shouldDisplayForm(false)"><mat-icon>remove_circle_outline</mat-icon></button>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+        <mat-form-field  style="width: 300px; margin-right: 20px;">
+            <mat-label>Stare hasło</mat-label>
+            <input matInput  placeholder="hasło" formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field  style="width: 300px; margin-right: 20px;">
+            <mat-label>Nowe hasło</mat-label>
+            <input matInput  placeholder="hasło" formControlName="surname">
+        </mat-form-field>
+
+        <mat-form-field  style="width: 300px; margin-right: 20px;">
+            <mat-label>Stare hasło</mat-label>
+            <input matInput  placeholder="hasło" formControlName="email">
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isManager">Kierownik</mat-checkbox>
+        <mat-checkbox formControlName="isAdmin">Manager</mat-checkbox>
+
+        <div class="end-flex">
+            Zapisz:
+            <button mat-icon-button (click)="save()">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </form>
+    
+    <div class="end-flex">
+        Przerwij dodawanie nowego użytkownika:
+        <button mat-icon-button (click)="shouldDisplayForm(false)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+
+</section>

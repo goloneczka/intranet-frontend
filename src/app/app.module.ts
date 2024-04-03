@@ -70,13 +70,13 @@ import {RightNavParentComponent, DutyComponent,
   MonthlyCalendarComponent, DisplayPostDialogComponent} from './component/right-nav';
 
 import {ContentSettingsComponent, NewUserComponent,
-  ChangePasswordComponent} from './component/content/content-settings';
+  ChangePasswordComponent, SocialMediaParamComponent} from './component/content/content-settings';
 
 
 import {PostService, EmployeeService, DocumentService, DutyService, AuthenticationService,
         FilterDutyPipe, ContentTabDisplayPipe, FilterDocumentPipe, HttpInterceptorService,
         BasicAuthInterceptor, SafeHtmlPipe, CreationTimeRepresentationPipe,
-        ContactService, ApplicationService, UserService } from './service/index';
+        ContactService, ApplicationService, UserService, SocialMediaService } from './service/index';
 
 import { HeaderComponent } from './component/header/header.component';
 import { LoginComponent } from './component/login-component/login.component';
@@ -141,7 +141,8 @@ import { FooterComponent } from './component/footer/footer.component';
     EmployeeMigrationComponent,
     ContentSettingsComponent,
     NewUserComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SocialMediaParamComponent
   ],
     imports: [
         CommonModule,
@@ -191,6 +192,7 @@ import { FooterComponent } from './component/footer/footer.component';
     AuthenticationService,
     ApplicationService,
     UserService,
+    SocialMediaService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     DatePipe

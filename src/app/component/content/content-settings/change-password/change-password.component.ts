@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-change-password',
@@ -7,4 +8,50 @@ import { Component } from '@angular/core';
 })
 export class ChangePasswordComponent {
 
+  shouldComponentBeRender = false;
+  passwordFieldType = 'password';
+  passwordForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+
+    this.passwordForm = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validators: this.passwordsMatchValidator });
+   }
+
+  ngOnInit(): void {
+    
+  }
+
+
+  shouldDisplayForm(arg0: boolean) {
+    this.shouldComponentBeRender = arg0;
+    if(!this.shouldComponentBeRender) {
+      this.passwordForm.reset();
+    }
+  }
+
+  passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const newPassword = control.get('newPassword');
+    const confirmPassword = control.get('confirmPassword');
+
+    return newPassword && confirmPassword && newPassword.value !== confirmPassword.value ? { passwordsNotMatch: true } : null;
+  }
+
+  togglePasswordVisibility(): void {
+    if(this.passwordFieldType === 'password') {
+      this.passwordFieldType = 'text';
+      setTimeout(() => {
+        this.passwordFieldType = 'password';
+      }, 4000)
+    } else {
+      this.passwordFieldType = 'password';
+    }
+  }
+
+  save(){
+
+  }
 }

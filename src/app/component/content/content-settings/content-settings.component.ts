@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { Observable, Subscription, of } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { DutyService } from 'src/app/service';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { UserService } from 'src/app/service/user.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { SocialMediaService } from 'src/app/service/social-media.service';
+import { SocialParamWithName } from 'src/app/model/param';
+import { DutyToAccept } from 'src/app/model/duty';
+import { SocialMediaEventService } from 'src/app/service/event/social-media-event.service';
 
 @Component({
   selector: 'app-content-settings',
@@ -13,31 +19,64 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class ContentSettingsComponent {
 
+  @ViewChild(ChangePasswordComponent)
+  changePasswordComponent!: ChangePasswordComponent;
+  @ViewChild(NewUserComponent)
+  newUserComponent!: NewUserComponent;
+
+  subscription!: Subscription;
+
   isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
-  idsToEdit: number[] = [];
   userToDisplay: boolean = true;
   logedUser: User = {firstName: '', lastName: '', email: this.authService.getJwtUser()?.sub || '', active: true};
   users$ : Observable<User[]> = of([]);
 
+  is_param_duty_time_edditing = false;
   param_duty_time_start: string = '';
   param_duty_time_end: string = '';
   param_duty_time_start_shadow: string = '';
   param_duty_time_end_shadow: string = '';
 
+  socialMediaTwitter: SocialParamWithName | null = {link: '', active: false, name: ''};
+  socialMediaFacebook: SocialParamWithName | null = {link: '', active: false, name: ''};
+  socialMediaYoutube: SocialParamWithName | null = {link: '', active: false, name: ''};
+  socialMediaInstagram: SocialParamWithName | null = {link: '', active: false, name: ''};
+  socialMediaLinkedin: SocialParamWithName | null = {link: '', active: false, name: ''};
+
   constructor(private userService: UserService,
     private authService : AuthenticationService,
-    private dutyService : DutyService){}
+    private dutyService : DutyService,
+    private socialMediaService : SocialMediaService,
+    private socialMediaEventService: SocialMediaEventService){}
 
   ngOnInit(){
     this.users$ = this.userService.getUsers();
     this.users$.subscribe(data => {
       this.logedUser = data.find(it => it.email === this.authService.getJwtUser()?.sub) || {firstName: '', lastName: '', email: this.authService.getJwtUser()?.sub || '', active: true};
     });
+
     this.dutyService.getDutyParams().subscribe(data => {
       this.param_duty_time_start = this.param_duty_time_start_shadow = data.hoursStart;
       this.param_duty_time_end = this.param_duty_time_end_shadow = data.hoursEnd;
-    })
+    });
+
+    this.socialMediaService.getAll().subscribe(data => {
+      this.socialMediaLinkedin = data.find(it => it.name === 'LINKEDIN') || null;
+      this.socialMediaTwitter = data.find(it => it.name === 'TWITTER') || null;
+      this.socialMediaFacebook = data.find(it => it.name === 'FACEBOOK') || null;
+      this.socialMediaYoutube = data.find(it => it.name === 'YOUTUBE') || null;
+      this.socialMediaInstagram = data.find(it => it.name === 'INSTAGRAM') || null;
+    });
   }
+
+  openNewUser(){
+    this.newUserComponent.shouldDisplayForm(true);
+  }
+
+  openChangePassword() {
+    this.changePasswordComponent.shouldDisplayForm(true);
+  }
+
 
   checkboxManagerChanged(user: User) {
 
@@ -51,16 +90,24 @@ export class ContentSettingsComponent {
     
   }
 
-  undoEdit(index: number){
-    this.idsToEdit = this.idsToEdit.filter(v => v != index);
-    if(index === 0){
-      this.param_duty_time_start = this.param_duty_time_start_shadow;
-      this.param_duty_time_end = this.param_duty_time_end_shadow;
-    }
+  undoEditDutyParam(){
+    this.is_param_duty_time_edditing = false;
+    this.param_duty_time_start = this.param_duty_time_start_shadow;
+    this.param_duty_time_end = this.param_duty_time_end_shadow;
   }
 
-  editMode(index: number){
-    this.idsToEdit.push(index);
+  editModeDutyParam(){
+    this.is_param_duty_time_edditing = true;
+  }
+
+  saveDutyTimeParam(){
+    if(this.param_duty_time_start?.length && this.param_duty_time_end?.length){
+      this.dutyService.updateDutyParams({hoursEnd: this.param_duty_time_end, hoursStart: this.param_duty_time_start}).subscribe(_ => {
+        this.param_duty_time_start_shadow = this.param_duty_time_start;
+        this.param_duty_time_end_shadow = this.param_duty_time_end;
+        this.undoEditDutyParam();
+      });
+    }
   }
 
   undoEditUser(){
@@ -71,13 +118,20 @@ export class ContentSettingsComponent {
     this.userToDisplay = false;
   }
 
-  saveDutyTimeParam(){
-    if(this.param_duty_time_start?.length && this.param_duty_time_end?.length){
-      this.dutyService.updateDutyParams({hoursEnd: this.param_duty_time_end, hoursStart: this.param_duty_time_start}).subscribe(_ => {
-        this.param_duty_time_start_shadow = this.param_duty_time_start;
-        this.param_duty_time_end_shadow = this.param_duty_time_end;
-        this.undoEdit(0);
-      });
+  onChangeSocialParamEvent() {
+    this.socialMediaEventService.sendMessageSocialMediaEdited();
+    this.socialMediaService.getAll().subscribe(data => {
+      this.socialMediaLinkedin = data.find(it => it.name === 'LINKEDIN') || null;
+      this.socialMediaTwitter = data.find(it => it.name === 'TWITTER') || null;
+      this.socialMediaFacebook = data.find(it => it.name === 'FACEBOOK') || null;
+      this.socialMediaYoutube = data.find(it => it.name === 'YOUTUBE') || null;
+      this.socialMediaInstagram = data.find(it => it.name === 'INSTAGRAM') || null;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
