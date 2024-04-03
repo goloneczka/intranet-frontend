@@ -1,0 +1,23 @@
+<form class="param-row" [formGroup]="form" (ngSubmit)="update()">
+    <div class="param-row-nested">
+        <p> <ng-content select="[choosen-social-media]"/> </p>
+        <mat-form-field  style="width: 450px;">
+            <mat-label>Do</mat-label>
+            <input matInput placeholder="Godzina" formControlName="link">
+        </mat-form-field>
+        <mat-checkbox formControlName="active">Aktywny</mat-checkbox>
+    </div>
+
+    <div *ngIf="this.form.controls['link'].enabled && this.form.controls['active'].enabled; then edit else display"></div>
+    <ng-template #edit>
+        <div>
+            <button mat-raised-button  style="margin-left: 5px; width: 75px;" >Zapisz</button>
+            <button mat-raised-button  (click)="undoEdit()"  style="margin-left: 5px; width: 75px;" >Cofnij</button>
+        </div>
+    </ng-template>
+    <ng-template #display>
+        <div>
+            <button mat-raised-button  (click)="editMode()" style="margin-left: 5px; width: 75px;" >Edytuj</button>
+        </div>
+    </ng-template>
+</form>
