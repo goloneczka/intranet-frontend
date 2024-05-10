@@ -14,6 +14,17 @@
     align-items: center;
   }
   
+  form {
+    margin: 0 15px 0 5px;
+  }
+
+  .row {
+    width: 100%;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+  }
+  
   .main-flex{
     display: flex;
     align-items: center;

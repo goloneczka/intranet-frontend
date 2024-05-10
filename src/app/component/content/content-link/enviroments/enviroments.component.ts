@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { EnvApplication } from 'src/app/model/application';
-import { ApplicationService } from 'src/app/service';
+import { ApplicationService, AuthenticationService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { EditEnvAppComponent } from './edit-env-app/edit-env-app.component';
 
@@ -19,9 +19,11 @@ export class EnviromentsComponent {
   envAppsChanged = new EventEmitter<void>();
 
   touchedEnvApps: {touched: boolean, obj: EnvApplication}[] = [];
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
 
-  constructor(private appService: ApplicationService, public dialog: MatDialog) {}
+  constructor(private appService: ApplicationService, public dialog: MatDialog, private authService: AuthenticationService) {
+    this.isUserAuthenticated = this.authService.hasAdminRole();
+  }
 
   ngOnInit(): void {}
 

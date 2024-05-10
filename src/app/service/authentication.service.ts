@@ -23,6 +23,16 @@ export class AuthenticationService {
     return storedJwtText ? jwt_decode<Jwt>(storedJwtText) : null;
   }
 
+  public hasAdminRole() {
+    const jwt = this.getJwtUser();
+    return !!jwt ? jwt.auth.some(it => it.authority === 'ADMIN_USER') : false;
+  }
+
+  public hasManagerRole() {
+    const jwt = this.getJwtUser();
+    return !!jwt ? jwt.auth.some(it => it.authority === 'MANAGER_USER') : false;
+  }
+
   logout() : void {
     LocalStorageService.clearJwt();
   }

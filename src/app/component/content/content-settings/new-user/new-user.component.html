@@ -8,27 +8,36 @@
     </div>
 
     <form [formGroup]="form" (ngSubmit)="save()">
-        <mat-form-field  style="width: 300px; margin-right: 20px;">
-            <mat-label>Stare hasło</mat-label>
-            <input matInput  placeholder="hasło" formControlName="firstName">
-        </mat-form-field>
 
-        <mat-form-field  style="width: 300px; margin-right: 20px;">
-            <mat-label>Nowe hasło</mat-label>
-            <input matInput  placeholder="hasło" formControlName="surname">
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field  style="width: 300px; margin-right: 20px;">
+                <mat-label>Imię</mat-label>
+                <input matInput  placeholder="hasło" formControlName="firstName">
+            </mat-form-field>
+    
+            <mat-form-field  style="width: 300px; margin-right: 20px;">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput  placeholder="hasło" formControlName="lastName">
+            </mat-form-field>
+        </div>
+       
+        <div>
+            <mat-form-field  style="width: 300px; margin-right: 20px;">
+                <mat-label>Email</mat-label>
+                <input matInput  placeholder="hasło" formControlName="email">
+            </mat-form-field>
+        </div>
+        
 
-        <mat-form-field  style="width: 300px; margin-right: 20px;">
-            <mat-label>Stare hasło</mat-label>
-            <input matInput  placeholder="hasło" formControlName="email">
-        </mat-form-field>
-
-        <mat-checkbox formControlName="isManager">Kierownik</mat-checkbox>
-        <mat-checkbox formControlName="isAdmin">Manager</mat-checkbox>
+        <div>
+            <mat-checkbox formControlName="isManager">Kierownik</mat-checkbox>
+            <mat-checkbox formControlName="isAdmin">Administrator</mat-checkbox>
+        </div>
+        
 
         <div class="end-flex">
             Zapisz:
-            <button mat-icon-button (click)="save()">
+            <button mat-icon-button type="submit">
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
         </div>

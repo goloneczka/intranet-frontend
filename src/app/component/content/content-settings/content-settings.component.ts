@@ -12,6 +12,8 @@ import { SocialParamWithName } from 'src/app/model/param';
 import { DutyToAccept } from 'src/app/model/duty';
 import { SocialMediaEventService } from 'src/app/service/event/social-media-event.service';
 
+
+
 @Component({
   selector: 'app-content-settings',
   templateUrl: './content-settings.component.html',
@@ -26,9 +28,9 @@ export class ContentSettingsComponent {
 
   subscription!: Subscription;
 
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
   userToDisplay: boolean = true;
-  logedUser: User = {firstName: '', lastName: '', email: this.authService.getJwtUser()?.sub || '', active: true};
+  logedUser: User;
   users$ : Observable<User[]> = of([]);
 
   is_param_duty_time_edditing = false;
@@ -47,12 +49,15 @@ export class ContentSettingsComponent {
     private authService : AuthenticationService,
     private dutyService : DutyService,
     private socialMediaService : SocialMediaService,
-    private socialMediaEventService: SocialMediaEventService){}
+    private socialMediaEventService: SocialMediaEventService){
+      this.isUserAuthenticated = this.authService.hasAdminRole();
+      this.logedUser = this.getBasicUser();
+    }
 
   ngOnInit(){
     this.users$ = this.userService.getUsers();
     this.users$.subscribe(data => {
-      this.logedUser = data.find(it => it.email === this.authService.getJwtUser()?.sub) || {firstName: '', lastName: '', email: this.authService.getJwtUser()?.sub || '', active: true};
+      this.logedUser = data.find(it => it.email === this.authService.getJwtUser()?.sub) || this.getBasicUser();
     });
 
     this.dutyService.getDutyParams().subscribe(data => {
@@ -67,6 +72,10 @@ export class ContentSettingsComponent {
       this.socialMediaYoutube = data.find(it => it.name === 'YOUTUBE') || null;
       this.socialMediaInstagram = data.find(it => it.name === 'INSTAGRAM') || null;
     });
+  }
+
+  private getBasicUser(): User {
+    return {firstName: '', lastName: '', email: this.authService.getJwtUser()?.sub || '', active: true, manager: false, admin: false};
   }
 
   openNewUser(){

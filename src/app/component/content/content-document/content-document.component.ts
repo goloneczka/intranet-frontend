@@ -9,6 +9,7 @@ import { SortingDocumentComponent } from './sorting-document/sorting-document.co
 import { EditDocumentGroupDialogComponent } from './edit-document-group-dialog/edit-document-group-dialog.component';
 import { NewDocumentDialogComponent } from './new-document-dialog/new-document-dialog.component';
 import { EditDocumentDialogComponent } from './edit-document-dialog/edit-document-dialog.component';
+import { AuthenticationService } from 'src/app/service';
 
 @Component({
   selector: 'app-content-document',
@@ -25,10 +26,12 @@ export class ContentDocumentComponent {
 
   documents$: Observable<Document[]> = of([]);
   docTypes: DocumentGroup[] = [];
+  isUserAuthenticated: boolean;
 
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
   
-  constructor(private documentService: DocumentService, public dialog: MatDialog) {}
+  constructor(private documentService: DocumentService, public dialog: MatDialog, private authService: AuthenticationService) {
+    this.isUserAuthenticated = this.authService.hasAdminRole();
+  }
 
   ngOnInit(): void {
     this.documents$ = this.documentService.getDocuments();

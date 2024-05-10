@@ -13,6 +13,7 @@ import { EditEmployeeTeamDialogComponent } from './edit-employee-team-dialog/edi
 import { EditTeamComponent } from './edit-team/edit-team.component';
 import { EmployeeEventService } from 'src/app/service/event/employee-event.service';
 import { EmployeeMigrationComponent } from './employee-migration/employee-migration.component';
+import { AuthenticationService } from 'src/app/service';
 
 
 @Component({
@@ -37,18 +38,21 @@ export class ContentEmployeeComponent implements OnInit{
   teamTree! : TeamTree;
   teamNamesToFilter : string[] = []; 
   filterForm: FormGroup;
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
   loading : boolean = false;
   empEventSubscription!: Subscription;
 
   constructor(private employeeService: EmployeeService,
       public dialog: MatDialog,
       private fb: FormBuilder,
-      private empEventService: EmployeeEventService) {
+      private empEventService: EmployeeEventService,
+      private authService: AuthenticationService) {
+    this.isUserAuthenticated = this.authService.hasAdminRole();
     this.filterForm = this.fb.group({
       name: [''],
       teamName: ['']
     });
+
   }
 
   ngOnInit(): void {

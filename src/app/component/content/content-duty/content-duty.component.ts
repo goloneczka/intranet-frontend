@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Duty, DutyParam, DutyToAccept, DutyType, DutyTypeMessage } from 'src/app/model/duty';
-import { DutyService } from 'src/app/service';
+import { AuthenticationService, DutyService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewDutyDialogComponent } from './new-duty-dialog/new-duty-dialog.component';
 import { DutyAcceptanceComponent } from './duty-acceptance/duty-acceptance.component';
@@ -28,7 +28,8 @@ export class ContentDutyComponent {
   @ViewChild(EditDutyTypeComponent)
   editDutyTypeComponent!: EditDutyTypeComponent;
 
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
+  isManagerAuthenticated: boolean;
 
   pickedDay: Date = new Date();
   dutiesToAccept: Duty[] = [];
@@ -44,8 +45,12 @@ export class ContentDutyComponent {
       private fb: FormBuilder,
       public dialog: MatDialog,
       private dutyEventService: DutyEventService,
-      private dutyTypeEventSevice: DutyTypeEventService
-      ) {}
+      private dutyTypeEventSevice: DutyTypeEventService,
+      private authService: AuthenticationService
+      ) {
+        this.isUserAuthenticated = this.authService.hasAdminRole();
+        this.isManagerAuthenticated = this.authService.hasManagerRole();
+      }
 
   ngOnInit(): void {
     this.dutyService.getDutyTypes().subscribe(typesData => {

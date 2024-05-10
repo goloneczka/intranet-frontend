@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {contentTab} from "../../model/content-tab";
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-left-nav',
@@ -12,9 +13,12 @@ export class LeftNavComponent {
   isFullLeftNav : boolean = false;
   @Output() contentTypeChangeEvent = new EventEmitter<contentTab>();
   @Output() resizeEvent = new EventEmitter<boolean>();
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isAdmin: boolean;
   ContentEnum = contentTab;
 
+  constructor(private authService :AuthenticationService) {
+    this.isAdmin = this.authService.hasAdminRole();
+  }
 
   setContent(contentTypeChange: contentTab) {
     this.contentTypeChangeEvent.emit(contentTypeChange);

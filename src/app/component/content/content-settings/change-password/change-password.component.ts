@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { UserService } from 'src/app/service';
 
 @Component({
   selector: 'app-change-password',
@@ -12,7 +13,8 @@ export class ChangePasswordComponent {
   passwordFieldType = 'password';
   passwordForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService) {
 
     this.passwordForm = this.formBuilder.group({
       oldPassword: ['', Validators.required],
@@ -52,6 +54,9 @@ export class ChangePasswordComponent {
   }
 
   save(){
+    const newPassword: string = this.passwordForm.controls['newPassword'].value;
+    const oldPassword: string = this.passwordForm.controls['oldPassword'].value;
+    this.userService.updatePassword(oldPassword, newPassword).subscribe(_ => {});
 
   }
 }

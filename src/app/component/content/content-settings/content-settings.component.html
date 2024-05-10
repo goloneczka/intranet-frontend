@@ -69,11 +69,11 @@
                         </div>
                     </td>
                     <td>
-                        <mat-checkbox (change)="checkboxManagerChanged(admin)">Administrator</mat-checkbox>
-                        <mat-checkbox (change)="checkboxAdminChanged(admin)">Kierownik</mat-checkbox>
+                        <mat-checkbox (change)="checkboxManagerChanged(admin)" [checked]="admin.admin">Administrator</mat-checkbox>
+                        <mat-checkbox (change)="checkboxAdminChanged(admin)" [checked]="admin.manager">Kierownik</mat-checkbox>
                     </td>
                     <td>
-                        <mat-checkbox (change)="checkboxEnabledChanged(admin)"></mat-checkbox>
+                        <mat-checkbox (change)="checkboxEnabledChanged(admin)" [checked]="admin.active"></mat-checkbox>
                     </td>
                 </tr>
             </table>

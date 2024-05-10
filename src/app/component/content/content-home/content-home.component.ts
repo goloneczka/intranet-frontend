@@ -6,6 +6,7 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PageEvent } from '@angular/material/paginator';
 import { PostEventService } from 'src/app/service/event/post-event.service';
+import { AuthenticationService } from 'src/app/service';
 
 @Component({
   selector: 'app-content-home',
@@ -20,13 +21,16 @@ export class ContentHomeComponent {
   idOfPostsToEdit : number[] = [];
   posts$: Observable<Post[]> = of([]);
   dailyPost$: Observable<DailyPost> = of();
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
   pagination = {length: 0, pageIndex: 0, size: 10};
   countAvaiablePosts: number = 0;
 
   constructor(private postService: PostService,
-              private postEventService: PostEventService
-            ) { }
+              private postEventService: PostEventService,
+              private authService: AuthenticationService
+            ) {
+              this.isUserAuthenticated = this.authService.hasAdminRole();
+             }
 
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts(this.pagination.pageIndex, this.pagination.size);

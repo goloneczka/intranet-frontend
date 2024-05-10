@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { Contact } from 'src/app/model/contact';
-import { ContactService } from 'src/app/service';
+import { AuthenticationService, ContactService } from 'src/app/service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 
@@ -18,9 +18,11 @@ export class ContactComponent {
   @Output()
   contactsChanged = new EventEmitter<void>();
 
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
 
-  constructor(private contactService: ContactService, public dialog: MatDialog) {}
+  constructor(private contactService: ContactService, public dialog: MatDialog, private authService: AuthenticationService) {
+    this.isUserAuthenticated = this.authService.hasAdminRole();
+  }
 
   ngOnInit(): void {}
 

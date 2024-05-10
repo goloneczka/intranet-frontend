@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NewEnvAppComponent } from './enviroments/new-env-app/new-env-app.component';
 import { SortingEnvAppComponent } from './enviroments/sorting-env-app/sorting-env-app.component';
 import { EnvApplication } from 'src/app/model/application';
-import { ApplicationService } from 'src/app/service';
+import { ApplicationService, AuthenticationService } from 'src/app/service';
 
 @Component({
   selector: 'app-content-link',
@@ -27,12 +27,14 @@ export class ContentLinkComponent {
   @ViewChild(SortingEnvAppComponent)
   sortingEnvAppChild!: SortingEnvAppComponent;
 
-  isUserAuthenticated: boolean = LocalStorageService.isAuthenticated();
+  isUserAuthenticated: boolean;
   contacts$ : Observable<Contact[]> = of([]);
   envApps$ : Observable<EnvApplication[]> = of([]);
 
 
-  constructor(private contactService: ContactService, private envAppService: ApplicationService) {}
+  constructor(private contactService: ContactService, private envAppService: ApplicationService, private authService: AuthenticationService) {
+    this.isUserAuthenticated = this.authService.hasAdminRole();
+  }
 
   ngOnInit() {
     this.initContacts();

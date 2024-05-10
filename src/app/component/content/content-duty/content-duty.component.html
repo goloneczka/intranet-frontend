@@ -4,10 +4,12 @@
     <div class="button-row" > 
       <button mat-raised-button (click)="addDutyType()" style="margin-left: 5px; background-color: #A89985;" >Zdefiniuj Nowy</button>
       <button mat-raised-button (click)="editDutyType()" style="margin-left: 5px; background-color: #A89985;" >Edytuj Istniejące</button>
-      <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
-        <span class="badge">{{ dutiesToAccept.length }}</span>
-        Oczekujące Dyżury
-      </button>
+      <span *ngIf="isManagerAuthenticated">
+        <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
+          <span class="badge">{{ dutiesToAccept.length }}</span>
+          Oczekujące Dyżury
+        </button>
+      </span>
     </div>
     
     <mat-divider style="margin-bottom: 5px;"></mat-divider>
@@ -17,6 +19,22 @@
       <app-edit-duty-type [dutyTypes]="dutyTypes" />
       <app-duty-acceptance [duties]="dutiesToAccept" (newDutyAcceptanceEvent)="saveNewDutyAcceptance($event)"/>
     </div>
+  </section>
+
+  <section *ngIf="!isUserAuthenticated && isManagerAuthenticated" style="padding-top: 5px;">
+    <div class="button-row" > 
+      <button mat-raised-button (click)="acceptDuties()" class="button-with-badge" style="margin-left: 5px; background-color: #A89985;">
+        <span class="badge">{{ dutiesToAccept.length }}</span>
+        Oczekujące Dyżury
+      </button>
+    </div>
+
+    <mat-divider style="margin-bottom: 5px;"></mat-divider>
+
+    <div id="admin-components">
+      <app-duty-acceptance [duties]="dutiesToAccept" (newDutyAcceptanceEvent)="saveNewDutyAcceptance($event)"/>
+    </div>
+
   </section>
 
   <div style="margin-top: 10px;">
